@@ -57,7 +57,8 @@ keystone.set('routes', require('./routes'));
 
 // This sets up the navbar in the admin UI page.
 keystone.set('nav', {
-	'users': 'users'
+	'users': 'users',
+	'posts': 'text-posts'
 });
 
 // Initialize the web server. It will also listen for the events specified.
@@ -65,14 +66,12 @@ keystone.set('nav', {
 keystone.start({
 
 	onHttpServerCreated: function () {
-		console.log('Server was started in non-secure mode listening to ' +
-			keystone.get('port'));
+		console.log('Server was started in non-secure mode!');
 	}
 
 	/* TODO: Remove this comment when HTTPS is ready.
 	onHttpsServerCreated: function () {
-		console.log('Server is HTTPS secured and listening to port ' +
-			keystone.get('ssl port') + '.');
+		console.log('Server is HTTPS secured.);
 	} */
 
 });
