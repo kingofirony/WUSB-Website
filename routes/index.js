@@ -35,7 +35,7 @@ var routes = {
 exports = module.exports = function(app) {
 	
 	// Views
-	app.get('/', routes.views.index);
+	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
 	
 	
 	// NOTE: To protect a route so that only admins can see it, 
