@@ -15,9 +15,7 @@ exports = module.exports = function(req, res) {
 		TextPost.model.find()
 			.populate('author', 'name')
 			.exec(function (err, posts) {
-			if (err) {
-				return res.err(err);
-			}
+			if (err) return res.err(err);
 			locals.posts = posts;
 			next();
 		});
@@ -55,6 +53,39 @@ exports = module.exports = function(req, res) {
 			}
 			
 		});
+	});
+
+	// Delete a post
+	view.on('get', { remove: 'post' }, function (next) {
+		if (!req.user) {
+			req.flash('error', 'You must be signed in to delete a post.');
+			return next();
+		}
+		TextPost.model.findOne({
+				_id: req.query.post
+			})
+			.exec(function (err, post) {
+				if (err) {
+					if (err.name === 'CastError') {
+						req.flash('error', 'The post ' + req.query.post + ' could not be found.');
+						return next();
+					}
+					return res.err(err);
+				}
+				if (!post) {
+					req.flash('error', 'The post ' + req.query.post + ' could not be found.');
+					return next();
+				}
+				if (post.author != req.user.id) {
+					req.flash('error', 'Sorry, you must be the author of a post to delete it.');
+					return next();
+				}
+				post.remove(function (err) {
+					if (err) return res.err(err);
+					req.flash('success', 'Your post has been deleted.');
+					return res.redirect('/');
+				});
+			});
 	});
 	
 	// Render the view
