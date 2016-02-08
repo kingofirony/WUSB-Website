@@ -9,8 +9,21 @@ exports = module.exports = function(req, res) {
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 	locals.section = 'home';
-
-	// Accept form post
+	
+	// Load posts
+	view.on('init', function (next) {
+		TextPost.model.find()
+			.populate('author', 'name')
+			.exec(function (err, posts) {
+			if (err) {
+				return res.err(err);
+			}
+			locals.posts = posts;
+			next();
+		});
+	});
+	
+	// Accept form post submit
 	view.on('post', { action: 'create-post' }, function(next) {
 
 		// handle form
@@ -35,12 +48,13 @@ exports = module.exports = function(req, res) {
 		}, function(err) {
 			if (err) {
 				locals.validationErrors = err.errors;
+				next();
 			} else {
 				req.flash('success', 'Post added');
+				res.redirect('/');
 			}
-			next();
+			
 		});
-
 	});
 	
 	// Render the view
