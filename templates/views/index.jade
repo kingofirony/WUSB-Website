@@ -1,8 +1,11 @@
 extends ../layouts/default
+include ../mixins/posts
 
 block content
 	.container: .jumbotron
 		img(src='/images/logo.svg', width='160')
+		+create-post()
+		+show-posts(posts)
 		h1 Welcome
 		p This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.
 		p It includes the latest versions of

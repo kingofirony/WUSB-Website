@@ -8,14 +8,22 @@
  */
 
 // TODO: MAKE SURE THE USER CREATED BY THIS IS DELETED IN PROD. !!!
-exports.create = {
+exports.create = function() {
 	console.log('ATTN: An empty MongoDB instance was used!' +
 		' If this was unintentional, please check that your' +
 		' mongo instance is set up properly.');
-	User: [
-		{ 'name.first': 'Admin', 'name.last': 'User', email: 'user@keystonejs.com', password: 'admin', isAdmin: true }
-	]
-};
+	return {
+		User: [
+			{
+				'name.first': 'Admin',
+				'name.last': 'User',
+				email: 'user@keystonejs.com',
+				password: 'admin',
+				isAdmin: true
+			}
+		]
+	};
+}();
 
 /*
 
