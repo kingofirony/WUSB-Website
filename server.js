@@ -7,6 +7,8 @@ require('dotenv').load();
 // Requires and constants if we need any
 const keystone = require('keystone');
 const http = require('http');
+const DB = require('./database.js');
+const uri = DB.uri;
 
 /* Sets up the server options. Consult the docs before editing.
 	Docs: http://keystonejs.com/guide/config */
@@ -24,6 +26,7 @@ keystone.init({
 	'auto update': true,
 	'session': true,
 	'auth': true,
+	'mongo': uri,
 	'user model': 'User'
 
 	/* TODO: Remove this comment when the HTTPS certificate is ready. 

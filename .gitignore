@@ -33,3 +33,5 @@ node_modules
 # Ignore WebStorm files
 .idea
 
+# Ignore the DB URI
+database.js
