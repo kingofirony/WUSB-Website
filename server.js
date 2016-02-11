@@ -19,6 +19,10 @@ function getDbUri() {
 	else if (env === 'test') {
 		return 'mongodb://localhost:27017/wusb_test';
 	}
+	else {
+		throw new Error("Env must be production, development, or test. " +
+						"Found: " + env);
+	}
 }
 
 if (env !== 'production') {
