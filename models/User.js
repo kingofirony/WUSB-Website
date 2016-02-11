@@ -5,7 +5,7 @@ const keystone = require('keystone');
 const Types = keystone.Field.Types;
 
 // Default user accounts... might be good enough, maybe worth changing.
-let User = new keystone.List('User');
+const User = new keystone.List('User');
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },

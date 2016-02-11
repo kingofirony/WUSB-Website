@@ -16,7 +16,7 @@ const options = {
 	drilldown: 'author'
 };
 
-let TextPost = new keystone.List('TextPost', options);
+const TextPost = new keystone.List('TextPost', options);
 
 TextPost.add({
 	title: { type: Types.Text, required: true },
