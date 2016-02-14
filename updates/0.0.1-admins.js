@@ -7,23 +7,21 @@
  * module.exports = function(done) { ... }
  */
 
-// TODO: MAKE SURE THE USER CREATED BY THIS IS DELETED IN PROD. !!!
-exports.create = function() {
-	console.log('ATTN: An empty MongoDB instance was used!' +
-		' If this was unintentional, please check that your' +
-		' mongo instance is set up properly.');
-	return {
-		User: [
-			{
-				'name.first': 'Admin',
-				'name.last': 'User',
-				email: 'user@keystonejs.com',
-				password: 'admin',
-				isAdmin: true
-			}
-		]
-	};
-}();
+var keystone = require('keystone');
+var env = keystone.get('env');
+
+exports.create = env !== 'development' ? {} : {
+	User: [
+		{
+			'name.first': 'Admin',
+			'name.last': 'User',
+			email: 'user@keystonejs.com',
+			password: 'admin',
+			isAdmin: true
+		}
+	]
+};
+
 
 /*
 
