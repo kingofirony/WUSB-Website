@@ -4,8 +4,14 @@ const keystone = require('keystone');
 // Docs: http://keystonejs.com/docs/database/#fieldtypes
 const Types = keystone.Field.Types;
 
+const options = {
+	autokey: { path: 'slug', from: 'name', unique: true },
+	singular: 'User',
+	plural: 'Users',
+};
+
 // Default user accounts... might be good enough, maybe worth changing.
-const User = new keystone.List('User');
+let User = new keystone.List('User', options);
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },

@@ -18,6 +18,9 @@ const options = {
 
 const TextPost = new keystone.List('TextPost', options);
 
+/* On Create Post: Add title, author, textContent. Set isPublished if
+	the post is not a draft. Everything else should not be touched and
+	will be set automatically! */
 TextPost.add({
 	title: { type: Types.Text, required: true },
 	author: { type: Types.Relationship, ref: 'User', required: true,
@@ -27,7 +30,8 @@ TextPost.add({
 	publishedAt: { type: Types.Datetime, noedit: true },
 	lastEditedAt: { type: Types.Datetime, noedit: true },
 	editCount: { type: Types.Number, default: 0, noedit: true },
-	textContent: { type: Types.Html, required: true, initial: true, wysiwyg: true, note: 'Can be expanded' },
+	textContent: { type: Types.Html, required: true, initial: true, 
+		wysiwyg: true, note: 'Can be expanded' },
 	silentEdit: { type: Types.Boolean, default: false,
 		note: 'Use to edit a post from the admin UI without \
 			changing the edit counter. Be sure to set to false again after \

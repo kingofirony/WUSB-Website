@@ -1,10 +1,11 @@
-var keystone = require('keystone');
-var TextPost = keystone.list('TextPost');
+'use strict';
+const keystone = require('keystone');
+const TextPost = keystone.list('TextPost');
 
-exports = module.exports = function(req, res) {
+exports = module.exports = function (req, res) {
 	
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
+	let view = new keystone.View(req, res);
+	let locals = res.locals;
 	
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
@@ -12,22 +13,24 @@ exports = module.exports = function(req, res) {
 	
 	// Load posts
 	view.on('init', function (next) {
-		TextPost.model.find()
-			.populate('author', 'name')
-			.exec(function (err, posts) {
-			if (err) return res.err(err);
-			locals.posts = posts;
+		TextPost.paginate({
+			page: req.query.page || 1,
+			perPage: 10
+		}).where('isPublished')
+		.sort('-publishedAt')
+		.populate('author', 'name')
+		.exec(function (err, posts) {
+			locals.posts = posts.results;
 			next();
 		});
 	});
 	
 	// Accept form post submit
-	view.on('post', { action: 'create-post' }, function(next) {
+	view.on('post', { action: 'create-post' }, function (next) {
 
 		// handle form
-		var newPost = new TextPost.model({
-				author: locals.user.id,
-				publishedDate: new Date()
+		let newPost = new TextPost.model({
+				author: locals.user.id
 			}),
 
 			updater = newPost.getUpdateHandler(req, res, {
@@ -36,14 +39,14 @@ exports = module.exports = function(req, res) {
 
 		// automatically publish posts by admin users
 		if (locals.user.isAdmin) {
-			newPost.state = 'published';
+			newPost.isPublished = true;
 		}
 
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
 			fields: 'title, textContent'
-		}, function(err) {
+		}, function (err) {
 			if (err) {
 				locals.validationErrors = err.errors;
 				next();
@@ -62,22 +65,25 @@ exports = module.exports = function(req, res) {
 			return next();
 		}
 		TextPost.model.findOne({
-				_id: req.query.post
+				slug: req.query.post
 			})
 			.exec(function (err, post) {
 				if (err) {
 					if (err.name === 'CastError') {
-						req.flash('error', 'The post ' + req.query.post + ' could not be found.');
+						req.flash('error', 'The post ' + req.query.post + 
+							' could not be found.');
 						return next();
 					}
 					return res.err(err);
 				}
 				if (!post) {
-					req.flash('error', 'The post ' + req.query.post + ' could not be found.');
+					req.flash('error', 'The post ' + req.query.post + 
+						' could not be found.');
 					return next();
 				}
 				if (post.author != req.user.id) {
-					req.flash('error', 'Sorry, you must be the author of a post to delete it.');
+					req.flash('error', 'Sorry, you must be the author' + 
+						' of a post to delete it.');
 					return next();
 				}
 				post.remove(function (err) {
