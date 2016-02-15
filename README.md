@@ -14,7 +14,8 @@ Backend: Peter Geiss
 
 1. Fork the respository, then <code>git clone</code> your fork onto your computer. <code>cd</code> into it.
 2. <code>npm install</code> (if you add an npm module, be sure to add it to <i>package.json</i> so npm responds to it)
-3. <code>npm start</code> and you're ready to go.
+3. If MongoDB isn't running, start it with <code>sudo mongod</code>
+4. <code>npm start</code> and you're ready to go.
 
 #Running the Server in production
 
