@@ -7,26 +7,43 @@ require('dotenv').load();
 // Requires and constants if we need any
 const keystone = require('keystone');
 const http = require('http');
-const DB = require('./database.js');
-const uri = DB.uri;
+const env = keystone.get('env');
+
+function getDbUri() {
+	if (env === 'production') {
+		return require('./database.js').uri;
+	}
+	else if (env === 'development') {
+		return 'mongodb://localhost:27017/wusb';
+	}
+	else if (env === 'test') {
+		return 'mongodb://localhost:27017/wusb_test';
+	}
+	else {
+		throw new Error("NODE_ENV must be production, development, or test. " +
+						"Found: " + env);
+	}
+}
+
+if (env !== 'production') {
+	keystone.set('cookie secret', 'whatever, it is not production');
+}
+
 
 /* Sets up the server options. Consult the docs before editing.
 	Docs: http://keystonejs.com/guide/config */
 keystone.init({
-
 	'name': 'WUSB',
 	'brand': 'WUSB',
-	
 	'sass': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'jade',
-	
 	'auto update': true,
 	'session': true,
 	'auth': true,
-	'mongo': uri,
+	'mongo': getDbUri(),
 	'user model': 'User'
 
 	/* TODO: Remove this comment when the HTTPS certificate is ready. 

@@ -16,7 +16,7 @@ const options = {
 	drilldown: 'author'
 };
 
-let TextPost = new keystone.List('TextPost', options);
+const TextPost = new keystone.List('TextPost', options);
 
 /* On Create Post: Add title, author, textContent. Set isPublished if
 	the post is not a draft. Everything else should not be touched and
