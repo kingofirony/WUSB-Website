@@ -7,15 +7,15 @@ const Types = keystone.Field.Types;
 const options = {
 	autokey: { path: 'slug', from: 'name', unique: true },
 	singular: 'User',
-	plural: 'Users',
+	plural: 'Users'
 };
 
 // Default user accounts... might be good enough, maybe worth changing.
-let User = new keystone.List('User', options);
+const User = new keystone.List('User', options);
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
+	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
 	// Docs: Passwords are automatically encrypted
 	password: { type: Types.Password, initial: true, required: true }
 }, 'Permissions', {

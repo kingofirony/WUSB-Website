@@ -32,6 +32,5 @@ mixin show-post(post)
 						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm Delete
 
 mixin show-posts(posts)
-	if posts.length
-		for post in posts
-			+show-post(post)
+	for post in posts
+		+show-post(post)
