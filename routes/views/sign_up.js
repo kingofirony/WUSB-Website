@@ -34,7 +34,6 @@ exports = module.exports = function (req, res) {
 				req.flash('success', 'User added');
 				res.redirect('/');
 			}
-
 		});
 	});
 
