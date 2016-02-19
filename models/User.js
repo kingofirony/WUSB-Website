@@ -17,7 +17,8 @@ User.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	// Docs: Passwords are automatically encrypted
-	password: { type: Types.Password, initial: true, required: true }
+	password: { type: Types.Password, initial: true, required: true },
+	isConfirmed: { type: Boolean, default: false }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });
