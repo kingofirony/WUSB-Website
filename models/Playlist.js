@@ -12,7 +12,7 @@ const options = {
 	plural: 'Playlists',
 	sortable: true,
 	defaultSort: '-date',
-	drilldown: 'author'
+	drilldown: 'author program'
 };
 
 const Playlist = new keystone.List('Playlist', options);
@@ -25,7 +25,9 @@ Playlist.add({
 	title: { type: Types.Text, required: true },
 	author: { type: Types.Relationship, ref: 'User', required: true,
 		initial: true, noedit: true },
-	date: { type: Types.Date, required: true, default: Date.now },
+	program: { type: Types.Relationship, ref: 'Program', required: true,
+		initial: true },
+	date: { type: Types.Datetime, required: true, default: Date.now },
 	description: { type: Types.Html, default: '' }, //Not required currently
 	isPublished: { type: Types.Boolean, default: false },
 	isPromoted: { type: Types.Boolean, default: false },
@@ -57,6 +59,23 @@ Playlist.schema.add({
 		link: String,
 		weight: Number
 	}] // Bypasses Keystone, it doesn't support this.
+});
+
+Playlist.schema.pre('save', function (next) {
+	/* Doesn't remove previous playlist from program if edited, 
+		but I'm not sure edits should be allowed in the first place. */
+	if ((this.isNew && this.isPublished) || 
+	 (this.isModified('program') && this.isPublished) ||
+	 (this.isModified('isPublished') && this.isPublished)) {
+		keystone.list('Program').model.update(
+			{ _id: this.program }, 
+			{ $push: { playlists: this } },
+			function (err) {
+				if (err) throw err;
+			}
+		);
+	}
+	next();
 });
 
 Playlist.defaultColumns = 'title, author, date, description,' +
