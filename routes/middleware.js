@@ -24,7 +24,8 @@ exports.initLocals = function(req, res, next) {
 	var locals = res.locals;
 	
 	locals.navLinks = [
-		{ label: 'Home',		key: 'home',		href: '/' }
+		{ label: 'Home',		key: 'home',		href: '/' },
+		{ label: 'Sign up',		key: 'sign-up',		href: '/sign-up' }
 	];
 	
 	locals.user = req.user;
