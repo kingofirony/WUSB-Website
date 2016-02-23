@@ -20,8 +20,8 @@ function getDbUri() {
 		return 'mongodb://localhost:27017/wusb_test';
 	}
 	else {
-		throw new Error("NODE_ENV must be production, development, or test. " +
-						"Found: " + env);
+		throw new Error('NODE_ENV must be production, development, ' + 
+			'or test. Found: ' + env);
 	}
 }
 
@@ -78,7 +78,9 @@ keystone.set('routes', require('./routes'));
 // This sets up the navbar in the admin UI page.
 keystone.set('nav', {
 	'users': 'users',
-	'posts': 'text-posts'
+	'posts': 'text-posts',
+	'programs': 'programs',
+	'playlists': 'playlists'
 });
 
 // Initialize the web server. It will also listen for the events specified.
