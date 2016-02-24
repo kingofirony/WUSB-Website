@@ -37,6 +37,7 @@ exports = module.exports = function(app) {
 	// Views
 	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
 	app.all('/sign-up', routes.views.sign_up);
+	app.all('/profile', routes.views.profile);
 	
 	
 	// NOTE: To protect a route so that only admins can see it, 
