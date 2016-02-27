@@ -1,0 +1,7 @@
+mixin post-playlist()
+	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
+		input(type='hidden', name='action', value='post-playlist')
+
+		.row: .col-sm-8.col-sm-offset-2
+
+			h2 Post playlist
