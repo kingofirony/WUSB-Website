@@ -13,14 +13,15 @@ exports = module.exports = function (req, res) {
 	// Accept form post submit
 	view.on('post', { action: 'edit-profile' }, function (next) {
 
-		function saveImage(callback) {
+		function saveImage(image, callback) {
 			callback();  	// TODO: Implement
 							// Note: Use errors object that keystone expects
 		}
 		
 		function acceptImageUpload(callback) {
-			if (req.files.profile_picture) {
-				saveImage(function(err) {
+			const image = req.files.profile_picture;
+			if (image) {
+				saveImage(image, function(err) {
 					if (err) {
 						callback(err);
 					}
