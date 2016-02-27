@@ -13,6 +13,28 @@ exports = module.exports = function (req, res) {
 	// Accept form post submit
 	view.on('post', { action: 'edit-profile' }, function (next) {
 
+		function saveImage(callback) {
+			callback();  	// TODO: Implement
+							// Note: Use errors object that keystone expects
+		}
+		
+		function acceptImageUpload(callback) {
+			if (req.files.profile_picture) {
+				saveImage(function(err) {
+					if (err) {
+						callback(err);
+					}
+					else {
+						locals.user.hasProfilePicture = true;
+						locals.user.save(callback);
+					}
+				});
+			}
+			else {
+				callback();
+			}
+		}
+		
 		if (!locals.user) {
 			req.flash('error', 'Please log in');
 			res.redirect('/keystone/signin');
@@ -32,8 +54,16 @@ exports = module.exports = function (req, res) {
 				locals.validationErrors = err.errors;
 				next();
 			} else {
-				req.flash('success', 'Profile updated');
-				res.redirect('/');
+				acceptImageUpload(function(err) {
+					if (err) {
+						locals.validationErrors = err.errors;
+						next();
+					}
+					else {
+						req.flash('success', 'Profile updated');
+						res.redirect('/profile');
+					}
+				});
 			}
 		});
 	});
