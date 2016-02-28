@@ -23,7 +23,12 @@ mixin edit-profile()
 		.row: .col-sm-8.col-sm-offset-2
 
 			h2 Edit Profile
-
+			
+			.form-group
+				if locals.user.hasProfilePicture
+					img(src='/images/profile/' + locals.user.slug + '.jpg')
+				label(for="profile_picture") Change profile picture
+				input(type='file', id='profile_picture' name='profile_picture')
 			.form-group
 				label(for="email") Email
 				input(type='email', value=locals.user.email, size="40", id='email', name='email', placeholder='email').input.input-xl.input-faded
