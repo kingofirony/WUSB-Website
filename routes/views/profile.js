@@ -1,5 +1,6 @@
 'use strict';
 const keystone = require('keystone');
+const fs = require('fs');
 
 exports = module.exports = function (req, res) {
 
@@ -11,17 +12,30 @@ exports = module.exports = function (req, res) {
 	locals.section = 'profile';
 
 	// Accept form post submit
-	view.on('post', { action: 'edit-profile' }, function (next) {
+	view.on('post', { action: 'edit-profile' }, (next) => {
 
 		function saveImage(image, callback) {
-			callback();  	// TODO: Implement
-							// Note: Use errors object that keystone expects
+			const fileName = locals.user.slug;
+
+			// Gives .jpg, .png, etc even if ext is not 3 char long
+			const fileExt = image.name.substr(
+				image.name.search(/\..+$/), image.name.length);
+
+			fs.readFile(image.path, (err, image) => {
+				fs.writeFile('public/images/profile/' + fileName + fileExt, 
+				  image, (err) => {
+					if (err) throw err;
+					console.log('Saved ' + fileName + fileExt + '...');
+					console.log('to public/images/profile');
+				});
+			});
+			callback();
 		}
 		
 		function acceptImageUpload(callback) {
 			const image = req.files.profile_picture;
 			if (image) {
-				saveImage(image, function(err) {
+				saveImage(image, (err) => {
 					if (err) {
 						callback(err);
 					}
@@ -50,12 +64,12 @@ exports = module.exports = function (req, res) {
 			flashErrors: true,
 			logErrors: true,
 			fields: 'email, name, password'
-		}, function (err) {
+		}, (err) => {
 			if (err) {
 				locals.validationErrors = err.errors;
 				next();
 			} else {
-				acceptImageUpload(function(err) {
+				acceptImageUpload((err) => {
 					if (err) {
 						locals.validationErrors = err.errors;
 						next();
