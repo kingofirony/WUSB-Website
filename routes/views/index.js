@@ -30,12 +30,12 @@ exports = module.exports = function (req, res) {
 
 		// handle form
 		let newPost = new TextPost.model({
-				author: locals.user.id
-			}),
+			author: locals.user.id
+		});
 
-			updater = newPost.getUpdateHandler(req, res, {
-				errorMessage: 'There was an error creating your new post:'
-			});
+		let updater = newPost.getUpdateHandler(req, res, {
+			errorMessage: 'There was an error creating your new post:'
+		});
 
 		// automatically publish posts by admin users
 		if (locals.user.isAdmin) {

@@ -30,11 +30,10 @@ exports = module.exports = function (req, res) {
 		}, function (err) {
 			if (err) {
 				locals.validationErrors = err.errors;
-				next();
 			} else {
 				req.flash('success', 'Profile updated');
-				res.redirect('/');
 			}
+			next();
 		});
 	});
 

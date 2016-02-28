@@ -5,3 +5,33 @@ mixin post-playlist()
 		.row: .col-sm-8.col-sm-offset-2
 
 			h2 Post playlist
+			
+			//- Program
+			.form-group
+			select(id='program', name='program').input.input-xl.input-faded
+				for program in programs
+					if playlist && playlist.program == program.id
+						option(value=program.slug selected)!=program.title
+					else
+						option(value=program.slug)!=program.title
+
+			//- Tracks
+			table
+				thead
+					tr
+						th Artist
+						th Album
+						th Song
+				tbody
+					- for(var i = 0; i < 10 + (playlist ? playlist.tracks.length : 0); i++)
+						tr
+							td
+								input(type='text' name="artist")
+							td
+								input(type='text' name="album")
+							td
+								input(type='text' name="title")
+			
+			//- Submit
+			.form-group
+				button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Save playlist
