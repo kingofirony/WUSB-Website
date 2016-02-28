@@ -8,7 +8,8 @@
  * modules in your project's /lib directory.
  */
 
-var _ = require('underscore');
+const _ = require('underscore');
+const keystone = require('keystone');
 
 
 /**
@@ -20,8 +21,8 @@ var _ = require('underscore');
 */
 
 exports.initLocals = function(req, res, next) {
-	
-	var locals = res.locals;
+
+	const locals = res.locals;
 	
 	locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
@@ -40,8 +41,8 @@ exports.initLocals = function(req, res, next) {
 */
 
 exports.flashMessages = function(req, res, next) {
-	
-	var flashMessages = {
+
+	const flashMessages = {
 		info: req.flash('info'),
 		success: req.flash('success'),
 		warning: req.flash('warning'),
@@ -68,4 +69,38 @@ exports.requireUser = function(req, res, next) {
 		next();
 	}
 	
+};
+
+
+/**
+ 	Make programs universally available
+ */
+
+exports.loadPrograms = function(req, res, next) {
+	keystone.list('Program').model.find().exec((err, programs) => {
+		if (err) return next(err);
+		req.programs = programs;
+		res.locals.programs = programs;
+		next();
+	});
+};
+
+
+/**
+ 	Load a playlist 
+ */
+
+exports.loadPlaylist = function(req, res, next) {
+	const playlistId = req.params.id;
+	if (playlistId) {
+		keystone.list('Playlist').model.findOne({ slug: playlistId }).exec((err, playlist) => {
+			if (err) return next(err);
+			req.playlist = playlist;
+			res.locals.playlist = playlist;
+			next();
+		});
+	}
+	else {
+		next();
+	}
 };

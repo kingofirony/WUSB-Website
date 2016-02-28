@@ -13,20 +13,6 @@ exports = module.exports = (req, res) => {
 	// item in the header navigation.
 	locals.section = 'post-playlist';
 
-	function loadPrograms() {
-		return Program.model.find().exec().then(programs => locals.programs = programs);
-	}
-	
-	function loadPlaylist() {
-		const playlistId = req.params.id;
-		if (playlistId) {  // Loading an existing playlist by id/slug
-			return Playlist.model.findOne({ slug: playlistId }).exec().then(playlist => locals.playlist = playlist);
-		}
-		else {
-			return Promise.resolve();
-		}
-	}
-	
 	function normalizeTrackField(field) {
 		field = field.trim();
 		if (field === '') {
@@ -56,10 +42,6 @@ exports = module.exports = (req, res) => {
 		
 		playlist.save(callback);
 	}
-	
-	view.on('init', next => {
-		loadPrograms().then(loadPlaylist).then(next, err => res.err(err));
-	});
 
 	// Accept form post submit
 	view.on('post', { action: 'post-playlist' }, next => {
@@ -127,5 +109,6 @@ exports = module.exports = (req, res) => {
 			}
 		}
 	});
+	
 	view.render('post_playlist');
 };

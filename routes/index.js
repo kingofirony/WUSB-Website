@@ -24,6 +24,7 @@ var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
+keystone.pre('routes', middleware.loadPrograms);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
@@ -34,10 +35,12 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = function(app) {
 	
-	// Views
 	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
 	app.all('/sign-up', routes.views.sign_up);
 	app.all('/profile', middleware.requireUser, routes.views.profile);
-	app.all('/post-playlist/:id?', middleware.requireUser, routes.views.post_playlist);
-
+	
+	// Playlists
+	app.all('/playlist/:id*', middleware.loadPlaylist);
+	app.all('/playlist/add', routes.views.add_playlist);
+	app.all('/playlist/:id/edit', routes.views.edit_playlist);
 };
