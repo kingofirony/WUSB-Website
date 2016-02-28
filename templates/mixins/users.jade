@@ -26,7 +26,7 @@ mixin edit-profile()
 			
 			.form-group
 				if locals.user.hasProfilePicture
-					img(src=images/profile/locals.user.slug + '.jpg')
+					img(src='/images/profile/' + locals.user.slug + '.jpg')
 				label(for="profile_picture") Change profile picture
 				input(type='file', id='profile_picture' name='profile_picture')
 			.form-group
