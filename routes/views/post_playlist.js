@@ -64,13 +64,6 @@ exports = module.exports = (req, res) => {
 	// Accept form post submit
 	view.on('post', { action: 'post-playlist' }, next => {
 
-		// TODO: refactor into a reusable function?
-		if (!locals.user) {
-			req.flash('error', 'Please log in');
-			res.redirect('/keystone/signin');
-			return;
-		}
-
 		const playlistId = req.params.id;
 		if (playlistId) {  // Appending to an existing playlist by id/slug
 			Playlist.model.findOne({ id: playlistId })
@@ -134,12 +127,5 @@ exports = module.exports = (req, res) => {
 			}
 		}
 	});
-
-	// TODO: refactor into a reusable function?
-	if (locals.user) {
-		view.render('post_playlist');
-	}
-	else {
-		res.redirect('/keystone/signin');
-	}
+	view.render('post_playlist');
 };

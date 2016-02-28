@@ -37,12 +37,7 @@ exports = module.exports = function(app) {
 	// Views
 	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
 	app.all('/sign-up', routes.views.sign_up);
-	app.all('/profile', routes.views.profile);
-	app.all('/post-playlist/:id?', routes.views.post_playlist);
-	
-	
-	// NOTE: To protect a route so that only admins can see it, 
-	// use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
-	
+	app.all('/profile', middleware.requireUser, routes.views.profile);
+	app.all('/post-playlist/:id?', middleware.requireUser, routes.views.post_playlist);
+
 };
