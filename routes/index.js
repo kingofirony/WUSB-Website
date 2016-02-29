@@ -24,24 +24,28 @@ var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
+keystone.pre('routes', middleware.loadPrograms);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+	views: importRoutes('./views'),
+	post: importRoutes('./post')
 };
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
 	
-	// Views
-	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
-	app.all('/sign-up', routes.views.sign_up);
-	app.all('/profile', routes.views.profile);
+	app.all('/', routes.views.index);
+	app.all('/sign-up', routes.views.sign_up); 
+	app.all('/profile', middleware.requireUser, routes.views.profile);
+	app.get('/playlists', routes.views.playlists);
 	
-	
-	// NOTE: To protect a route so that only admins can see it, 
-	// use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
-	
+	// Playlist
+	app.get('/playlist', routes.views.add_playlist);
+	app.all('/playlist/:id*', middleware.loadPlaylist);
+	app.get('/playlist/:id', routes.views.playlist);
+	app.get('/playlist/:id/edit', routes.views.edit_playlist);
+	app.post('/playlist', routes.post.post_playlist);
+	app.post('/playlist/:id/edit', routes.post.post_playlist);
 };
