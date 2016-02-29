@@ -36,4 +36,10 @@ if (env === 'development') {
 			}
 		});
 	};
+} else {
+	exports = module.exports = done => {
+		console.log('Patch 0.0.2 is not applicable in production or ' +
+			'testing');
+		done();
+	}
 }
