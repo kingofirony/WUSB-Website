@@ -21,11 +21,11 @@ mixin create-post()
 
 mixin show-post(post)
 	if post.author
-		div(id='post-id-' + post.id, style="margin-top: 30px;")
+		div(id='post-id-' + post.id, class='post')
 			.media
 				.media-body
-					p!=post.author.name.first + ' ' + post.author.name.last
-					p!=post.title
+					h3!=post.title
+					h4!=post.author.name.first + ' ' + post.author.name.last
 					p!=post.textContent.replace(/\n/g, '<br>')
 					if user && user.id === post.author.id
 						|  &middot; 
