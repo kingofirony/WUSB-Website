@@ -40,6 +40,8 @@ exports = module.exports = function(app) {
 	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
 	app.get('/playlists', routes.views.playlists);
+	app.get('/programs', routes.views.programs);
+	app.get('/program/:slug', middleware.loadProgram, routes.views.program);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);

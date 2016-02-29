@@ -1,0 +1,22 @@
+mixin programs()
+	for program in programs
+		p
+			a(href='/program/' + program.slug)!=program.title
+	if user && user.isAdmin
+		hr
+		p
+			a(href='/keystone/programs') Edit programs
+
+mixin program()
+		h2!=program.title	
+		hr
+		h4 DJs
+		ul
+			for dj in program.djs
+				li!=dj.name.first + ' ' + dj.name.last
+		hr
+		h4 Playlists
+		ul
+			for playlist in program.playlists
+				li!=playlist.title	
+				

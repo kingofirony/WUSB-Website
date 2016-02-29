@@ -30,7 +30,8 @@ exports.initLocals = function(req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Sign up', key: 'sign-up',	href: '/sign-up' },
 		{ label: 'Profile', key: 'profile',	href: '/profile' },
-		{ label: 'Playlists', key: 'playlists', href: '/playlists' }
+		{ label: 'Playlists', key: 'playlists', href: '/playlists' },
+		{ label: 'Programs', key: 'programs', href: '/programs' }
 	];
 	
 	locals.user = req.user;
@@ -103,6 +104,28 @@ exports.loadPlaylist = function(req, res, next) {
 			res.locals.playlist = playlist;
 			next();
 		});
+	}
+	else {
+		next();
+	}
+};
+
+
+/**
+ Load a program
+ */
+
+exports.loadProgram = function(req, res, next) {
+	const programSlug = req.params.slug;
+	if (programSlug) {
+		Program.model.findOne({ slug: programSlug })
+			.populate(['djs', 'playlists'])
+			.exec((err, program) => {
+				if (err) return next(err);
+				req.program = program;
+				res.locals.program = program;
+				next();
+			});
 	}
 	else {
 		next();
