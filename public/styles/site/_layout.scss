@@ -29,36 +29,33 @@ body {
 
 #body {
   
-  	display: flex;
-  	flex-direction: row;
-  
   	.navigation {
-	  	margin: 25px 15px 10px 50px;
-	  	background-color: $wusb-white;
-	  	width: 20vw;
-	  	display: flex;
-	  	flex-direction: column;
-	  	padding-top: 20px;
-	  
-	  	li {
-		  list-style: none;
-		  margin-top: 10px;
-		  margin-bottom: 10px;
+	  	
+	  	padding: 20px 30px 20px 30px;
+		
+	  	.menu {
+		  	background-color: $wusb-white;
+		  	display: flex;
+			flex-direction: column;
 		  
-		  a {
-			color: $wusb-blue;
-			font-size: 1.5em;
-			font-weight: bold;
-		  }
-		}
+			li {
+			  	list-style: none;
+			  	margin-top: 10px;
+			  	margin-bottom: 10px;
+	
+			  	a {
+					color: $wusb-blue;
+					font-size: 1.5em;
+					font-weight: bold;
+			  	}
+			}
+	  	}
 	}
   
   	.jumbotron {
 		background-color: $body-bg;
 		border-radius: 0 !important;
 		color: #fff;
-		padding-right: 0 !important;
-	    padding-left: 0 !important;
 		padding-top: 10px;
 
 		.post {
