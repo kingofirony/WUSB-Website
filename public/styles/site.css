@@ -5843,11 +5843,13 @@ body {
   height: auto; }
 
 #body .navigation {
-  padding: 20px 30px 20px 30px; }
+  padding: 40px 0 20px 0; }
   #body .navigation .menu {
     background-color: #fff;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px; }
     #body .navigation .menu li {
       list-style: none;
       margin-top: 10px;
@@ -5859,9 +5861,10 @@ body {
 
 #body .jumbotron {
   background-color: #000;
-  border-radius: 0 !important;
+  border-radius: 0;
   color: #fff;
-  padding-top: 10px; }
+  padding-top: 10px;
+  padding-right: 0; }
   #body .jumbotron .post {
     background-color: #3E78B2;
     margin-top: 20px;

@@ -31,12 +31,14 @@ body {
   
   	.navigation {
 	  	
-	  	padding: 20px 30px 20px 30px;
+	  	padding: 40px 0 20px 0;
 		
 	  	.menu {
 		  	background-color: $wusb-white;
 		  	display: flex;
 			flex-direction: column;
+			padding-top: 10px;
+			padding-bottom: 10px;
 		  
 			li {
 			  	list-style: none;
@@ -54,9 +56,10 @@ body {
   
   	.jumbotron {
 		background-color: $body-bg;
-		border-radius: 0 !important;
+		border-radius: 0;
 		color: #fff;
 		padding-top: 10px;
+	  	padding-right: 0;
 
 		.post {
 			background-color: $wusb-blue;

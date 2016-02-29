@@ -57,8 +57,8 @@ html
 								li: a(href='/keystone/signin') Sign In
 
 		//- BODY
-		#body
-			div.navigation.text-center.col-md-3.col-xs-12
+		#body.container
+			div.navigation.text-center.col-md-2.col-xs-12.col-sm-3
 				div.menu
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label

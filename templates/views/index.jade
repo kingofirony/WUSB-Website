@@ -2,7 +2,7 @@ extends ../layouts/default
 include ../mixins/posts
 
 block content
-	.container: .jumbotron.col-md-9.col-xs-12
+	.jumbotron.col-md-10.col-xs-12.col-sm-9
 		h2 news from the booth
 		+create-post()
 		+show-posts(posts)
