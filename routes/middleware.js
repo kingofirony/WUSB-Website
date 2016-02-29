@@ -10,6 +10,8 @@
 
 const _ = require('underscore');
 const keystone = require('keystone');
+const Program = keystone.list('Program');
+const Playlist = keystone.list('Playlist');
 
 
 /**
@@ -28,7 +30,7 @@ exports.initLocals = function(req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Sign up', key: 'sign-up',	href: '/sign-up' },
 		{ label: 'Profile', key: 'profile',	href: '/profile' },
-		{ label: 'Post playlist', key: 'post-playlist', href: '/post-playlist' }
+		{ label: 'Playlists', key: 'playlists', href: '/playlists' }
 	];
 	
 	locals.user = req.user;
@@ -77,7 +79,7 @@ exports.requireUser = function(req, res, next) {
  */
 
 exports.loadPrograms = function(req, res, next) {
-	keystone.list('Program').model.find().exec((err, programs) => {
+	Program.model.find().exec((err, programs) => {
 		if (err) return next(err);
 		req.programs = programs;
 		res.locals.programs = programs;
@@ -93,7 +95,9 @@ exports.loadPrograms = function(req, res, next) {
 exports.loadPlaylist = function(req, res, next) {
 	const playlistId = req.params.id;
 	if (playlistId) {
-		keystone.list('Playlist').model.findOne({ slug: playlistId }).exec((err, playlist) => {
+		Playlist.model.findOne({ _id: playlistId })
+		.populate('program')
+		.exec((err, playlist) => {
 			if (err) return next(err);
 			req.playlist = playlist;
 			res.locals.playlist = playlist;

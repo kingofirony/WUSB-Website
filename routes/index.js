@@ -29,18 +29,23 @@ keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+	views: importRoutes('./views'),
+	post: importRoutes('./post')
 };
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
 	
-	app.all('/', routes.views.index);  // Uses "all" instead of "get" to allow POST
-	app.all('/sign-up', routes.views.sign_up);
+	app.all('/', routes.views.index);
+	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
+	app.get('/playlists', routes.views.playlists);
 	
-	// Playlists
+	// Playlist
+	app.get('/playlist', routes.views.add_playlist);
 	app.all('/playlist/:id*', middleware.loadPlaylist);
-	app.all('/playlist/add', routes.views.add_playlist);
-	app.all('/playlist/:id/edit', routes.views.edit_playlist);
+	app.get('/playlist/:id', routes.views.playlist);
+	app.get('/playlist/:id/edit', routes.views.edit_playlist);
+	app.post('/playlist', routes.post.post_playlist);
+	app.post('/playlist/:id/edit', routes.post.post_playlist);
 };

@@ -25,8 +25,8 @@ if (env === 'development') {
 				done(err);
 			}
 			else {
-				_.each(programs, function (post) {
-					var program = new Program.model(post);
+				_.each(programs, function (p) {
+					const program = new Program.model(p);
 					program.djs = [user.id];
 					program.save(function (err) {
 						if (err) {

@@ -24,7 +24,7 @@ if (env === 'development') {
 			}
 			else {
 				_.each(posts, function (post) {
-					var textPost = new TextPost.model(post);
+					const textPost = new TextPost.model(post);
 					textPost.author = user.id;
 					textPost.save(function (err) {
 						if (err) {
