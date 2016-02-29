@@ -96,7 +96,7 @@ exports.loadPlaylist = function(req, res, next) {
 	const playlistId = req.params.id;
 	if (playlistId) {
 		Playlist.model.findOne({ _id: playlistId })
-		.populate('program')
+		.populate(['program', 'author'])
 		.exec((err, playlist) => {
 			if (err) return next(err);
 			req.playlist = playlist;
