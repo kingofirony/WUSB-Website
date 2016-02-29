@@ -5821,7 +5821,7 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-body, html {
+body {
   background-color: #000; }
 
 #header {
@@ -5842,15 +5842,34 @@ body, html {
   max-width: 100%;
   height: auto; }
 
-.jumbotron {
-  background-color: #000;
-  border-radius: 0 !important;
-  color: #fff;
-  padding-right: 0 !important;
-  padding-top: 10px; }
-  .jumbotron .post {
-    background-color: #3E78B2;
-    margin-top: 20px;
-    padding: 20px 15px 20px 15px; }
-    .jumbotron .post h3 {
-      margin-top: 10px; }
+#body {
+  display: flex;
+  flex-direction: row; }
+  #body .navigation {
+    margin: 25px 15px 10px 50px;
+    background-color: #fff;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px; }
+    #body .navigation li {
+      list-style: none;
+      margin-top: 10px;
+      margin-bottom: 10px; }
+      #body .navigation li a {
+        color: #3E78B2;
+        font-size: 1.5em;
+        font-weight: bold; }
+  #body .jumbotron {
+    background-color: #000;
+    border-radius: 0 !important;
+    color: #fff;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 10px; }
+    #body .jumbotron .post {
+      background-color: #3E78B2;
+      margin-top: 20px;
+      padding: 20px 15px 20px 15px; }
+      #body .jumbotron .post h3 {
+        margin-top: 10px; }

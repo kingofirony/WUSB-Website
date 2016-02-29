@@ -58,7 +58,16 @@ html
 
 		//- BODY
 		#body
-
+			div.navigation.text-center
+				each link in navLinks
+					li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+				if user
+					if user.canAccessKeystone
+						li: a(href='/keystone') Open Keystone
+					li: a(href='/keystone/signout') Sign Out
+				else
+					li: a(href='/keystone/signin') Sign In
+				
 			//- NOTE:
 			//- There is no .container wrapping class around body blocks to allow more flexibility in design.
 			//- Remember to include it in your templates when you override the intro and content blocks!
