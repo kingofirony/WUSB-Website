@@ -43,16 +43,16 @@ exports.initLocals = function(req, res, next) {
 	Fetches and clears the flashMessages before a view is rendered
 */
 
-exports.flashMessages = function(req, res, next) {
+exports.flashMessages = (req, res, next) => {
 
-	const flashMessages = {
+	const flashMsgs = {
 		info: req.flash('info'),
 		success: req.flash('success'),
 		warning: req.flash('warning'),
 		error: req.flash('error')
 	};
 	
-	res.locals.messages = _.any(flashMessages, function(msgs) { return msgs.length; }) ? flashMessages : false;
+	res.locals.messages = _.any(flashMsgs, m => m.length) ? flashMsgs : false;
 	
 	next();
 	
@@ -63,7 +63,7 @@ exports.flashMessages = function(req, res, next) {
 	Prevents people from accessing protected pages when they're not signed in
  */
 
-exports.requireUser = function(req, res, next) {
+exports.requireUser = (req, res, next) => {
 	
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
@@ -79,7 +79,7 @@ exports.requireUser = function(req, res, next) {
  	Make programs universally available
  */
 
-exports.loadPrograms = function(req, res, next) {
+exports.loadPrograms = (req, res, next) => {
 	Program.model.find().exec((err, programs) => {
 		if (err) return next(err);
 		req.programs = programs;
@@ -93,7 +93,7 @@ exports.loadPrograms = function(req, res, next) {
  	Load a playlist 
  */
 
-exports.loadPlaylist = function(req, res, next) {
+exports.loadPlaylist = (req, res, next) => {
 	const playlistId = req.params.id;
 	if (playlistId) {
 		Playlist.model.findOne({ _id: playlistId })
@@ -115,7 +115,7 @@ exports.loadPlaylist = function(req, res, next) {
  Load a program
  */
 
-exports.loadProgram = function(req, res, next) {
+exports.loadProgram = (req, res, next) => {
 	const programSlug = req.params.slug;
 	if (programSlug) {
 		Program.model.findOne({ slug: programSlug })

@@ -1,11 +1,11 @@
-var keystone = require('keystone'),
+const keystone = require('keystone'),
 	_ = require('underscore'),
 	env = keystone.get('env'),
 	User = keystone.list('User'),
 	Program = keystone.list('Program');
 
 if (env === 'development') {
-	var programs = [
+	const programs = [
 		{
 			title: 'Program 1',
 			textContent: 'blah blah blah',
@@ -18,17 +18,17 @@ if (env === 'development') {
 		}
 	];
 
-	exports = module.exports = function (done) {
-		User.model.findOne(function (err, user) {
+	exports = module.exports = done => {
+		User.model.findOne((err, user) => {
 			if (err) {
 				console.error(err);
 				done(err);
 			}
 			else {
-				_.each(programs, function (p) {
+				_.each(programs, p => {
 					const program = new Program.model(p);
 					program.djs = [user.id];
-					program.save(function (err) {
+					program.save(err => {
 						if (err) {
 							console.error(err);
 						}

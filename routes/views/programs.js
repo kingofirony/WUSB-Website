@@ -8,7 +8,7 @@ exports = module.exports = (req, res) => {
 	locals.section = 'programs';
 
 	// Load programs
-	view.on('init', function (next) {
+	view.on('init', next => {
 		Program.paginate({
 			page: req.query.page || 1,
 			perPage: 10

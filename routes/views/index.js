@@ -2,7 +2,7 @@
 const keystone = require('keystone');
 const TextPost = keystone.list('TextPost');
 
-exports = module.exports = function (req, res) {
+exports = module.exports = (req, res) => {
 	
 	let view = new keystone.View(req, res);
 	let locals = res.locals;
@@ -12,21 +12,21 @@ exports = module.exports = function (req, res) {
 	locals.section = 'home';
 	
 	// Load posts
-	view.on('init', function (next) {
+	view.on('init', next => {
 		TextPost.paginate({
 			page: req.query.page || 1,
 			perPage: 10
 		}).where('isPublished')
 		.sort('-publishedAt')
 		.populate('author', 'name')
-		.exec(function (err, posts) {
+		.exec((err, posts) => {
 			locals.posts = posts.results;
 			next();
 		});
 	});
 	
 	// Accept form post submit
-	view.on('post', { action: 'create-post' }, function (next) {
+	view.on('post', { action: 'create-post' }, next => {
 
 		// handle form
 		let newPost = new TextPost.model({
@@ -46,7 +46,7 @@ exports = module.exports = function (req, res) {
 			flashErrors: true,
 			logErrors: true,
 			fields: 'title, textContent'
-		}, function (err) {
+		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
 				next();
@@ -59,7 +59,7 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Delete a post
-	view.on('get', { remove: 'post' }, function (next) {
+	view.on('get', { remove: 'post' }, next => {
 		if (!req.user) {
 			req.flash('error', 'You must be signed in to delete a post.');
 			return next();
@@ -67,7 +67,7 @@ exports = module.exports = function (req, res) {
 		TextPost.model.findOne({
 				slug: req.query.post
 			})
-			.exec(function (err, post) {
+			.exec((err, post) => {
 				if (err) {
 					if (err.name === 'CastError') {
 						req.flash('error', 'The post ' + req.query.post + 
@@ -86,7 +86,7 @@ exports = module.exports = function (req, res) {
 						' of a post to delete it.');
 					return next();
 				}
-				post.remove(function (err) {
+				post.remove(err => {
 					if (err) return res.err(err);
 					req.flash('success', 'Your post has been deleted.');
 					return res.redirect('/');

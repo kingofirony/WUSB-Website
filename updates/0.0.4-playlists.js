@@ -1,4 +1,4 @@
-var keystone = require('keystone'),
+const keystone = require('keystone'),
 	_ = require('underscore'),
 	env = keystone.get('env'),
 	User = keystone.list('User'),
@@ -6,7 +6,7 @@ var keystone = require('keystone'),
 	Playlist = keystone.list('Playlist');
 
 if (env === 'development') {
-	var playlists = [
+	const playlists = [
 		{
 			title: 'Playlist 1',
 			genre: 'J-Pop',
@@ -45,8 +45,8 @@ if (env === 'development') {
 		}
 	];
 
-	exports = module.exports = function (done) {
-		User.model.findOne(function (err, user) {
+	exports = module.exports = done => {
+		User.model.findOne((err, user) => {
 			if (err) {
 				console.error(err);
 				done(err);
@@ -58,11 +58,11 @@ if (env === 'development') {
 						done(err);
 					}
 					else {
-						_.each(playlists, function (p) {
+						_.each(playlists, p => {
 							const playlist = new Playlist.model(p);
 							playlist.author = user.id;
 							playlist.program = program.id;
-							playlist.save(function (err) {
+							playlist.save(err => {
 								if (err) {
 									console.error(err);
 								}

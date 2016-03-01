@@ -7,8 +7,8 @@
  * module.exports = function(done) { ... }
  */
 
-var keystone = require('keystone');
-var env = keystone.get('env');
+const keystone = require('keystone');
+const env = keystone.get('env');
 
 exports.create = env !== 'development' ? {} : {
 	User: [
