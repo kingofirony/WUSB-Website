@@ -5821,8 +5821,15 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+body {
+  background-color: #000; }
+
 #header {
-  margin-top: 30px; }
+  background-color: #4A525A;
+  padding: 10px 15px 10px 15px; }
+  #header img {
+    margin-left: auto;
+    margin-right: auto; }
 
 #footer {
   margin-top: 30px;
@@ -5834,3 +5841,33 @@ button.close {
   display: block;
   max-width: 100%;
   height: auto; }
+
+#body .navigation {
+  padding: 40px 0 20px 0; }
+  #body .navigation .menu {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    #body .navigation .menu li {
+      list-style: none;
+      margin-top: 10px;
+      margin-bottom: 10px; }
+      #body .navigation .menu li a {
+        color: #3E78B2;
+        font-size: 1.5em;
+        font-weight: bold; }
+
+#body .jumbotron {
+  background-color: #000;
+  border-radius: 0;
+  color: #fff;
+  padding-top: 10px;
+  padding-right: 0; }
+  #body .jumbotron .post {
+    background-color: #3E78B2;
+    margin-top: 20px;
+    padding: 20px 15px 20px 15px; }
+    #body .jumbotron .post h3 {
+      margin-top: 10px; }
