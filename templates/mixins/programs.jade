@@ -1,3 +1,5 @@
+include ../mixins/users
+
 mixin programs()
 	for program in programs
 		p
@@ -11,9 +13,9 @@ mixin program()
 		h2!=program.title	
 		hr
 		h4 DJs
-		ul
+		div
 			for dj in program.djs
-				li!=dj.name.first + ' ' + dj.name.last
+				+user-picture-with-name(dj)
 		hr
 		h4 Playlists
 		ul
