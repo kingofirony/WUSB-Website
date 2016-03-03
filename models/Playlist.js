@@ -32,8 +32,9 @@ Playlist.add({
 	isPublished: { type: Types.Boolean, default: false },
 	isPromoted: { type: Types.Boolean, default: false },
 	/* Docs: JSON.stringify objects that follow this standard:
-		{ artist: String, album: String, title: String, label: String, 
-		link: String, weight: Number } (we can always add more if needed).
+		{ isNew: Boolean, artist: String, album: String, title: String, 
+			label: String, link: String, weight: Number } 
+		(we can always add more if needed)
 		JSON.deserialize should be used upon getting the string array,
 		expect to get objects from it (naturally). */
 	// !!! Do not set to required/initial, causes undefined behavior !!!
