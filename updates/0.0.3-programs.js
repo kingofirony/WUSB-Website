@@ -7,14 +7,15 @@ const keystone = require('keystone'),
 if (env === 'development') {
 	const programs = [
 		{
-			title: 'Program 1',
-			textContent: 'blah blah blah',
-			genre: 'J-Pop'
+			title: 'JSO Radio',
+			genre: 'J-Pop',
+			description: 'Audio treasures from Japan'
 		},
 		{
-			title: 'Program 2',
-			textContent: 'WUSB :)',
-			genre: 'Dream pop'
+			title: 'Fever Dream',
+			genre: 'Dream pop',
+			description: 'Dream pop and shoegaze',
+			isBiweekly: true
 		}
 	];
 

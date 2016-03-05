@@ -64,14 +64,26 @@ exports.flashMessages = (req, res, next) => {
  */
 
 exports.requireUser = (req, res, next) => {
-	
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
 		res.redirect('/keystone/signin');
 	} else {
 		next();
 	}
-	
+};
+
+
+/**
+ Prevents people from accessing protected pages when they're admins
+ */
+
+exports.requireAdmin = (req, res, next) => {
+	if (!req.user || !req.user.isAdmin) {
+		req.flash('error', 'You must be an admin to access this page.');
+		res.redirect('/keystone/signin');
+	} else {
+		next();
+	}
 };
 
 

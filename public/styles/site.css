@@ -5871,3 +5871,6 @@ body {
     padding: 20px 15px 20px 15px; }
     #body .jumbotron .post h3 {
       margin-top: 10px; }
+
+input[type='text'], textarea {
+  color: black; }

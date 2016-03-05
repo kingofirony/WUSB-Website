@@ -54,7 +54,6 @@ exports = module.exports = (req, res) => {
 				req.flash('success', 'Post added');
 				res.redirect('/');
 			}
-			
 		});
 	});
 
