@@ -5824,12 +5824,36 @@ button.close {
 body {
   background-color: #000; }
 
-#header {
-  background-color: #4A525A;
-  padding: 10px 15px 10px 15px; }
-  #header img {
-    margin-left: auto;
-    margin-right: auto; }
+#header .container {
+  width: 100vw;
+  padding-left: 0;
+  padding-right: 0; }
+
+#header .tower {
+  background-color: #4A525A; }
+  #header .tower img {
+    margin: 15px auto 15px auto; }
+
+#header .navbar-toggle {
+  background-color: inherit;
+  border: none; }
+  #header .navbar-toggle .icon-bar {
+    background-color: #fff; }
+
+#header .navbar {
+  background-color: #3E78B2;
+  border: none;
+  border-radius: 0; }
+  #header .navbar .navbar-collapse {
+    border: none; }
+    #header .navbar .navbar-collapse ul .active {
+      font-weight: bold; }
+      #header .navbar .navbar-collapse ul .active a {
+        background-color: inherit; }
+    #header .navbar .navbar-collapse ul li {
+      list-style: none; }
+      #header .navbar .navbar-collapse ul li a {
+        color: #fff; }
 
 #footer {
   margin-top: 30px;
@@ -5842,29 +5866,13 @@ body {
   max-width: 100%;
   height: auto; }
 
-#body .navigation {
-  padding: 40px 0 20px 0; }
-  #body .navigation .menu {
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    padding-bottom: 10px; }
-    #body .navigation .menu li {
-      list-style: none;
-      margin-top: 10px;
-      margin-bottom: 10px; }
-      #body .navigation .menu li a {
-        color: #3E78B2;
-        font-size: 1.5em;
-        font-weight: bold; }
-
 #body .jumbotron {
   background-color: #000;
   border-radius: 0;
   color: #fff;
   padding-top: 10px;
-  padding-right: 0; }
+  padding-right: 0;
+  padding-left: 0; }
   #body .jumbotron .post {
     background-color: #3E78B2;
     margin-top: 20px;
