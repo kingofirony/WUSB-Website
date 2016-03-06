@@ -2,17 +2,19 @@ var keystone = require('keystone'),
 	_ = require('underscore'),
 	env = keystone.get('env'),
 	User = keystone.list('User'),
-	TextPost = keystone.list('TextPost');
-	
+	Program = keystone.list('Program');
+
 if (env === 'development') {
-	var posts = [
+	var programs = [
 		{
-			title: 'Post 1',
-			textContent: 'blah blah blah'
+			title: 'Program 1',
+			textContent: 'blah blah blah',
+			genre: 'J-Pop'
 		},
 		{
-			title: 'Post 2',
-			textContent: 'WUSB :)'
+			title: 'Program 2',
+			textContent: 'WUSB :)',
+			genre: 'Dream pop'
 		}
 	];
 
@@ -23,10 +25,10 @@ if (env === 'development') {
 				done(err);
 			}
 			else {
-				_.each(posts, function (post) {
-					const textPost = new TextPost.model(post);
-					textPost.author = user.id;
-					textPost.save(function (err) {
+				_.each(programs, function (p) {
+					const program = new Program.model(p);
+					program.djs = [user.id];
+					program.save(function (err) {
 						if (err) {
 							console.error(err);
 						}
@@ -38,8 +40,8 @@ if (env === 'development') {
 	};
 } else {
 	exports = module.exports = done => {
-		console.log('Patch 0.0.2 is not applicable in production or ' +
-			'testing');
+		console.log('Patch 0.0.3 is not applicable in production or ' +
+			'testing.');
 		done();
 	}
 }

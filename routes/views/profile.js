@@ -2,7 +2,7 @@
 const keystone = require('keystone');
 const fs = require('fs');
 
-exports = module.exports = function (req, res) {
+exports = module.exports = (req, res) => {
 
 	let view = new keystone.View(req, res);
 	let locals = res.locals;
@@ -12,7 +12,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'profile';
 
 	// Accept form post submit
-	view.on('post', { action: 'edit-profile' }, (next) => {
+	view.on('post', { action: 'edit-profile' }, next => {
 
 		function saveImage(image, callback) {
 			const fileName = locals.user.slug;
@@ -50,12 +50,6 @@ exports = module.exports = function (req, res) {
 			}
 		}
 		
-		if (!locals.user) {
-			req.flash('error', 'Please log in');
-			res.redirect('/keystone/signin');
-			return;
-		}
-		
 		let updater = locals.user.getUpdateHandler(req, res, {
 			errorMessage: 'There was an error editing your profile:'
 		});
@@ -64,12 +58,11 @@ exports = module.exports = function (req, res) {
 			flashErrors: true,
 			logErrors: true,
 			fields: 'email, name, password'
-		}, (err) => {
+		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
-				next();
 			} else {
-				acceptImageUpload((err) => {
+				acceptImageUpload(err => {
 					if (err) {
 						locals.validationErrors = err.errors;
 						next();
@@ -80,13 +73,9 @@ exports = module.exports = function (req, res) {
 					}
 				});
 			}
+			next();
 		});
 	});
 
-	if (locals.user) {
-		view.render('profile');  // Only render edit profile page if signed in
-	}
-	else {
-		res.redirect('/keystone/signin');
-	}
+	view.render('profile');
 };

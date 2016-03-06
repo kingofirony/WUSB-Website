@@ -1,0 +1,86 @@
+mixin playlists()
+	for playlist in playlists
+		p
+			a(href='/playlist/' + playlist.id)!=playlist.title
+	if user
+		hr
+		p
+			a(href='/playlist') Add playlist
+
+mixin playlist()
+	.row: .col-sm-8.col-sm-offset-2
+	
+		h2 Playlist
+
+		if user && user.id == playlist.author.id
+			p
+				a(href='/playlist/' + playlist.id + '/edit') Edit			
+		
+		p Program:
+			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+	
+		//- Tracks
+		table(style='width:100%')
+			thead
+				tr
+					th Artist
+					th Album
+					th Title
+			tbody
+				for track in playlist.tracks
+					tr
+						td!=track.artist
+						td!=track.album
+						td!=track.title
+
+mixin post-playlist(editing)
+	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
+		input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
+
+		.row: .col-sm-8.col-sm-offset-2
+
+			h2 Post playlist
+			
+			if editing
+				p
+					a(href='/playlist/' + playlist.id) View
+			
+			//- Program
+			.form-group
+				label(for='program') Program:
+				select(id='program', name='program').input.input-xl.input-faded
+					for program in programs
+						if editing && playlist.program.id == program.id
+							option(value=program.id selected)!=program.title
+						else
+							option(value=program.id)!=program.title
+
+			//- Tracks
+			table
+				thead
+					tr
+						th Artist
+						th Album
+						th Song
+				tbody
+					if editing
+						for track in playlist.tracks
+							tr
+								td
+									input(type='text' name="artist" value=track.artist)
+								td
+									input(type='text' name="album" value=track.album)
+								td
+									input(type='text' name="title" value=track.title)						
+					- for(var i = 0; i < 10; i++)
+						tr
+							td
+								input(type='text' name="artist")
+							td
+								input(type='text' name="album")
+							td
+								input(type='text' name="title")
+			
+			//- Submit
+			.form-group
+				button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Save playlist
