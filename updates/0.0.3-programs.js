@@ -1,34 +1,35 @@
-var keystone = require('keystone'),
+const keystone = require('keystone'),
 	_ = require('underscore'),
 	env = keystone.get('env'),
 	User = keystone.list('User'),
 	Program = keystone.list('Program');
 
 if (env === 'development') {
-	var programs = [
+	const programs = [
 		{
-			title: 'Program 1',
-			textContent: 'blah blah blah',
-			genre: 'J-Pop'
+			title: 'JSO Radio',
+			genre: 'J-Pop',
+			description: 'Audio treasures from Japan'
 		},
 		{
-			title: 'Program 2',
-			textContent: 'WUSB :)',
-			genre: 'Dream pop'
+			title: 'Fever Dream',
+			genre: 'Dream pop',
+			description: 'Dream pop and shoegaze',
+			isBiweekly: true
 		}
 	];
 
-	exports = module.exports = function (done) {
-		User.model.findOne(function (err, user) {
+	exports = module.exports = done => {
+		User.model.findOne((err, user) => {
 			if (err) {
 				console.error(err);
 				done(err);
 			}
 			else {
-				_.each(programs, function (p) {
+				_.each(programs, p => {
 					const program = new Program.model(p);
 					program.djs = [user.id];
-					program.save(function (err) {
+					program.save(err => {
 						if (err) {
 							console.error(err);
 						}

@@ -30,7 +30,8 @@ exports.initLocals = function(req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Sign up', key: 'sign-up',	href: '/sign-up' },
 		{ label: 'Profile', key: 'profile',	href: '/profile' },
-		{ label: 'Playlists', key: 'playlists', href: '/playlists' }
+		{ label: 'Playlists', key: 'playlists', href: '/playlists' },
+		{ label: 'Programs', key: 'programs', href: '/programs' }
 	];
 	
 	locals.user = req.user;
@@ -42,16 +43,16 @@ exports.initLocals = function(req, res, next) {
 	Fetches and clears the flashMessages before a view is rendered
 */
 
-exports.flashMessages = function(req, res, next) {
+exports.flashMessages = (req, res, next) => {
 
-	const flashMessages = {
+	const flashMsgs = {
 		info: req.flash('info'),
 		success: req.flash('success'),
 		warning: req.flash('warning'),
 		error: req.flash('error')
 	};
 	
-	res.locals.messages = _.any(flashMessages, function(msgs) { return msgs.length; }) ? flashMessages : false;
+	res.locals.messages = _.any(flashMsgs, m => m.length) ? flashMsgs : false;
 	
 	next();
 	
@@ -62,15 +63,27 @@ exports.flashMessages = function(req, res, next) {
 	Prevents people from accessing protected pages when they're not signed in
  */
 
-exports.requireUser = function(req, res, next) {
-	
+exports.requireUser = (req, res, next) => {
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
 		res.redirect('/keystone/signin');
 	} else {
 		next();
 	}
-	
+};
+
+
+/**
+ Prevents people from accessing protected pages when they're admins
+ */
+
+exports.requireAdmin = (req, res, next) => {
+	if (!req.user || !req.user.isAdmin) {
+		req.flash('error', 'You must be an admin to access this page.');
+		res.redirect('/keystone/signin');
+	} else {
+		next();
+	}
 };
 
 
@@ -78,7 +91,7 @@ exports.requireUser = function(req, res, next) {
  	Make programs universally available
  */
 
-exports.loadPrograms = function(req, res, next) {
+exports.loadPrograms = (req, res, next) => {
 	Program.model.find().exec((err, programs) => {
 		if (err) return next(err);
 		req.programs = programs;
@@ -92,7 +105,7 @@ exports.loadPrograms = function(req, res, next) {
  	Load a playlist 
  */
 
-exports.loadPlaylist = function(req, res, next) {
+exports.loadPlaylist = (req, res, next) => {
 	const playlistId = req.params.id;
 	if (playlistId) {
 		Playlist.model.findOne({ _id: playlistId })
@@ -103,6 +116,28 @@ exports.loadPlaylist = function(req, res, next) {
 			res.locals.playlist = playlist;
 			next();
 		});
+	}
+	else {
+		next();
+	}
+};
+
+
+/**
+ Load a program
+ */
+
+exports.loadProgram = (req, res, next) => {
+	const programSlug = req.params.slug;
+	if (programSlug) {
+		Program.model.findOne({ slug: programSlug })
+			.populate(['djs', 'playlists'])
+			.exec((err, program) => {
+				if (err) return next(err);
+				req.program = program;
+				res.locals.program = program;
+				next();
+			});
 	}
 	else {
 		next();

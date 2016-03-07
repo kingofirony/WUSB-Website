@@ -2,7 +2,7 @@
 const keystone = require('keystone');
 const User = keystone.list('User');
 
-exports = module.exports = function (req, res) {
+exports = module.exports = (req, res) => {
 
 	let view = new keystone.View(req, res);
 	let locals = res.locals;
@@ -12,7 +12,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'sign-up';
 	
 	// Accept form post submit
-	view.on('post', { action: 'sign-up' }, function (next) {
+	view.on('post', { action: 'sign-up' }, next => {
 
 		// handle form
 		let newUser = new User.model({
@@ -26,7 +26,7 @@ exports = module.exports = function (req, res) {
 			flashErrors: true,
 			logErrors: true,
 			fields: 'email, name, password'
-		}, function (err) {
+		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
 				next();

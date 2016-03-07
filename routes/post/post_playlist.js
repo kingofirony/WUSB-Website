@@ -26,36 +26,50 @@ exports = module.exports = (req, res) => {
 		// Filter out rows that are completely empty
 		playlist.tracks = _.reject(tracks, t => _.all(_.values(t), v => !v));
 	}
+
+	function fillPlaylist(playlist, data) {
+
+		// Fixes "fieldTypes.relationship.updateItem()"
+		//       "Error - You cannot update populated relationships."
+		playlist.program = data.program;
+		
+		const updater = playlist.getUpdateHandler(req, res, {
+			errorMessage: 'There was an error creating your new playlist:'
+		});
+		return new Promise((resolve, reject) => {
+			updater.process(data, {
+				flashErrors: true,
+				logErrors: true,
+				fields: 'title, description'
+			}, err => {
+				if (err) {
+					return reject(err);
+				} else {
+					addTracksToPlaylist(playlist, data);
+					return resolve(playlist);
+				}
+			});
+		}).then(p => p.save());
+	}
 	
 	if (action === 'add-playlist') {
-		const playlist = new Playlist.model({
-			program: req.body.program,
-			title: '???',  // TODO: Add playlist title
-			author: locals.user.id
-		});
-		addTracksToPlaylist(playlist, req.body);
-		playlist.save(err => {
-			if (err) {
-				locals.validationErrors = err.errors;
-				res.redirect(req.originalUrl);
-			}
-			else {
-				req.flash('success', 'Playlist created');
-				res.redirect(`/playlist/${playlist.id}/edit`);
-			}
+		const playlist = new Playlist.model({ author: locals.user.id });
+		fillPlaylist(playlist, req.body).then(() => {
+			req.flash('success', 'Playlist created');
+			res.redirect(`/playlist/${playlist.id}/edit`);
+		},
+		err => {
+			locals.validationErrors = err.errors;
+			res.redirect(req.originalUrl);
 		});
 	}
 	else if (action === 'edit-playlist') {
-		const playlist = locals.playlist;
-		playlist.program = req.body.program;
-		addTracksToPlaylist(playlist, req.body);
-		playlist.save(err => {
-			if (err) {
-				locals.validationErrors = err.errors;
-			}
-			else {
-				req.flash('success', 'Playlist updated');
-			}
+		fillPlaylist(locals.playlist, req.body).then(() => {
+			req.flash('success', 'Playlist updated');
+			res.redirect(req.originalUrl);
+		},
+		err => {
+			locals.validationErrors = err.errors;
 			res.redirect(req.originalUrl);
 		});
 	}
