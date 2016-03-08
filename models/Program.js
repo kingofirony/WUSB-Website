@@ -21,14 +21,98 @@ Program.add({
 	title: { type: Types.Text, required: true },
 	djs: { type: Types.Relationship, ref: 'User', many: true, 
 		required: true, initial: true },
-	schedule: { type: Types.Date, required: true, default: Date.now },
-	isBiweekly: { type: Types.Boolean, default: false },
+	day: { type: Types.Number, required: true, initial: true },
+	startTime: { type : Types.Text, required: true, initial: true },
+	endTime: { type: Types.Text, required: true, initial: true },
+	isBiweekly: { type: Types.Boolean, initial: true, default: false },
+
+	/* Set to true if the program will play on the first week
+		of the year, set to false otherwise (or null if not biweekly) */
+	biweeklyState: { type: Types.Boolean, initial: true, default: null },
 	description: { type: Types.Text, default: '', note: 'Optional' },
 	playlists: { type: Types.Relationship, ref: 'Playlist', many: true },
 	genre: { type: Types.Text, required: true, initial: true }
 });
 
-Program.defaultColumns = 'title, djs, genre, schedule, description, ' +
-	'isBiweekly, playlists';
+Program.schema.pre('save', function (next) {
+	if ((this.isModified('isBiweekly') || this.isNew) && this.isBiweekly &&
+		(this.biweeklyState === null)) {
+		this.biweekylState = false;
+	} else if (this.isModified('isBiweekly') && !this.isBiweekly) {
+		this.biWeeklystate = null;
+	}
+	// Bounds checking starts here
+	if (this.isBiweekly) {
+		/* Alternate query for biweekly programs. 
+			Because of the odd way JS logic works, $ne: !this.biweeklyState
+			will actually capture undefined/null even though it seems
+			counterintuitive at first. */
+		Program.model.find({ 
+			_id: { $ne: this._id },
+			day: { $eq: this.day },
+			biweeklyState: { $ne: !this.biweeklyState }
+		})
+		.exec((err, results) => {
+			if (err) next(err);
+			if (results !== null && results !== undefined) {
+				for (let result of results) {
+					const start = result.startTime;
+					const end = result.endTime;
+					/* If any time occurs between two other times, then
+						the bounds check failed. The first line checks start,
+						second checks this.startTime, similar pattern for
+						lines 3 and 4 */
+					if (start >= this.startTime && start <= this.endTime ||
+					  this.startTime >= start && this.startTime <= end ||
+					  end >= this.startTime && end <= this.endTime ||
+					  this.endTime >= start && this.endTime <= end) {
+						Program.model.findById(this._id)
+						.remove((err) => {
+							console.log('Time conflict detected.');
+							next(new Error('This program has a time ' +
+								'conflict in ' + 'range: ' +
+								start + ' - ' + end));
+						});
+					}
+				}
+			}
+		});
+	} else {
+		// Complex verification is best done in a callback
+		Program.model.find({
+			_id: { $not: { $eq: this._id } },
+			day: { $eq: this.day }
+		})
+		.exec((err, results) => {
+			if (err) next(err);
+			if (results !== null && results !== undefined) {
+				for (let result of results) {
+					const start = result.startTime;
+					const end = result.endTime;
+					/* If any time occurs between two other times, then
+						the bounds check failed. The first line checks start,
+						second checks this.startTime, similar pattern for
+						lines 3 and 4 */
+					if (start >= this.startTime && start <= this.endTime ||
+					  this.startTime >= start && this.startTime <= end ||
+					  end >= this.startTime && end <= this.endTime ||
+					  this.endTime >= start && this.endTime <= end) {
+					  	Program.model.findById(this._id)
+						.remove((err) => {
+							console.log('Time conflict detected.');
+							next(new Error('This program has a time ' +
+								'conflict in ' + 'range: ' +
+								start + ' - ' + end));
+						});
+					}
+				}
+			}
+		});
+	}
+	next();
+});
+
+Program.defaultColumns = 'title, djs, genre, day, startTime, endTime,' +
+	'isBiweekly, biweeklyState, playlists';
 
 Program.register();

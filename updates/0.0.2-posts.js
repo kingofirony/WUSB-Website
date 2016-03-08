@@ -1,11 +1,11 @@
-var keystone = require('keystone'),
+const keystone = require('keystone'),
 	_ = require('underscore'),
 	env = keystone.get('env'),
 	User = keystone.list('User'),
 	TextPost = keystone.list('TextPost');
 	
 if (env === 'development') {
-	var posts = [
+	const posts = [
 		{
 			title: 'Post 1',
 			textContent: 'blah blah blah'
@@ -16,8 +16,8 @@ if (env === 'development') {
 		}
 	];
 
-	exports = module.exports = function (done) {
-		User.model.findOne(function (err, user) {
+	exports = module.exports = done => {
+		User.model.findOne((err, user)  => {
 			if (err) {
 				console.error(err);
 				done(err);
@@ -26,7 +26,7 @@ if (env === 'development') {
 				_.each(posts, function (post) {
 					const textPost = new TextPost.model(post);
 					textPost.author = user.id;
-					textPost.save(function (err) {
+					textPost.save(err => {
 						if (err) {
 							console.error(err);
 						}

@@ -12,7 +12,7 @@ exports = module.exports = (req, res) => {
 		Playlist.paginate({
 			page: req.query.page || 1,
 			perPage: 10
-		}).populate('program', 'author')
+		}).populate(['program', 'author'])
 			.exec(function (err, playlists) {
 				locals.playlists = playlists.results;
 				next();

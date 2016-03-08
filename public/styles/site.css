@@ -5888,3 +5888,13 @@ body {
 #body .grid-item {
   float: left;
   width: 200px; }
+
+  #body .jumbotron .post {
+    background-color: #3E78B2;
+    margin-top: 20px;
+    padding: 20px 15px 20px 15px; }
+    #body .jumbotron .post h3 {
+      margin-top: 10px; }
+
+input[type='text'], textarea {
+  color: black; }

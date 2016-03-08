@@ -55,6 +55,11 @@ mixin post-playlist(editing)
 						else
 							option(value=program.id)!=program.title
 
+			//- Description
+			.form-group
+				label(for='description') Description:
+				textarea(id='description', name='description')!=editing ? playlist.description : ''
+						
 			//- Tracks
 			table
 				thead

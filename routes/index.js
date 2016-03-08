@@ -18,9 +18,9 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
-var keystone = require('keystone');
-var middleware = require('./middleware');
-var importRoutes = keystone.importer(__dirname);
+const keystone = require('keystone');
+const middleware = require('./middleware');
+const importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
@@ -34,18 +34,27 @@ var routes = {
 };
 
 // Setup Route Bindings
-exports = module.exports = function(app) {
+exports = module.exports = app => {
 	
 	app.all('/', routes.views.index);
 	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
 	app.get('/playlists', routes.views.playlists);
+	app.get('/programs', routes.views.programs);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);
 	app.all('/playlist/:id*', middleware.loadPlaylist);
 	app.get('/playlist/:id', routes.views.playlist);
-	app.get('/playlist/:id/edit', routes.views.edit_playlist);
-	app.post('/playlist', routes.post.post_playlist);
-	app.post('/playlist/:id/edit', routes.post.post_playlist);
+	app.get('/playlist/:id/edit', middleware.requireUser, routes.views.edit_playlist);
+	app.post('/playlist',middleware.requireUser,  routes.post.post_playlist);
+	app.post('/playlist/:id/edit', middleware.requireUser, routes.post.post_playlist);
+	
+	// Program
+	app.get('/program', routes.views.add_program);
+	app.all('/program/:slug*', middleware.loadProgram);
+	app.get('/program/:slug', middleware.loadProgram, routes.views.program);
+	app.get('/program/:slug/edit', middleware.requireAdmin, routes.views.edit_program);
+	app.post('/program', middleware.requireAdmin, routes.post.post_program);
+	app.post('/program/:slug/edit', middleware.requireAdmin, routes.post.post_program);	
 };
