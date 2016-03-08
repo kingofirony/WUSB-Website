@@ -5858,6 +5858,7 @@ body {
       #header .navbar .navbar-collapse ul .active a {
         background-color: inherit; }
     #header .navbar .navbar-collapse ul li {
+      font-size: 18px;
       list-style: none; }
       #header .navbar .navbar-collapse ul li a {
         color: #fff; }
