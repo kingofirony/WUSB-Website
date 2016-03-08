@@ -19,10 +19,11 @@
 		}
 	}
   
-  	.grid-item {
+	
+  	.grid-sizer, .grid-item {
 		float: left;
-		width: 200px;
-	  	margin: 10px 0 10px 0;
+		width: 220px;
+		padding: 10px 10px 0 0;
 	}
   
 }

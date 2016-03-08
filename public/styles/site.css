@@ -5902,10 +5902,10 @@ input[type='text'], textarea {
   #body .post h3 {
     margin-top: 10px; }
 
-#body .grid-item {
+#body .grid-sizer, #body .grid-item {
   float: left;
-  width: 200px;
-  margin: 10px 0 10px 0; }
+  width: 220px;
+  padding: 10px 10px 0 0; }
 
 .sign-up .sign-up-form {
   margin-top: 10px;

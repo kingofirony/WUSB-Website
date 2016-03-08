@@ -24,17 +24,18 @@ mixin create-post()
 
 mixin show-post(post)
 	if post.author
-		div(id='post-id-' + post.id, class='post grid-item')
-			.media
-				.media-body
-					h3!=post.title
-					h4!=post.author.name.first + ' ' + post.author.name.last
-					p!=post.textContent.replace(/\n/g, '<br>')
-					if user && user.id === post.author.id
-						|  &middot; 
-						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm Delete
+		div.grid-item
+			div(id='post-id-' + post.id, class='post')
+				.media
+					.media-body
+						h3!=post.title
+						h4!=post.author.name.first + ' ' + post.author.name.last
+						p!=post.textContent.replace(/\n/g, '<br>')
+						if user && user.id === post.author.id
+							|  &middot; 
+							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm Delete
 
 mixin show-posts(posts)
-	.grid(data-masonry='{ "columnWidth": 80, "itemSelector": ".grid-item" }')
+	.grid(data-masonry='{ "columnWidth": 220, "itemSelector": ".grid-item" }')
 		for post in posts
 			+show-post(post)
