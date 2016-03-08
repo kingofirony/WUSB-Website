@@ -2,8 +2,6 @@ body {
   background-color: $body-bg;
 }
 
-
-
 #header {
   	.container {  	
 	  	width: 100vw;
@@ -73,8 +71,6 @@ body {
 
 #body {
   
-  	
-  
   	.jumbotron {
 		background-color: $body-bg;
 		border-radius: 0;
@@ -82,14 +78,5 @@ body {
 		padding-top: 10px;
 	  	padding-right: 0;
 	  	padding-left: 0;
-
-		.post {
-			background-color: $wusb-blue;
-			margin-top: 20px;
-			padding: 20px 15px 20px 15px; 
-			h3 {
-				margin-top: 10px
-			}
-		}
   	}
 }

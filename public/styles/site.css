@@ -5873,9 +5873,18 @@ body {
   padding-top: 10px;
   padding-right: 0;
   padding-left: 0; }
-  #body .jumbotron .post {
-    background-color: #3E78B2;
-    margin-top: 20px;
-    padding: 20px 15px 20px 15px; }
-    #body .jumbotron .post h3 {
-      margin-top: 10px; }
+
+#body #new-post {
+  text-align: center;
+  background-color: #3E78B2;
+  font-weight: bold; }
+
+#body .post {
+  padding: 10px;
+  background-color: #3E78B2; }
+  #body .post h3 {
+    margin-top: 10px; }
+
+#body .grid-item {
+  float: left;
+  width: 200px; }

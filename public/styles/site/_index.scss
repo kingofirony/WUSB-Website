@@ -1,0 +1,22 @@
+#body {
+  
+	#new-post {
+	  	text-align: center;
+	  	background-color: $wusb-blue;
+	  	font-weight: bold;
+	}
+
+	.post {
+	  	padding: 10px;
+		background-color: $wusb-blue;
+		h3 {
+		  	margin-top: 10px
+		}
+	}
+  
+  	.grid-item {
+		float: left;
+		width: 200px;
+	}
+  
+}
