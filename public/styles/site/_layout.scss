@@ -19,8 +19,8 @@ body {
   	.navbar-toggle {
 	  	background-color: inherit;
 	  	border: none;
-	  	
-	  	.icon-bar {
+
+		.icon-bar {
 		  	background-color: $wusb-white;
 		}
 	  
@@ -34,9 +34,21 @@ body {
 	  	background-color: $wusb-blue;
 	  	border: none;
   		border-radius: 0;
-	  	
-	  	.navbar-collapse {
+	  	text-align: center;
+		box-shadow: 0 2px 6px 0px rgba(0,0,0,0.75);
+
+
+		.navbar-collapse {
+			
 		  	border: none;
+		  
+			.nav {
+				display:inline-block;
+				float: none;
+				vertical-align: top;
+				border: none;
+			}
+		
 		  	ul {
 				.active {  
 					font-weight: bold;
@@ -53,6 +65,19 @@ body {
 				}
 		  	}
 		}
+		
+		.collapsing {
+			text-align: left;
+		}
+		
+		.in {
+			text-align: left;
+			
+			.nav {
+				
+			}
+		}
+		
 	}
 }
 

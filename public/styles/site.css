@@ -5822,7 +5822,7 @@ button.close {
     display: none !important; } }
 
 body {
-  background-color: #000; }
+  background-color: #475C76; }
 
 #header .container {
   width: 100vw;
@@ -5830,7 +5830,7 @@ body {
   padding-right: 0; }
 
 #header .tower {
-  background-color: #4A525A; }
+  background-color: #3E4954; }
   #header .tower img {
     margin: 15px auto 15px auto; }
 
@@ -5841,11 +5841,18 @@ body {
     background-color: #fff; }
 
 #header .navbar {
-  background-color: #3E78B2;
+  background-color: #519AC8;
   border: none;
-  border-radius: 0; }
+  border-radius: 0;
+  text-align: center;
+  box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.75); }
   #header .navbar .navbar-collapse {
     border: none; }
+    #header .navbar .navbar-collapse .nav {
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+      border: none; }
     #header .navbar .navbar-collapse ul .active {
       font-weight: bold; }
       #header .navbar .navbar-collapse ul .active a {
@@ -5854,6 +5861,10 @@ body {
       list-style: none; }
       #header .navbar .navbar-collapse ul li a {
         color: #fff; }
+  #header .navbar .collapsing {
+    text-align: left; }
+  #header .navbar .in {
+    text-align: left; }
 
 #footer {
   margin-top: 30px;
@@ -5867,34 +5878,50 @@ body {
   height: auto; }
 
 #body .jumbotron {
-  background-color: #000;
+  background-color: #475C76;
   border-radius: 0;
   color: #fff;
   padding-top: 10px;
   padding-right: 0;
   padding-left: 0; }
 
+input[type='text'], textarea {
+  color: black; }
+
 #body #new-post {
   text-align: center;
-  background-color: #3E78B2;
+  background-color: #519AC8;
   font-weight: bold; }
 
 #body .post {
   padding: 10px;
-  background-color: #3E78B2; }
+  background-color: #519AC8;
+  -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75); }
   #body .post h3 {
     margin-top: 10px; }
 
 #body .grid-item {
   float: left;
-  width: 200px; }
+  width: 200px;
+  margin: 10px 0 10px 0; }
 
-  #body .jumbotron .post {
-    background-color: #3E78B2;
-    margin-top: 20px;
-    padding: 20px 15px 20px 15px; }
-    #body .jumbotron .post h3 {
-      margin-top: 10px; }
-
-input[type='text'], textarea {
-  color: black; }
+.sign-up .sign-up-form {
+  margin-top: 10px;
+  background-color: #519AC8;
+  -webkit-box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.75); }
+  .sign-up .sign-up-form .form-group .col-xs-12 {
+    margin-bottom: 10px; }
+  .sign-up .sign-up-form .form-group button {
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    color: #519AC8;
+    background-color: #fff;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75); }

@@ -13,7 +13,11 @@ if (env === 'development') {
 		{
 			title: 'Post 2',
 			textContent: 'WUSB :)'
-		}
+		},
+		{
+			title: 'Post 3',
+			textContent: 'Milhouse front page robot troll IRL OP gilded. Sanic Bernie Sanders fallout Putin troll reddiquette Patrick Stewart sweet Zoidberg. Sanic MRW rage banana self lose skyrim aliens win hot. Lose gilded ipsum pepe Milhouse sanic Nic Cage actually drone. Bernie Sanders Patrick Stewart vega journalism Zoidberg pooch unidan dank IRL.'
+		}	
 	];
 
 	exports = module.exports = done => {
