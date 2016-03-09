@@ -1,5 +1,5 @@
 include ../mixins/flash-messages
-
+	
 doctype html
 html
 
@@ -43,31 +43,26 @@ html
 			
 			div.tower.text-center
 				img(src="/images/wusb-tower.svg")
-			//div(role="navigation").navbar.navbar-default
+			div(role="navigation").navbar.navbar-default
 				.container-fluid
-					.navbar-header
-						
+					button.navbar-toggle.collapsed(data-toggle="collapse" data-target=".navbar-collapse")
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
 					.collapse.navbar-collapse
-						ul.nav.navbar-nav.navbar-right
+						ul.nav.navbar-nav
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 							if user
 								if user.canAccessKeystone
 									li: a(href='/keystone') Open Keystone
 								li: a(href='/keystone/signout') Sign Out
 							else
 								li: a(href='/keystone/signin') Sign In
+								
 
 		//- BODY
 		#body.container
-			div.navigation.text-center.col-md-2.col-xs-12.col-sm-3
-				div.menu
-					each link in navLinks
-						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-					if user
-						if user.canAccessKeystone
-							li: a(href='/keystone') Open Keystone
-						li: a(href='/keystone/signout') Sign Out
-					else
-						li: a(href='/keystone/signin') Sign In
 				
 			//- NOTE:
 			//- There is no .container wrapping class around body blocks to allow more flexibility in design.
@@ -108,6 +103,7 @@ html
 			script(src='/keystone/js/content/editor.js')
 
 		//- Add scripts that are globally required by your site here.
+		script(src='/js/masonry/masonry.pkgd.min.js')
 
 		//- Include template-specific javascript files by extending the js block
 		block js

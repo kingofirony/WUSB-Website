@@ -9,13 +9,19 @@ if (env === 'development') {
 		{
 			title: 'JSO Radio',
 			genre: 'J-Pop',
-			description: 'Audio treasures from Japan'
+			description: 'Audio treasures from Japan',
+			day: '0',
+			startTime: '1200',
+			endTime: '1400'
 		},
 		{
 			title: 'Fever Dream',
 			genre: 'Dream pop',
 			description: 'Dream pop and shoegaze',
-			isBiweekly: true
+			isBiweekly: true,
+			day: '1',
+			startTime: '1200',
+			endTime: '1400'
 		}
 	];
 
