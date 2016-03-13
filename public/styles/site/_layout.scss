@@ -2,16 +2,84 @@ body {
   background-color: $body-bg;
 }
 
-
-
 #header {
-	background-color: $wusb-grey;
-  	padding: 10px 15px 10px 15px;
+  	.container {  	
+	  	width: 100vw;
+	  	padding-left: 0;
+	  	padding-right: 0;
+	}
+  	.tower {
+	  	background-color: $wusb-grey;
+	    
+		img {
+		  	margin: 15px auto 15px auto;
+		}
+	}
+
+  	.navbar-toggle {
+	  	background-color: inherit;
+	  	border: none;
+
+		.icon-bar {
+		  	background-color: $wusb-white;
+		}
+	  
+	}
   
-    img{
-		margin-left: auto;
-	  	margin-right: auto;
-    }
+  	.navbar-toggle:hover {
+	  
+	}	
+  
+	.navbar {
+	  	background-color: $wusb-blue;
+	  	border: none;
+  		border-radius: 0;
+	  	text-align: center;
+		box-shadow: 0 2px 6px 0px rgba(0,0,0,0.75);
+
+
+		.navbar-collapse {
+			
+		  	border: none;
+		  
+			.nav {
+				display:inline-block;
+				float: none;
+				vertical-align: top;
+				border: none;
+			}
+		
+		  	ul {
+				.active {  
+					font-weight: bold;
+			  		a {
+						background-color: inherit;
+			  		}
+				}
+
+				li {
+					font-size: 18px;
+			  		list-style: none;
+			  		a {
+						color: $wusb-white;
+			  		}
+				}
+		  	}
+		}
+		
+		.collapsing {
+			text-align: left;
+		}
+		
+		.in {
+			text-align: left;
+			
+			.nav {
+				
+			}
+		}
+		
+	}
 }
 
 #footer {
@@ -29,46 +97,13 @@ body {
 
 #body {
   
-  	.navigation {
-	  	
-	  	padding: 40px 0 20px 0;
-		
-	  	.menu {
-		  	background-color: $wusb-white;
-		  	display: flex;
-			flex-direction: column;
-			padding-top: 10px;
-			padding-bottom: 10px;
-		  
-			li {
-			  	list-style: none;
-			  	margin-top: 10px;
-			  	margin-bottom: 10px;
-	
-			  	a {
-					color: $wusb-blue;
-					font-size: 1.5em;
-					font-weight: bold;
-			  	}
-			}
-	  	}
-	}
-  
   	.jumbotron {
 		background-color: $body-bg;
 		border-radius: 0;
 		color: #fff;
 		padding-top: 10px;
 	  	padding-right: 0;
-
-		.post {
-			background-color: $wusb-blue;
-			margin-top: 20px;
-			padding: 20px 15px 20px 15px; 
-			h3 {
-				margin-top: 10px
-			}
-		}
+	  	padding-left: 0;
   	}
 }
 

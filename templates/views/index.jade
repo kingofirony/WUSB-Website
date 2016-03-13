@@ -2,16 +2,17 @@ extends ../layouts/default
 include ../mixins/posts
 
 block content
-	.jumbotron.col-md-10.col-xs-12.col-sm-9
+	.jumbotron.col-md-12.col-xs-12.col-sm-12
 		h2 news from the booth
 		+create-post()
 		+show-posts(posts)
-		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p We have created a default Admin user for you with the email <strong>user@keystonejs.com</strong> and the password <strong>admin</strong>.
-			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
+		div
+			hr
+			if user && user.canAccessKeystone
+				p
+					a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
+			else
+				p We have created a default Admin user for you with the email <strong>user@keystonejs.com</strong> and the password <strong>admin</strong>.
+				p
+					a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
+					|  to use the Admin UI.
