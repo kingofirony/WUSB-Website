@@ -17,6 +17,8 @@ Backend: Peter Geiss
 3. If MongoDB isn't running, start it with <code>sudo mongod</code>
 4. <code>npm start</code> and you're ready to go.
 
+Want to run the tests? Perform these steps and <code>npm install -g mocha</code>, then run `mocha` while `mongod` is running.
+
 #Running the Server in production
 
 1. Fork the respository, then <code>git clone</code> your fork onto your computer. <code>cd</code> into it.
