@@ -1,8 +1,8 @@
 /**
  * This file contains the common middleware used by your routes.
- * 
+ *
  * Extend or replace these functions as your application requires.
- * 
+ *
  * This structure is not enforced, and just a starting point. If
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
@@ -16,7 +16,7 @@ const Playlist = keystone.list('Playlist');
 
 /**
 	Initialises the standard view locals
-	
+
 	The included layout depends on the navLinks array to generate
 	the navigation in the header, you may wish to change this array
 	or replace it with your own templates / logic.
@@ -25,15 +25,14 @@ const Playlist = keystone.list('Playlist');
 exports.initLocals = function(req, res, next) {
 
 	const locals = res.locals;
-	
+
 	locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
-		{ label: 'Sign up', key: 'sign-up',	href: '/sign-up' },
-		{ label: 'Profile', key: 'profile',	href: '/profile' },
 		{ label: 'Playlists', key: 'playlists', href: '/playlists' },
-		{ label: 'Programs', key: 'programs', href: '/programs' }
+		{ label: 'Programs', key: 'programs', href: '/programs' },
+		{label:'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'}
 	];
-	
+
 	locals.user = req.user;
 	next();
 };
@@ -51,11 +50,11 @@ exports.flashMessages = (req, res, next) => {
 		warning: req.flash('warning'),
 		error: req.flash('error')
 	};
-	
+
 	res.locals.messages = _.any(flashMsgs, m => m.length) ? flashMsgs : false;
-	
+
 	next();
-	
+
 };
 
 
@@ -102,7 +101,7 @@ exports.loadPrograms = (req, res, next) => {
 
 
 /**
- 	Load a playlist 
+ 	Load a playlist
  */
 
 exports.loadPlaylist = (req, res, next) => {

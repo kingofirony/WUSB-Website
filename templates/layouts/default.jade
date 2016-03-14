@@ -1,5 +1,5 @@
 include ../mixins/flash-messages
-	
+
 doctype html
 html
 
@@ -40,7 +40,7 @@ html
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
-			
+
 			div.tower.text-center
 				img(src="/images/wusb-tower.svg")
 			div(role="navigation").navbar.navbar-default
@@ -55,15 +55,18 @@ html
 								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 							if user
 								if user.canAccessKeystone
-									li: a(href='/keystone') Open Keystone
+									li: a(href='/keystone') Admin Panel
+								li: a(href='/profile') Profile
 								li: a(href='/keystone/signout') Sign Out
 							else
 								li: a(href='/keystone/signin') Sign In
-								
+								li: a(href='sign-up') Sign Up
+
+
 
 		//- BODY
 		#body.container
-				
+
 			//- NOTE:
 			//- There is no .container wrapping class around body blocks to allow more flexibility in design.
 			//- Remember to include it in your templates when you override the intro and content blocks!
