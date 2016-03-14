@@ -1,6 +1,7 @@
 'use strict';
 const keystone = require('keystone');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 
 exports = module.exports = (req, res) => {
 
@@ -15,21 +16,24 @@ exports = module.exports = (req, res) => {
 	view.on('post', { action: 'edit-profile' }, next => {
 
 		function saveImage(image, callback) {
+			const dir = 'public/images/profile/';
 			const fileName = locals.user.slug;
-
-			// Gives .jpg, .png, etc even if ext is not 3 char long
-			const fileExt = image.name.substr(
-				image.name.search(/\..+$/), image.name.length);
-
-			fs.readFile(image.path, (err, image) => {
-				fs.writeFile('public/images/profile/' + fileName + fileExt, 
-				  image, (err) => {
-					if (err) throw err;
-					console.log('Saved ' + fileName + fileExt + '...');
-					console.log('to public/images/profile');
+			mkdirp(dir, function (err) {	// Create directory
+				if (err) throw err;
+				// Gives .jpg, .png, etc even if ext is not 3 char long
+				const fileExt = image.name.substr(
+					image.name.search(/\..+$/), image.name.length);
+	
+				fs.readFile(image.path, (err, image) => {
+					fs.writeFile(dir + fileName + fileExt, 
+					  image, (err) => {
+						if (err) throw err;
+						console.log('Saved ' + fileName + fileExt + '...');
+						console.log('to public/images/profile');
+					});
 				});
+				callback();
 			});
-			callback();
 		}
 		
 		function acceptImageUpload(callback) {
@@ -61,6 +65,7 @@ exports = module.exports = (req, res) => {
 		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
+				next();
 			} else {
 				acceptImageUpload(err => {
 					if (err) {
@@ -73,7 +78,6 @@ exports = module.exports = (req, res) => {
 					}
 				});
 			}
-			next();
 		});
 	});
 
