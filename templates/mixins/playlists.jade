@@ -48,7 +48,7 @@ mixin post-playlist(editing)
 			//- Program
 			.form-group
 				label(for='program') Program:
-				input(id='program' class='typeahead' type='text' placeholder='')
+				input(id='program' name='program' class='typeahead' type='text' value=playlist.program.title)
 
 			//- Description
 			.form-group
@@ -71,7 +71,8 @@ mixin post-playlist(editing)
 								td
 									input(type='text' name="album" value=track.album)
 								td
-									input(type='text' name="title" value=track.title)						
+									input(type='text' name="title" value=track.title)
+						
 					- for(var i = 0; i < 10; i++)
 						tr
 							td

@@ -6,8 +6,6 @@ var programs = new Bloodhound({
 	prefetch: 'api/programs'
 });
 
-console.log(programs);
-
 // passing in `null` for the `options` arguments will result in the default
 // options being used
 $('#program.typeahead').typeahead(null, {
