@@ -48,7 +48,7 @@ mixin post-playlist(editing)
 			//- Program
 			.form-group
 				label(for='program') Program:
-				input(id='program' name='program' class='typeahead' type='text' value=playlist.program.title)
+				input(id='program' name='program' class='typeahead' type='text' value=editing ? playlist.program.title : '')
 
 			//- Description
 			.form-group
