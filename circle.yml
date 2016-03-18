@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: 5.6.0
+
+dependencies:
+  pre:
+    - rm -rf node_modules
+    - npm install --no-optional
+    - npm install mocha -g
+    - npm install browserify -g
+
+test:
+  override:
+    - sudo mkdir -p /data/db/
+    - sudo chown `id -u` /data/db
+    - sudo service mongodb stop
+    - sudo mongod --fork --logpath /var/log/mongod.log
+    - mocha

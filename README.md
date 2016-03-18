@@ -1,8 +1,9 @@
 # WUSB-Website
-This is the source for the WUSB main website at wusb.fm. 
+This is the source for the WUSB main website at wusb.fm.
 
+![Circle CI Build Status](https://circleci.com/gh/kingofirony/WUSB-Website.png?circle-token=:circle-token)
 ##Team:
-Manager: Peter Jasko 
+Manager: Peter Jasko
 
 Frontend: Ken Fehling
 
