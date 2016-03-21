@@ -52,7 +52,7 @@ mixin post-program(editing)
 			//- Description
 			.form-group
 				label(for='description') Description:
-				textarea(id='description', name='description')!=editing ? program.description : ''
+				textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
 				
 			//- DJs
 				
