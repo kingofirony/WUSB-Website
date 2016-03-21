@@ -18,6 +18,8 @@ mixin playlist()
 		
 		p Program:
 			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+
+		p!=playlist.description
 	
 		//- Tracks
 		table(style='width:100%')
