@@ -13,8 +13,6 @@ $('#dj.typeahead').typeahead(null, {
 	source: djs
 });
 
-console.log("DBD");
-
 $('#date').datepicker({
 	
 });
