@@ -12,3 +12,11 @@ $('#dj.typeahead').typeahead(null, {
 	name: 'djs',
 	source: djs
 });
+
+console.log("DBD");
+
+$('#date').datepicker({
+	
+});
+
+$('#time').timepicker();
