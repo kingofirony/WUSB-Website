@@ -28,28 +28,28 @@ exports = module.exports = (req, res) => {
 	}
 
 	function fillPlaylist(playlist, data) {
-
-		// Fixes "fieldTypes.relationship.updateItem()"
-		//       "Error - You cannot update populated relationships."
-		playlist.program = data.program;
-		
 		const updater = playlist.getUpdateHandler(req, res, {
 			errorMessage: 'There was an error creating your new playlist:'
 		});
-		return new Promise((resolve, reject) => {
-			updater.process(data, {
-				flashErrors: true,
-				logErrors: true,
-				fields: 'title, description'
-			}, err => {
-				if (err) {
-					return reject(err);
-				} else {
+		return Program.model.findOne({ title: data.program }).exec()
+		.then(program => {
+			playlist.program = program.id;
+			return Promise.resolve(playlist);
+		}).then(playlist => {
+			return new Promise((resolve, reject) => {
+				updater.process(data, {
+					flashErrors: true,
+					logErrors: true,
+					fields: 'title, description'
+				}, err => {
+					if (err) return reject(err);
 					addTracksToPlaylist(playlist, data);
 					return resolve(playlist);
-				}
+				})
 			});
-		}).then(p => p.save());
+		}).then(playlist => {
+			Promise.resolve(playlist.save());
+		});
 	}
 	
 	if (action === 'add-playlist') {

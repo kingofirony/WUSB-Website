@@ -30,6 +30,7 @@ keystone.pre('render', middleware.flashMessages);
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
+	api: importRoutes('./api'),
 	post: importRoutes('./post')
 };
 
@@ -56,5 +57,8 @@ exports = module.exports = app => {
 	app.get('/program/:slug', middleware.loadProgram, routes.views.program);
 	app.get('/program/:slug/edit', middleware.requireAdmin, routes.views.edit_program);
 	app.post('/program', middleware.requireAdmin, routes.post.post_program);
-	app.post('/program/:slug/edit', middleware.requireAdmin, routes.post.post_program);	
+	app.post('/program/:slug/edit', middleware.requireAdmin, routes.post.post_program);
+	
+	// API
+	app.get('/api/programs', routes.api.programs);
 };

@@ -52,8 +52,8 @@ TextPost.schema.pre('save', function (next) {
 	if (this.isModified('isPublished') && this.isPublished &&
 		!this.publishedAt) {
 		this.publishedAt = moment();
-	} else if (this.isModified('textContent') && this.isPublished && 
-		this.publishedAt && !this.silentEdit) {
+	} else if (this.isModified('textContent') && this.isPublished 
+		&& !this.silentEdit) {
 		this.lastEditedAt = moment();
 		this.editCount += 1;
 	}
@@ -61,7 +61,22 @@ TextPost.schema.pre('save', function (next) {
 	next(); // Everyone loves callback hell
 });
 
-TextPost.schema.post('save', function (next) {
+TextPost.schema.post('save', function () {
+	if (this.silentEdit) {
+		this.silentEdit = false;
+		console.log('An admin attempted a silent edit at ' + new Date() +
+			'.');
+	}
+});
+
+TextPost.schema.pre('update', function (next) {
+	if (this.isPublished && !this.publishedAt) {
+		this.publishedAt = moment();
+	}
+	next();
+});
+
+TextPost.schema.post('update', function () {
 	if (this.silentEdit) {
 		this.silentEdit = false;
 		console.log('An admin attempted a silent edit at ' + new Date() +

@@ -1,8 +1,10 @@
 # WUSB-Website
-This is the source for the WUSB main website at wusb.fm. 
+This is the source for the WUSB main website at wusb.fm.
+
+[![Circle CI](https://circleci.com/gh/kingofirony/WUSB-Website.png?circle-token=:circle-token)](https://circleci.com/gh/kingofirony/WUSB-Website)
 
 ##Team:
-Manager: Peter Jasko 
+Manager: Peter Jasko
 
 Frontend: Ken Fehling
 
@@ -16,6 +18,8 @@ Backend: Peter Geiss
 2. <code>npm install</code> (if you add an npm module, be sure to add it to <i>package.json</i> so npm responds to it)
 3. If MongoDB isn't running, start it with <code>sudo mongod</code>
 4. <code>npm start</code> and you're ready to go.
+
+Want to run the tests? Perform these steps and <code>npm install -g mocha</code>, then run `mocha` while `mongod` is running.
 
 #Running the Server in production
 

@@ -22,8 +22,8 @@ Program.add({
 	djs: { type: Types.Relationship, ref: 'User', many: true, 
 		required: true, initial: true },
 	day: { type: Types.Number, required: true, initial: true },
-	startTime: { type : Types.Text, required: true, initial: true },
-	endTime: { type: Types.Text, required: true, initial: true },
+	startTime: { type : Types.Number, required: true, initial: true },
+	endTime: { type: Types.Number, required: true, initial: true },
 	isBiweekly: { type: Types.Boolean, initial: true, default: false },
 
 	/* Set to true if the program will play on the first week

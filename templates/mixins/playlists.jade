@@ -48,12 +48,7 @@ mixin post-playlist(editing)
 			//- Program
 			.form-group
 				label(for='program') Program:
-				select(id='program', name='program').input.input-xl.input-faded
-					for program in programs
-						if editing && playlist.program.id == program.id
-							option(value=program.id selected)!=program.title
-						else
-							option(value=program.id)!=program.title
+				input(id='program' name='program' class='typeahead' type='text' value=editing ? playlist.program.title : '')
 
 			//- Description
 			.form-group
@@ -76,7 +71,8 @@ mixin post-playlist(editing)
 								td
 									input(type='text' name="album" value=track.album)
 								td
-									input(type='text' name="title" value=track.title)						
+									input(type='text' name="title" value=track.title)
+						
 					- for(var i = 0; i < 10; i++)
 						tr
 							td
