@@ -62,8 +62,9 @@ mixin post-program(editing)
 						for dj in program.djs
 							li
 								input(id='dj', name='dj', class='typeahead', type='text', value=dj.fullName)
-					li
-						input(id='dj' name='dj' class='typeahead' type='text')
+					for i in [1, 2]
+						li
+							input(id='dj' name='dj' class='typeahead' type='text')
 				
 			//- Schedule
 				

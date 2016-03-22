@@ -36,8 +36,8 @@ User.schema.virtual('fullName').get(function() {
 });
 
 User.schema.statics.findByFullName = function(name, cb) {
-	const nameParts = name.split(' ');
-	return this.findOne({'name.first': nameParts[0], 'name.last': nameParts[1]}, cb)
+	const parts = name.split(' ');
+	return this.findOne({'name.first': parts[0], 'name.last': parts[1]}, cb)
 };
 
 /* When someone is browsing the admin pane, they'll see the DB columns
