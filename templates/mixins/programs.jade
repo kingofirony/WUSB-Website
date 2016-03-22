@@ -55,6 +55,15 @@ mixin post-program(editing)
 				textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
 				
 			//- DJs
+			.form-group
+				label(for='dj') DJs:
+				ul
+					if editing
+						for dj in program.djs
+							li
+								input(id='dj', name='dj', class='typeahead', type='text', value=dj.fullName)
+					li
+						input(id='dj' name='dj' class='typeahead' type='text')
 				
 			//- Schedule
 				

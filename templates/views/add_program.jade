@@ -1,6 +1,9 @@
 extends ../layouts/default
 include ../mixins/programs
 
+block js
+	script(src="/js/site/post-program.js")
+	
 block content
 	.container: .jumbotron
 		+post-program(false)

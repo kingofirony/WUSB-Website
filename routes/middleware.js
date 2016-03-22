@@ -10,6 +10,7 @@
 
 const _ = require('underscore');
 const keystone = require('keystone');
+const User = keystone.list('User');
 const Program = keystone.list('Program');
 const Playlist = keystone.list('Playlist');
 
@@ -85,9 +86,21 @@ exports.requireAdmin = (req, res, next) => {
 	}
 };
 
+/**
+ Load users
+ */
+
+exports.loadUsers = (req, res, next) => {
+	User.model.find().exec((err, users) => {
+		if (err) return next(err);
+		req.users = users;
+		res.locals.users = users;
+		next();
+	});
+};
 
 /**
- 	Make programs universally available
+ 	Load programs
  */
 
 exports.loadPrograms = (req, res, next) => {
