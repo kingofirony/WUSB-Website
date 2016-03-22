@@ -5892,7 +5892,23 @@ input[type='text'], textarea {
 #body #new-post {
   text-align: center;
   background-color: #519AC8;
-  font-weight: bold; }
+  font-weight: bold;
+  width: 50px;
+  max-height: 50px;
+  line-height: 50px;
+  margin: 0;
+  -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+  -webkit-transition: width 1s ease, height 2s ease;
+  -moz-transition: width 1s ease, height 2s ease;
+  -o-transition: width 1s ease, height 2s ease;
+  transition: width 1s ease, height 2s ease; }
+  #body #new-post form {
+    text-align: left; }
+
+#body #new-post:hover {
+  cursor: pointer; }
 
 #body .post {
   padding: 10px;
@@ -5902,6 +5918,9 @@ input[type='text'], textarea {
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75); }
   #body .post h3 {
     margin-top: 10px; }
+  #body .post a {
+    color: #fff;
+    text-decoration: none; }
 
 #body .grid-sizer, #body .grid-item {
   float: left;
