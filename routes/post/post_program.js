@@ -48,7 +48,7 @@ exports = module.exports = (req, res) => {
 
 	function fillDate(program, dateString) {
 		const date = new Date(dateString);
-		program.day = date.day;
+		program.day = date.getDay();
 		program.biweeklyState = program.isBiweekly && date.getWeekOfYear() % 2 == 1;
 		return Promise.resolve(program);
 	}
@@ -74,7 +74,8 @@ exports = module.exports = (req, res) => {
 			});
 		}).then(() => fillStartTime(program, req.body.startTime))
 			.then(() => fillEndTime(program, req.body.endTime))
-			.then(() => fillDate(program, req.body.date));
+			.then(() => fillDate(program, req.body.date))
+			.then(program => program.save());
 	}
 	
 	if (action === 'add-program') {
