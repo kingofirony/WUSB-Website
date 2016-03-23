@@ -17,4 +17,5 @@ $('#date').datepicker({
 	
 });
 
-$('#time').timepicker();
+$('#startTime').timepicker();
+$('#endTime').timepicker();
