@@ -9,13 +9,11 @@ mixin create-post()
 			
 					//- Title
 					.form-group
-						h3 Create a post
 						input(type='text', id='post-title', name='title', placeholder='Post title').form-control.col-sm-12
 						
 					//- Content
 					.form-group
-						h3 Post content
-						textarea(name='textContent', class='wysiwyg', rows="3").form-control.col-sm-12
+						textarea(name='textContent', placeholder='Post content', class='wysiwyg', rows="3").form-control.col-sm-12
 						
 					//- Submit
 					.form-group
