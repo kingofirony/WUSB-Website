@@ -18,6 +18,8 @@ mixin playlist()
 		
 		p Program:
 			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+
+		p!=playlist.description
 	
 		//- Tracks
 		table(style='width:100%')
@@ -53,7 +55,7 @@ mixin post-playlist(editing)
 			//- Description
 			.form-group
 				label(for='description') Description:
-				textarea(id='description', name='description')!=editing ? playlist.description : ''
+				textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
 						
 			//- Tracks
 			table
