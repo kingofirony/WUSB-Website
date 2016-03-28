@@ -24,7 +24,6 @@ const importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
-keystone.pre('routes', middleware.loadPrograms);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
@@ -41,7 +40,7 @@ exports = module.exports = app => {
 	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
 	app.get('/playlists', routes.views.playlists);
-	app.get('/programs', routes.views.programs);
+	app.get('/programs', middleware.loadPrograms, routes.views.programs);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);
@@ -60,5 +59,6 @@ exports = module.exports = app => {
 	app.post('/program/:slug/edit', middleware.requireAdmin, routes.post.post_program);
 	
 	// API
-	app.get('/api/programs', routes.api.programs);
+	app.get('/api/users', middleware.loadUsers, routes.api.users);
+	app.get('/api/programs', middleware.loadPrograms, routes.api.programs);
 };
