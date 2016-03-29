@@ -79,6 +79,20 @@ Playlist.schema.pre('save', function (next) {
 	next();
 });
 
+Playlist.schema.pre('update', function (next) {
+	if ((this.isModified('program') && this.isPublished) ||
+	  (this.isModified('isPublished') && this.isPublished)) {
+		keystone.list('Program').model.update(
+			{ _id: this.program }, 
+			{ $push: { playlists: this } },
+			function (err) {
+				if (err) throw err;
+			}
+		);
+	}
+	next();
+})
+
 Playlist.defaultColumns = 'title, author, date, description,' +
 	' isPublished, isPromoted, serializedTracks';
 
