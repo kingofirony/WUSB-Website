@@ -116,16 +116,33 @@ Program.defaultColumns = 'title, djs, genre, day, startTime, endTime,' +
 	'isBiweekly, biweeklyState, playlists';
 
 function toTimeString(value) {
-	if (value === 0) {
-		return '12:00 AM'
+	let hours = Math.floor(value / 100);
+	if (hours > 12) {
+		hours -= 12;
+	}
+	if (hours == 0) {
+		hours = 12;
+	}
+	let minutes = value % 100;
+	if (minutes < 10) {
+		minutes = '0' + String(minutes); // Dumb JS type coercion guard
 	}
 	if (value < 1200) {
-		return value / 100 + ':' + value % 100 + ' AM';
+		return hours + ':' + minutes + ' AM';
+	} else if (value >= 1200) {
+		return hours + ':' + minutes + ' PM';
 	}
-	if (value === 1200) {
-		return '12:00 PM';
-	}
-	return (value - 1200) / 100 + ':' + value % 100 + ' PM';
+}
+
+/* Jan 1 is 0, etc. JS Date objects handle leap years.
+	Argument is optional. */
+function daysSinceBeginningOfYear(date) {
+	const now = (date === undefined) ? new Date() : date;
+	const janFirst = new Date(now.getFullYear(), 0, 0);
+	const diff = now - janFirst;
+	const millisPerDay = 86400000;
+	// Think units: millisec div (millisec div day) = days
+	return Math.floor(diff / millisPerDay);
 }
 
 Program.schema.virtual('startTimeString').get(function() {
@@ -137,7 +154,7 @@ Program.schema.virtual('endTimeString').get(function() {
 });
 
 Program.schema.virtual('nextAirDate').get(function() {
-	// TODO: Implement date calculation functions
+	// Not implemented yet
 	return new Date();
 });
 
@@ -145,6 +162,26 @@ Program.schema.virtual('nextAirDateMMDDYY').get(function() {
 	const d = this.nextAirDate;
 	return ("0" + (d.getMonth() + 1).toString()).substr(-2) + "/" +
 		("0" + d.getDate().toString()).substr(-2) + "/" + d.getFullYear();
+});
+
+Program.schema.virtual('isLiveNow').get(function () {
+	// Check biweekly first, then do a general bounds check.
+	if (this.isBiweekly) {
+		const curWeek = Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2);
+		const state = (curWeek == 0) ? true : false;
+		if (this.biweeklyState != state) {
+			return false;
+		}
+	}
+	// General bounds check
+	const now = new Date();
+	if (this.day == now.getDay()) {
+		const time = (now.getHours() * 100) + now.getMinutes();
+		if (this.startTime < time && this.endTime > time) {
+			return true;
+		}
+	}
+	return false; // No sense in repeating this
 });
 
 Program.register();
