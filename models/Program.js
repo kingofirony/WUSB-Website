@@ -115,4 +115,36 @@ Program.schema.pre('save', function (next) {
 Program.defaultColumns = 'title, djs, genre, day, startTime, endTime,' +
 	'isBiweekly, biweeklyState, playlists';
 
+function toTimeString(value) {
+	if (value === 0) {
+		return '12:00 AM'
+	}
+	if (value < 1200) {
+		return value / 100 + ':' + value % 100 + ' AM';
+	}
+	if (value === 1200) {
+		return '12:00 PM';
+	}
+	return (value - 1200) / 100 + ':' + value % 100 + ' PM';
+}
+
+Program.schema.virtual('startTimeString').get(function() {
+	return toTimeString(this.startTime);
+});
+
+Program.schema.virtual('endTimeString').get(function() {
+	return toTimeString(this.endTime);
+});
+
+Program.schema.virtual('nextAirDate').get(function() {
+	// TODO: Implement date calculation functions
+	return new Date();
+});
+
+Program.schema.virtual('nextAirDateMMDDYY').get(function() {
+	const d = this.nextAirDate;
+	return ("0" + (d.getMonth() + 1).toString()).substr(-2) + "/" +
+		("0" + d.getDate().toString()).substr(-2) + "/" + d.getFullYear();
+});
+
 Program.register();

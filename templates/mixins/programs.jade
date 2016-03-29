@@ -28,7 +28,7 @@ mixin program()
 				li!=playlist.title	
 				
 mixin post-program(editing)
-	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
+	form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
 		input(type='hidden', name='action', value=editing ? 'edit-program' : 'add-program')
 
 		.row: .col-sm-8.col-sm-offset-2
@@ -55,9 +55,41 @@ mixin post-program(editing)
 				textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
 				
 			//- DJs
-				
-			//- Schedule
-				
+			.form-group
+				label(for='dj') DJs:
+				ul
+					if editing
+						for dj in program.djs
+							li
+								input(id='dj', name='dj', class='typeahead', type='text', value=dj.fullName)
+					for i in [1, 2]
+						li
+							input(id='dj' name='dj' class='typeahead' type='text')
+			
+			//- Start time
+			.form-group
+				label(for='startTime') Start time:
+				div(class="input-group bootstrap-timepicker timepicker")
+					input(id="startTime", name="startTime", type="text", class="form-control input-small", value=editing ? program.startTimeString : '')
+					span(class="input-group-addon")
+						i(class="glyphicon glyphicon-time")
+						
+			//- End time
+			.form-group
+				label(for='endTime') End time:
+				div(class="input-group bootstrap-timepicker timepicker")
+					input(id="endTime", name="endTime", type="text", class="form-control input-small", value=editing ? program.endTimeString : '')
+					span(class="input-group-addon")
+						i(class="glyphicon glyphicon-time")
+
+			//- Date
+			.form-group
+				label(for='date') Date:
+				div(class="input-group date")
+					input(id="date", name="date", type="text", class="form-control", value=editing ? program.nextAirDateMMDDYY : '')
+					span(class="input-group-addon")
+						i(class="glyphicon glyphicon-th")
+
 			//- Biweekly
 			.form-group
 				label(for='isBiweekly') Biweekly:

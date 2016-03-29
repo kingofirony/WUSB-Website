@@ -47,9 +47,7 @@ exports = module.exports = (req, res) => {
 					return resolve(playlist);
 				})
 			});
-		}).then(playlist => {
-			Promise.resolve(playlist.save());
-		});
+		}).then(playlist => Promise.resolve(playlist.save()));
 	}
 	
 	if (action === 'add-playlist') {

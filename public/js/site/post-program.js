@@ -1,15 +1,21 @@
-var programs = new Bloodhound({
+var djs = new Bloodhound({
 	datumTokenizer: Bloodhound.tokenizers.whitespace,
 	queryTokenizer: Bloodhound.tokenizers.whitespace,
 	// url points to a json file that contains an array of country names, see
 	// https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
-	prefetch: '/api/programs'
+	prefetch: '/api/users'
 });
 
 // passing in `null` for the `options` arguments will result in the default
 // options being used
-$('#program.typeahead').typeahead(null, {
-	name: 'programs',
-	source: programs
+$('#dj.typeahead').typeahead(null, {
+	name: 'djs',
+	source: djs
 });
 
+$('#date').datepicker({
+	
+});
+
+$('#startTime').timepicker();
+$('#endTime').timepicker();
