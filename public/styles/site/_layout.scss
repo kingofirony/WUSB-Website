@@ -96,27 +96,14 @@ body {
     height: auto;
 }
 
-button {
-	border: none;
-	border-radius: 0;
-	color: $wusb-blue;
-	background-color: $wusb-white;
-	font-weight: bold;
-	-webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.75);
-	
-	* {
-		vertical-align: middle;
-	}
-}
+
 
 #body {
   
   	.jumbotron {
 		background-color: $body-bg;
 		border-radius: 0;
-		color: #fff;
+		color: $wusb-white;
 		padding-top: 10px;
 	  	padding-right: 0;
 	  	padding-left: 0;

@@ -1,6 +1,6 @@
-$('#new-post').click(function() {
-	var plus = $("span.plus");
-	var form = $(this).find("form");
+$('span.plus').click(function() {
+	var plus = $(this);
+	var form = $(this).parent().find("form");
 
 	
 	plus.bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
@@ -17,18 +17,17 @@ $('#new-post').click(function() {
 	});
 
 
-	$(this).toggleClass('row');
+	$(this).parent().toggleClass('row');
 
 	if (form.hasClass("hidden")) {
-		$(this).css({"width": "inherit", "height": "auto"});
+		$(this).parent().css({"width": "inherit", "height": "auto"});
 		form.removeClass("hidden");
 		plus.addClass('rotate-right');
 
 	}
 	else {
-		$(this).css({"width": "50px", "height": "50px"});
+		$(this).parent().css({"width": "50px", "height": "50px"});
 		form.addClass('hidden');
 		plus.addClass('rotate-left');
-
 	}
 });
