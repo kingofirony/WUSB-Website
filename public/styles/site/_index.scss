@@ -1,3 +1,24 @@
+@-moz-keyframes spin-right {
+	100% { -moz-transform: rotate(45deg); } 
+}
+@-webkit-keyframes spin-right { 
+	100% { -webkit-transform: rotate(45deg); }
+}
+@keyframes spin-right { 
+	100% { -webkit-transform: rotate(45deg); transform: rotate(45deg); } 
+}
+
+@-moz-keyframes spin-left {
+	100% { -moz-transform: rotate(0deg); }
+}
+@-webkit-keyframes spin-left {
+	100% { -webkit-transform: rotate(0deg); }
+}
+@keyframes spin-left {
+	100% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+}
+
+
 #body {
   
 	#new-post {
@@ -5,7 +26,7 @@
 	  	background-color: $wusb-blue;
 	  	font-weight: bold;
 		width: 50px;
-		max-height: 50px;
+		height: 50px;
 		line-height: 50px;
 		margin: 0;
 		-webkit-box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.75);
@@ -22,6 +43,18 @@
 		
 		form {
 			text-align: left;
+		}
+		
+		.rotate-right {
+			-webkit-animation: spin-right 1s linear;
+			-moz-animation: spin-right 1s linear;
+			animation: spin-right 1s linear;
+		}
+
+		.rotate-left {
+			-webkit-animation: spin-left 1s linear;
+			-moz-animation: spin-left 1s linear;
+			animation: spin-left 1s linear;
 		}
 	}
 	
