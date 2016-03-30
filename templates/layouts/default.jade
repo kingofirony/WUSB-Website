@@ -40,9 +40,12 @@ html
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
-
 			div.tower.text-center
 				img(src="/images/wusb-tower.svg")
+				div.stream
+					<h5>Listen to Dreamseville </br> with </br> NobelSobel and Goldenrod <h5>
+					i.glyphicon.glyphicon-play.play &nbsp;
+					i.glyphicon.glyphicon-stop.stop
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
 					button.navbar-toggle.collapsed(data-toggle="collapse" data-target=".navbar-collapse")
@@ -95,6 +98,7 @@ html
 		//- and the KeystoneJS Content Editor. If you are not targeting IE8,
 		//- you can upgrade to 2.1.4 (also bundled) for better performance.
 		script(src='/js/jquery/jquery-1.11.3.min.js')
+		script(src='js/site/stream.js')
 
 		//- Customise which Bootstrap javascript files are served by including
 		//- them specifically here, instead of bootstrap-3.3.5.min.js
@@ -111,15 +115,15 @@ html
 			
 		script(src='/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.all.min.js')
 		link(href="/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.min.css", rel="stylesheet")
-		
+
 		script(src='/js/bootstrap-timepicker/bootstrap-timepicker.min.js')
 		link(href="/js/bootstrap-timepicker/bootstrap-timepicker.min.css", rel="stylesheet")
-		
+
 		script(src='/js/bootstrap-datepicker/bootstrap-datepicker.min.js')
 		link(href="/js/bootstrap-datepicker/bootstrap-datepicker.min.css", rel="stylesheet")
-		
+
 	//- Make form text areas WYSIWYG
 	script(src='/js/site/wysiwyg.js')
-			
+
 	//- Include template-specific javascript files by extending the js block
 	block js
