@@ -57,25 +57,26 @@ exports = module.exports = (req, res) => {
 		const updater = program.getUpdateHandler(req, res, {
 			errorMessage: 'There was an error creating your new program:'
 		});
-		return fillDJs(program, req.body.dj).then(() => {
-			return new Promise((resolve, reject) => {
-				updater.process(req.body, {
-					flashErrors: true,
-					logErrors: true,
-					fields: 'title, isBiweekly, description, genre'
-				}, err => {
-					if (err) {
-						return reject(err);
-					} else {
-						req.flash('success', 'Program ' + (editing ? 'updated' : 'created'));
-						return resolve(program);
-					}
-				});
+		return fillDJs(program, req.body.dj)
+		.then(() => fillStartTime(program, req.body.startTime))
+		.then(() => fillEndTime(program, req.body.endTime))
+		.then(() => fillDate(program, req.body.date))
+		.then(() => new Promise((resolve, reject) => {
+			updater.process(req.body, {
+				flashErrors: true,
+				logErrors: true,
+				fields: 'title, isBiweekly, description, genre'
+			}, err => {
+				if (err) return reject(err);
+				req.flash('success', 'Program ' + (editing ? 'updated' : 'created'));
+				return resolve(program);
 			});
-		}).then(() => fillStartTime(program, req.body.startTime))
-			.then(() => fillEndTime(program, req.body.endTime))
-			.then(() => fillDate(program, req.body.date))
-			.then(program => program.save());
+		})).then(program => new Promise((resolve, reject) => {
+			program.save(err => {
+				if (err) return reject(err);
+				return resolve(program);
+			})
+		}));
 	}
 	
 	if (action === 'add-program') {
