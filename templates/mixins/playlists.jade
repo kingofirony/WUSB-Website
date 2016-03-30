@@ -1,7 +1,8 @@
 mixin playlists()
 	for playlist in playlists
-		p
-			a(href='/playlist/' + playlist.id)!=playlist.title
+		if playlist.isPublished || playlist.author.id == user.id
+			p
+				a(href='/playlist/' + playlist.id)!=playlist.itemTitle
 	if user
 		hr
 		p
@@ -83,6 +84,11 @@ mixin post-playlist(editing)
 								input(type='text' name="album")
 							td
 								input(type='text' name="title")
+			
+			//- Is Published
+			.form-group
+				label(for='isPublished') Published:
+				input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
 			
 			//- Submit
 			.form-group
