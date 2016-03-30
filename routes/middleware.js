@@ -74,7 +74,7 @@ exports.requireUser = (req, res, next) => {
 
 
 /**
- Prevents people from accessing protected pages when they're admins
+ Prevents people from accessing protected pages when they're not admins
  */
 
 exports.requireAdmin = (req, res, next) => {

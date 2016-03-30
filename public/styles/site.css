@@ -5829,6 +5829,27 @@ body {
   padding-left: 0;
   padding-right: 0; }
 
+#header .stream {
+  position: absolute;
+  background-color: #3E4954;
+  text-align: left;
+  color: #fff;
+  top: .5em;
+  right: .5em; }
+  #header .stream h5 {
+    font-size: 1em;
+    text-align: center; }
+  #header .stream i {
+    font-size: 1.2em; }
+  #header .stream i.play:hover {
+    color: #519AC8; }
+  #header .stream i.stop:hover {
+    color: #519AC8; }
+  #header .stream i.play:active {
+    font-size: 1.35em; }
+  #header .stream i.stop:active {
+    font-size: 1.35em; }
+
 #header .tower {
   background-color: #3E4954; }
   #header .tower img {
