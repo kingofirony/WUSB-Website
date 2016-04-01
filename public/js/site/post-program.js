@@ -13,9 +13,7 @@ $('#dj.typeahead').typeahead(null, {
 	source: djs
 });
 
-$('#date').datepicker({
-	
-});
+$('#date').datepicker();
 
 $('#startTime').timepicker();
 $('#endTime').timepicker();
