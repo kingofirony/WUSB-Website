@@ -1,8 +1,10 @@
 mixin playlists()
 	for playlist in playlists
-		if playlist.isPublished || playlist.author.id == user.id
+		if playlist.isPublished || (user && playlist.author.id == user.id)
 			p
 				a(href='/playlist/' + playlist.id)!=playlist.itemTitle
+				if !playlist.isPublished
+					span (draft)
 	if user
 		hr
 		p
