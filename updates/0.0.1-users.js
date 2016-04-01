@@ -18,6 +18,13 @@ exports.create = env !== 'development' ? {} : {
 			email: 'user@keystonejs.com',
 			password: 'admin',
 			isAdmin: true
+		},
+		{
+			'name.first': 'Ken',
+			'name.last': 'Fehling',
+			email: 'ken@androidideas.org',
+			password: 'password',
+			isAdmin: false
 		}
 	]
 };
