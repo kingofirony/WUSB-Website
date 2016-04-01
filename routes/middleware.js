@@ -24,16 +24,14 @@ const Playlist = keystone.list('Playlist');
 */
 
 exports.initLocals = function(req, res, next) {
-
 	const locals = res.locals;
-
 	locals.navLinks = [
-		{ label: 'Home', key: 'home', href: '/' },
-		{ label: 'Playlists', key: 'playlists', href: '/playlists' },
-		{ label: 'Programs', key: 'programs', href: '/programs' },
+		{label: 'Home', key: 'home', href: '/'},
+		{label: 'Playlists', key: 'playlists', href: '/playlists'},
+		{label: 'Programs', key: 'programs', href: '/programs'},
+		{label: 'Schedule', key: 'schedule', href: '/schedule'},
 		{label:'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'}
 	];
-
 	locals.user = req.user;
 	next();
 };
@@ -44,18 +42,14 @@ exports.initLocals = function(req, res, next) {
 */
 
 exports.flashMessages = (req, res, next) => {
-
 	const flashMsgs = {
 		info: req.flash('info'),
 		success: req.flash('success'),
 		warning: req.flash('warning'),
 		error: req.flash('error')
 	};
-
 	res.locals.messages = _.any(flashMsgs, m => m.length) ? flashMsgs : false;
-
 	next();
-
 };
 
 

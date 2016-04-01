@@ -43,6 +43,7 @@ exports = module.exports = app => {
 	app.all('/profile', middleware.requireUser, routes.views.profile);
 	app.get('/playlists', routes.views.playlists);
 	app.get('/programs', middleware.loadPrograms, routes.views.programs);
+	app.get('/schedule', middleware.loadPrograms, routes.views.weekly_schedule);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);
