@@ -46,6 +46,14 @@ TextPost.schema.methods.wasEdited = function () {
 	return this.editCount > 0;
 }
 
+TextPost.schema.virtual('textLength').get(() => {
+	const length = this.textContent.length;
+	if (length < 35) return 'xs';
+	else if (length <= 70) return 's';
+	else if (length <= 140) return 'm';
+	else return 'l';
+});
+
 /* Set the published date when the post first gets published 
 	or set the edit date and the edit counter */
 TextPost.schema.pre('save', function (next) {
