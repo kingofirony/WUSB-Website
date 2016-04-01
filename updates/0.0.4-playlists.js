@@ -10,6 +10,7 @@ if (env === 'development') {
 		{
 			title: 'Playlist 1',
 			genre: 'J-Pop',
+			isPublished: true,
 			tracks: [
 				{
 					artist: '17 Years Old and Berlin Wall',
@@ -45,6 +46,7 @@ if (env === 'development') {
 		},
 		{
 			genre: 'Experimental',
+			isPublished: false,
 			tracks: [
 
 			]
