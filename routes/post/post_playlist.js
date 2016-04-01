@@ -39,7 +39,7 @@ exports = module.exports = (req, res) => {
 			updater.process(data, {
 				flashErrors: true,
 				logErrors: true,
-				fields: 'title, description'
+				fields: 'title, description, isPublished'
 			}, err => {
 				if (err) return reject(err);
 				addTracksToPlaylist(playlist, data);
@@ -67,7 +67,12 @@ exports = module.exports = (req, res) => {
 	else if (action === 'edit-playlist') {
 		fillPlaylist(locals.playlist, req.body).then(() => {
 			req.flash('success', 'Playlist updated');
-			res.redirect(req.originalUrl);
+			if (req.body['save-and-exit']) {
+				res.redirect(`/playlists`);
+			}
+			else {
+				res.redirect(req.originalUrl);
+			}
 		},
 		err => {
 			locals.validationErrors = err.errors;
