@@ -14,4 +14,6 @@ block content
 						td!=timeslot.string
 						for day in days
 							- var program = calendar[day][timeslot.number]
-							td!=program ? program.title : ''
+							td
+								if program
+									a(href='/program/' + program.slug)!=program.title
