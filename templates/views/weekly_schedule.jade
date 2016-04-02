@@ -11,8 +11,7 @@ block content
 			tbody
 				for timeslot in timeslots
 					tr
-						td!=timeslot
+						td!=timeslot.string
 						for day in days
-							td!="BONE"
-								
-						
+							- var program = calendar[day][timeslot.number]
+							td!=program ? program.title : ''
