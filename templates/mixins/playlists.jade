@@ -1,21 +1,35 @@
 mixin playlists()
-	for playlist in playlists
-		p
-			a(href='/playlist/' + playlist.id)!=playlist.title
 	if user
-		p
-			a(href='/playlist') Add playlist
+		div.playlist
+			a(href='/playlist')
+				span.glyphicon.glyphicon-plus
+				span  Add playlist
+	for playlist in playlists
+		div.playlist
+			a(href='/playlist/' + playlist.id)
+				h4
+					span.glyphicon.glyphicon-music
+					&nbsp
+					!=playlist.title
+					span  for 
+					!=playlist.date
+				h5
+					span by 
+					!=playlist.program.title
+				h6
+					!=playlist.description
+	
 
 mixin playlist()
-	.row: .col-sm-8.col-sm-offset-2
-	
-		h2 Playlist
-
+	h2!=playlist.title
+	div.col-sm-12
 		if user && user.id == playlist.author.id
-			p
-				a(href='/playlist/' + playlist.id + '/edit') Edit			
+			button
+				a(href='/playlist/' + playlist.id + '/edit') 
+					span.glyphicon.glyphicon-pencil
+					span  Edit			
 		
-		p Program:
+		p Program: 
 			a(href='/program/' + playlist.program.slug)!=playlist.program.title
 
 		p!=playlist.description

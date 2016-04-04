@@ -26,6 +26,7 @@
 		border-radius: 0;
 		color: $wusb-blue;
 		background-color: $wusb-white;
+		transition: all 0.5s ease;
 		font-weight: bold;
 		-webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.75);
 		-moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.75);
@@ -34,6 +35,11 @@
 		* {
 			vertical-align: middle;
 		}
+	}
+	
+	button:hover {
+		background-color: $wusb-grey;
+		color: $wusb-white;
 	}
   
 	#new-post {
