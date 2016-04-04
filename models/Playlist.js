@@ -22,7 +22,7 @@ const Playlist = new keystone.List('Playlist', options);
 	You should treat "tracks" below as if it were in Playlist.add and
 	the constructor works like you'd expect. */
 Playlist.add({
-	title: { type: Types.Text, required: true },
+	title: { type: Types.Text },
 	author: { type: Types.Relationship, ref: 'User', required: true,
 		initial: true, noedit: true },
 	program: { type: Types.Relationship, ref: 'Program', required: true,
@@ -77,6 +77,25 @@ Playlist.schema.pre('save', function (next) {
 		);
 	}
 	next();
+});
+
+Playlist.schema.pre('update', function (next) {
+	if ((this.isModified('program') && this.isPublished) ||
+	  (this.isModified('isPublished') && this.isPublished)) {
+		keystone.list('Program').model.update(
+			{ _id: this.program }, 
+			{ $push: { playlists: this } },
+			function (err) {
+				if (err) throw err;
+			}
+		);
+	}
+	next();
+});
+
+Playlist.schema.virtual('itemTitle').get(function() {
+	return this.title ? this.title : this.program.title + ' - ' +
+			this.date.toLocaleDateString();
 });
 
 Playlist.defaultColumns = 'title, author, date, description,' +

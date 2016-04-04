@@ -35,19 +35,22 @@ exports = module.exports = (req, res) => {
 		.then(program => {
 			playlist.program = program.id;
 			return Promise.resolve(playlist);
-		}).then(playlist => {
-			return new Promise((resolve, reject) => {
-				updater.process(data, {
-					flashErrors: true,
-					logErrors: true,
-					fields: 'title, description'
-				}, err => {
-					if (err) return reject(err);
-					addTracksToPlaylist(playlist, data);
-					return resolve(playlist);
-				})
-			});
-		}).then(playlist => Promise.resolve(playlist.save()));
+		}).then(playlist => new Promise((resolve, reject) => {
+			updater.process(data, {
+				flashErrors: true,
+				logErrors: true,
+				fields: 'title, description, isPublished'
+			}, err => {
+				if (err) return reject(err);
+				addTracksToPlaylist(playlist, data);
+				return resolve(playlist);
+			})
+		})).then(playlist => new Promise((resolve, reject) => {
+			playlist.save(err => {
+				if (err) return reject(err);
+				return resolve(playlist);
+			})
+		}));
 	}
 	
 	if (action === 'add-playlist') {
@@ -64,7 +67,12 @@ exports = module.exports = (req, res) => {
 	else if (action === 'edit-playlist') {
 		fillPlaylist(locals.playlist, req.body).then(() => {
 			req.flash('success', 'Playlist updated');
-			res.redirect(req.originalUrl);
+			if (req.body['save-and-exit']) {
+				res.redirect(`/playlists`);
+			}
+			else {
+				res.redirect(req.originalUrl);
+			}
 		},
 		err => {
 			locals.validationErrors = err.errors;

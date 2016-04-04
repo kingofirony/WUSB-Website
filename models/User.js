@@ -20,7 +20,15 @@ User.add({
 	// Docs: Passwords are automatically encrypted
 	password: { type: Types.Password, initial: true, required: true },
 	isConfirmed: { type: Boolean, default: false },
-	hasProfilePicture: { type: Boolean, default: false }
+	profileImage: { type: Types.LocalFile, dest: 'public/images/profile',
+		prefix: 'images/profile', 
+		filename: function (item, file) {
+			return item.slug + '.' + file.extension;
+		},
+		format: function (item, file) {
+			return '<img src="/images/profile/'+file.filename+'">'
+		} 
+	}
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });

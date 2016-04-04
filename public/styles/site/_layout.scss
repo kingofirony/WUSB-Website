@@ -4,14 +4,42 @@ body {
 
 
 #header {
-  	.container {  	
+  	.container {
 	  	width: 100vw;
 	  	padding-left: 0;
 	  	padding-right: 0;
 	}
+
+    .stream {
+      position: absolute;
+      background-color: $wusb-grey;
+      text-align: left;
+      color: $wusb-white;
+      top:.5em;
+      right: .5em;
+      h5 {
+        font-size: 1em;
+        text-align: center;
+      }
+      i {
+        font-size: 1.2em;
+      }
+      i.play:hover {
+        color: $wusb-blue;
+      }
+      i.stop:hover {
+        color: $wusb-blue;
+      }
+      i.play:active {
+        font-size: 1.35em;
+      }
+      i.stop:active {
+        font-size: 1.35em;
+      }
+    }
+
   	.tower {
 	  	background-color: $wusb-grey;
-	    
 		img {
 		  	margin: 15px auto 15px auto;
 		}
@@ -24,13 +52,13 @@ body {
 		.icon-bar {
 		  	background-color: $wusb-white;
 		}
-	  
+
 	}
-  
+
   	.navbar-toggle:hover {
-	  
-	}	
-  
+
+	}
+
 	.navbar {
 	  	background-color: $wusb-blue;
 	  	border: none;
@@ -40,18 +68,18 @@ body {
 
 
 		.navbar-collapse {
-			
+
 		  	border: none;
-		  
+
 			.nav {
 				display:inline-block;
 				float: none;
 				vertical-align: top;
 				border: none;
 			}
-		
+
 		  	ul {
-				.active {  
+				.active {
 					font-weight: bold;
 			  		a {
 						background-color: inherit;
@@ -67,19 +95,19 @@ body {
 				}
 		  	}
 		}
-		
+
 		.collapsing {
 			text-align: left;
 		}
-		
+
 		.in {
 			text-align: left;
-			
+
 			.nav {
-				
+
 			}
 		}
-		
+
 	}
 }
 
@@ -99,7 +127,7 @@ body {
 
 
 #body {
-  
+
   	.jumbotron {
 		background-color: $body-bg;
 		border-radius: 0;
