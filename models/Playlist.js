@@ -94,8 +94,7 @@ Playlist.schema.pre('update', function (next) {
 });
 
 Playlist.schema.virtual('itemTitle').get(function() {
-	return this.title ? this.title : this.program.title + ' - ' +
-			this.date.toLocaleDateString();
+	return this.program.title + ' - ' + this.date.toLocaleDateString();
 });
 
 Playlist.defaultColumns = 'title, author, date, description,' +
