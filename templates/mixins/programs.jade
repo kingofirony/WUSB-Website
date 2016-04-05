@@ -2,7 +2,7 @@ include ../mixins/users
 
 mixin programs()
 	for program in programs
-		p
+		.program
 			a(href='/program/' + program.slug)!=program.title
 	if user && user.isAdmin
 		hr
