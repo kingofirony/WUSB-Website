@@ -1,22 +1,20 @@
 mixin create-post()
 	if user
-		.row
-			#new-post.col-md-1.col-lg-1.col-sm-2
-				span.glyphicon.glyphicon-plus.plus
-			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
+		#new-post
+			span.glyphicon.glyphicon-plus.plus
+			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
 				input(type='hidden', name='action', value='create-post')
-			
-				.row: .col-sm-8.col-sm-offset-2
-			
+
+				.col-sm-10.col-sm-offset-1
+
 					//- Title
 					.form-group
-						h2 Create a post
-						input(type='text', id='post-title', name='title', placeholder='Post title').input.input-xl.input-faded
-						
+						input(type='text', id='post-title', name='title', placeholder='Post title').form-control.col-sm-12
+
 					//- Content
 					.form-group
-						textarea(name='textContent', class='wysiwyg', placeholder='Post content').input.input-faded
-						
+						textarea(name='textContent', placeholder='Post content', class='wysiwyg', rows="3").form-control.col-sm-12
+
 					//- Submit
 					.form-group
 						button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Create post
@@ -31,8 +29,10 @@ mixin show-post(post)
 						h4!=post.author.name.first + ' ' + post.author.name.last
 						p!=post.textContent.replace(/\n/g, '<br>')
 						if user && user.id === post.author.id
-							|  &middot; 
-							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm Delete
+							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
+								button
+									span.glyphicon.glyphicon-remove
+									span  delete
 
 mixin show-posts(posts)
 	.grid(data-masonry='{ "columnWidth": 220, "itemSelector": ".grid-item" }')

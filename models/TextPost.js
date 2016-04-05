@@ -37,14 +37,14 @@ TextPost.add({
 			changing the edit counter. Be sure to set to false again after \
 			you finish your edit.' }
 
-})
+});
 
 /* Set up the Mongoose schema
 	API Docs: http://mongoosejs.com/docs/api.html
 	Docs on Pre and Post: http://mongoosejs.com/docs/middleware.html */
 TextPost.schema.methods.wasEdited = function () {
 	return this.editCount > 0;
-}
+};
 
 TextPost.schema.virtual('textLength').get(() => {
 	const length = this.textContent.length;
@@ -90,7 +90,7 @@ TextPost.schema.post('update', function () {
 		console.log('An admin attempted a silent edit at ' + new Date() +
 			'.');
 	}
-})
+});
 
 TextPost.defaultColumns = 'title, author, isPublished,' +
 	' draftedAt, publishedAt';
