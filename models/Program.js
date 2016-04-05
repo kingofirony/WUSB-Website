@@ -40,7 +40,7 @@ Program.schema.pre('save', function (next) {
 		(this.biweeklyState === null)) {
 		this.biweekylState = false;
 	} else if (this.isModified('isBiweekly') && !this.isBiweekly) {
-		this.biWeeklystate = null;
+		this.bieeklyState = null;
 	}
 	// Bounds checking starts here
 	if (this.isBiweekly) {
@@ -146,6 +146,19 @@ function daysSinceBeginningOfYear(date) {
 	return Math.floor(diff / millisPerDay);
 }
 
+/* Uses daysSinceBeginningOfYear to get this week's 
+	biweekly state. */
+function getCurrentBiweeklyState() {
+	return Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2) == 0;
+}
+
+/* Uses JS Date object functions to get the time
+	in the format expected by the DB */
+function getTime() {
+	const now = new Date();
+	return (now.getHours() * 100) + now.getMinutes()
+}
+
 Program.schema.virtual('startTimeString').get(function() {
 	return toTimeString(this.startTime);
 });
@@ -168,8 +181,7 @@ Program.schema.virtual('nextAirDateMMDDYY').get(function() {
 Program.schema.virtual('isLiveNow').get(function () {
 	// Check biweekly first, then do a general bounds check.
 	if (this.isBiweekly) {
-		const curWeek = Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2);
-		const state = curWeek == 0;
+		const state = getCurrentBiweeklyState();
 		if (this.biweeklyState != state) {
 			return false;
 		}
@@ -177,13 +189,28 @@ Program.schema.virtual('isLiveNow').get(function () {
 	// General bounds check
 	const now = new Date();
 	if (this.day == now.getDay()) {
-		const time = (now.getHours() * 100) + now.getMinutes();
+		const time = getTime();
 		if (this.startTime < time && this.endTime > time) {
 			return true;
 		}
 	}
 	return false; // No sense in repeating this
 });
+
+/* Call this with a callback expecting an error object
+	and a program. If program is null there is no live
+	program at the moment. */
+Program.schema.statics.getLiveProgram = function (next) {
+	const state = getCurrentBiweeklyState();
+	const now = new Date();
+	const time = getTime();
+	this.findOne({ 
+		day: now.getDay(),
+		startTime: {$lte: time},
+		endTime: {$gte: time},
+		biweeklyState: {$ne: !state} //capture undefined+null
+	}).populate(['djs']).exec(next);
+};
 
 Program.schema.statics.getTimeSlots = function() {
 	return _.map(_.flatten(_.map(_.range(24), h => [h*100, h*100+30])), num => ({

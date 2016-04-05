@@ -99,3 +99,14 @@ mixin post-program(editing)
 			//- Submit
 			.form-group
 				button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Save program
+
+mixin live-program(prg)
+	if prg
+		h2!='Title: ' + prg.title
+		p!='Genre: ' + prg.genre
+		- var names = 'Djs:'
+		for dj in prg.djs
+			- names += ' ' + dj.name.first + ' ' + dj.name.last
+		p!=names
+	else
+		p!='No program right now.'
