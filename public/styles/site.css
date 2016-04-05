@@ -6024,6 +6024,9 @@ input[type='text'], textarea {
 .playlist-list h2 {
   margin-bottom: 20px; }
 
+.playlist-list .row {
+  margin: 10px 0 10px 0; }
+
 .playlist-list .playlist {
   color: #fff;
   background-color: #519AC8;

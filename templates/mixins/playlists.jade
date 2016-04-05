@@ -1,24 +1,26 @@
 mixin playlists()
 	if user
-		div.playlist
-			a(href='/playlist')
-				span.glyphicon.glyphicon-plus
-				span  Add playlist
+		.row
+			div.playlist
+				a(href='/playlist')
+					span.glyphicon.glyphicon-plus
+					span  Add playlist
 	for playlist in playlists
-		div.playlist
-			if playlist.isPublished || user !== undefined && playlist.author.id == user.id
-				a(href='/playlist/' + playlist.id)
-					h4
-						span.glyphicon.glyphicon-music
-						&nbsp
-						!=playlist.title
-						span  for
-						!=playlist.date
-					h5
-						span by
-						!=playlist.program.title
-					h6
-						!=playlist.description
+		if playlist.isPublished || user !== undefined && playlist.author.id == user.id
+			.row
+				div.playlist
+					a(href='/playlist/' + playlist.id)
+						h4
+							span.glyphicon.glyphicon-music
+							&nbsp 
+							!=playlist.title
+							span  for 
+							!=playlist.date
+						h5
+							span by 
+							!=playlist.program.title
+						h6
+							!=playlist.description
 
 
 mixin playlist()
