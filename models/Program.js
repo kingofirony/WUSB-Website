@@ -1,5 +1,6 @@
 'use strict';
 const keystone = require('keystone');
+const _ = require('underscore');
 
 // Docs: http://keystonejs.com/docs/database/#fieldtypes
 const Types = keystone.Field.Types;
@@ -168,7 +169,7 @@ Program.schema.virtual('isLiveNow').get(function () {
 	// Check biweekly first, then do a general bounds check.
 	if (this.isBiweekly) {
 		const curWeek = Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2);
-		const state = (curWeek == 0) ? true : false;
+		const state = curWeek == 0;
 		if (this.biweeklyState != state) {
 			return false;
 		}
@@ -183,5 +184,16 @@ Program.schema.virtual('isLiveNow').get(function () {
 	}
 	return false; // No sense in repeating this
 });
+
+Program.schema.statics.getTimeSlots = function() {
+	return _.map(_.flatten(_.map(_.range(24), h => [h*100, h*100+30])), num => ({
+		number: num,
+		string: toTimeString(num)
+	}));
+};
+
+Program.schema.statics.findBySlot = function(day, time, cb) {
+	return this.findOne({'day': day, 'startTime': time}, cb)
+};
 
 Program.register();
