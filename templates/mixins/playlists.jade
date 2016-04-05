@@ -6,22 +6,23 @@ mixin playlists()
 					span.glyphicon.glyphicon-plus
 					span  Add playlist
 	for playlist in playlists
-		if playlist.isPublished || user !== undefined && playlist.author.id == user.id
+		if playlist.isPublished || (user && playlist.author.id == user.id)
 			.row
 				div.playlist
 					a(href='/playlist/' + playlist.id)
 						h4
 							span.glyphicon.glyphicon-music
-							&nbsp 
+							&nbsp
 							!=playlist.title
-							span  for 
+							span  for
 							!=playlist.date
 						h5
-							span by 
+							span by
 							!=playlist.program.title
 						h6
 							!=playlist.description
-
+							if !playlist.isPublished
+								span (draft)
 
 mixin playlist()
 	h2!=playlist.title

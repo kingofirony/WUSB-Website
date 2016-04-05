@@ -1,0 +1,19 @@
+extends ../layouts/default
+
+block content
+	.container: .jumbotron
+		table(style='width:100%; table-layout:fixed')
+			thead
+				tr
+					th
+					for day in days
+						th!=day
+			tbody
+				for timeslot in timeslots
+					tr
+						td!=timeslot.string
+						for day in days
+							- var program = calendar[day][timeslot.number]
+							td
+								if program
+									a(href='/program/' + program.slug)!=program.title
