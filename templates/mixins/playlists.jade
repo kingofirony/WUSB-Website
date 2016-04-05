@@ -12,32 +12,34 @@ mixin playlists()
 					a(href='/playlist/' + playlist.id)
 						h4
 							span.glyphicon.glyphicon-music
-							&nbsp 
+							&nbsp
 							!=playlist.title
-							span  for 
+							span  for
 							!=playlist.date
 						h5
-							span by 
+							span by
 							!=playlist.program.title
 						h6
 							!=playlist.description
-
->>>>>>> styling beginning of programs
-
+							if !playlist.isPublished
+								span (draft)
 mixin playlist()
 	h2!=playlist.title
 	div.col-sm-12
 		if user && user.id == playlist.author.id
 			button
-				a(href='/playlist/' + playlist.id + '/edit') 
+				a(href='/playlist/' + playlist.id + '/edit')
 					span.glyphicon.glyphicon-pencil
-					span  Edit			
+					span  Edit
 		
-		p Program: 
+		p Program:
+				a(href='/playlist/' + playlist.id + '/edit')
+
+		p Program:
 			a(href='/program/' + playlist.program.slug)!=playlist.program.title
 
 		p!=playlist.description
-	
+
 		//- Tracks
 		table(style='width:100%')
 			thead
@@ -59,11 +61,11 @@ mixin post-playlist(editing)
 		.row: .col-sm-8.col-sm-offset-2
 
 			h2 Post playlist
-			
+
 			if editing
 				p
 					a(href='/playlist/' + playlist.id) View
-			
+
 			//- Program
 			.form-group
 				label(for='program') Program:
@@ -73,7 +75,7 @@ mixin post-playlist(editing)
 			.form-group
 				label(for='description') Description:
 				textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-						
+
 			//- Tracks
 			table
 				thead
@@ -91,7 +93,7 @@ mixin post-playlist(editing)
 									input(type='text' name="album" value=track.album)
 								td
 									input(type='text' name="title" value=track.title)
-						
+
 					- for(var i = 0; i < 10; i++)
 						tr
 							td
@@ -100,12 +102,12 @@ mixin post-playlist(editing)
 								input(type='text' name="album")
 							td
 								input(type='text' name="title")
-			
+
 			//- Is Published
 			.form-group
 				label(for='isPublished') Published:
 				input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
-			
+
 			//- Submit
 			.form-group
 				button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue
