@@ -48,12 +48,29 @@
 	}
   
 	
+	.grid {
+		max-width: 1140px;
+	}
+
+	/* clearfix */
+	.grid:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	
   	.grid-sizer, .grid-item {
 		float: left;
-		width: 220px;
-		padding: 10px 10px 0 0;
-		
-		
+		width: 250px;
+		padding: 10px 0 0 0;
+	}
+	
+	.grid-item--width2 {
+		width: 500px;
+	}
+	
+	.grid-item--width3 {
+		width: 1000px;
 	}
   
 }

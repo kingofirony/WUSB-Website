@@ -5910,43 +5910,52 @@ body {
 input[type='text'], textarea {
   color: black; }
 
-#body #new-post {
-  text-align: center;
-  background-color: #519AC8;
-  font-weight: bold;
-  width: 50px;
-  max-height: 50px;
-  line-height: 50px;
-  margin: 0;
-  -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
-  -webkit-transition: width 1s ease, height 2s ease;
-  -moz-transition: width 1s ease, height 2s ease;
-  -o-transition: width 1s ease, height 2s ease;
-  transition: width 1s ease, height 2s ease; }
-  #body #new-post form {
-    text-align: left; }
-
-#body #new-post:hover {
-  cursor: pointer; }
-
-#body .post {
-  padding: 10px;
-  background-color: #519AC8;
-  -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75); }
-  #body .post h3 {
-    margin-top: 10px; }
-  #body .post a {
-    color: #fff;
-    text-decoration: none; }
-
-#body .grid-sizer, #body .grid-item {
-  float: left;
-  width: 220px;
-  padding: 10px 10px 0 0; }
+#body {
+  /* clearfix */ }
+  #body #new-post {
+    text-align: center;
+    background-color: #519AC8;
+    font-weight: bold;
+    width: 50px;
+    max-height: 50px;
+    line-height: 50px;
+    margin: 0;
+    -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    -webkit-transition: width 1s ease, height 2s ease;
+    -moz-transition: width 1s ease, height 2s ease;
+    -o-transition: width 1s ease, height 2s ease;
+    transition: width 1s ease, height 2s ease; }
+    #body #new-post form {
+      text-align: left; }
+  #body #new-post:hover {
+    cursor: pointer; }
+  #body .post {
+    padding: 10px;
+    background-color: #519AC8;
+    -webkit-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75); }
+    #body .post h3 {
+      margin-top: 10px; }
+    #body .post a {
+      color: #fff;
+      text-decoration: none; }
+  #body .grid {
+    max-width: 1140px; }
+  #body .grid:after {
+    content: '';
+    display: block;
+    clear: both; }
+  #body .grid-sizer, #body .grid-item {
+    float: left;
+    width: 250px;
+    padding: 10px 0 0 0; }
+  #body .grid-item--width2 {
+    width: 500px; }
+  #body .grid-item--width3 {
+    width: 1000px; }
 
 .sign-up .sign-up-form {
   margin-top: 10px;
