@@ -17,24 +17,23 @@ mixin create-post()
 
 					//- Submit
 					.form-group
-						button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Create post
+						button(type='submit', data-loading-text="Changing...").btn.btn-default.btn-lg.btn-block.btn-raised Create post
 
 mixin show-post(post)
 	if post.author
 		div.grid-item
-			div(id='post-id-' + post.id, class='post')
-				.media
-					.media-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-						if user && user.id === post.author.id
-							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-								button
-									span.glyphicon.glyphicon-remove
-									span  delete
+			div(id='post-id-' + post.id, class='panel panel-primary')
+				.panel-heading
+					h3!=post.title
+					h4!=post.author.name.first + ' ' + post.author.name.last
+				.panel-body
+					p!=post.textContent.replace(/\n/g, '<br>')
+				if user && user.id === post.author.id
+					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
+						button.btn.btn-default.btn-delete
+							span.glyphicon.glyphicon-remove
 
 mixin show-posts(posts)
-	.grid(data-masonry='{ "columnWidth": 220, "itemSelector": ".grid-item" }')
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for post in posts
 			+show-post(post)

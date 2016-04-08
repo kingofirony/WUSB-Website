@@ -1,28 +1,28 @@
 mixin playlists()
 	if user
 		.row
-			div.playlist
+			.playlist
 				a(href='/playlist')
 					span.glyphicon.glyphicon-plus
 					span  Add playlist
-	for playlist in playlists
-		if playlist.isPublished || (user && playlist.author.id == user.id)
-			.row
-				div.playlist
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+		for playlist in playlists
+			if playlist.isPublished || (user && playlist.author.id == user.id)
+				.grid-item
 					a(href='/playlist/' + playlist.id)
-						h4
-							span.glyphicon.glyphicon-music
-							&nbsp
-							!=playlist.title
-							span  for
-							!=playlist.date
-						h5
-							span by
-							!=playlist.program.title
-						h6
-							!=playlist.description
-							if !playlist.isPublished
-								span (draft)
+						.panel.panel-primary
+							.panel-heading
+									h3
+										!=playlist.title
+									h4
+										span by #{playlist.program.title}
+									h4
+										span #{playlist.date.toISOString().slice(0, 10)}
+								.panel-body
+									p
+										!=playlist.description
+										if !playlist.isPublished
+											span (draft)
 mixin playlist()
 	h2!=playlist.title
 	div.col-sm-12

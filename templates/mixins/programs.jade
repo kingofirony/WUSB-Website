@@ -1,13 +1,18 @@
 include ../mixins/users
 
 mixin programs()
-	for program in programs
-		.program
-			a(href='/program/' + program.slug)!=program.title
 	if user && user.isAdmin
-		hr
 		p
 			a(href='/program') Create new program
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+		for program in programs
+			.grid-item
+				a(href='/program/' + program.slug)
+					.panel.panel-primary
+						.panel-heading
+							h4
+								!=program.title
+	
 
 mixin program()
 	h2!=program.title

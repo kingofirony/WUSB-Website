@@ -45,32 +45,14 @@ body {
 		}
 	}
 
-  	.navbar-toggle {
-	  	background-color: inherit;
-	  	border: none;
-
-		.icon-bar {
-		  	background-color: $wusb-white;
-		}
-
-	}
-
-  	.navbar-toggle:hover {
-
-	}
-
 	.navbar {
-	  	background-color: $wusb-blue;
-	  	border: none;
-  		border-radius: 0;
-	  	text-align: center;
-		box-shadow: 0 2px 6px 0px rgba(0,0,0,0.75);
-
+		background-color: $wusb-blue;
+		border: none;
+		border-radius: 0;
+		text-align: center;
 
 		.navbar-collapse {
-
-		  	border: none;
-
+			
 			.nav {
 				display:inline-block;
 				float: none;
@@ -78,22 +60,22 @@ body {
 				border: none;
 			}
 
-		  	ul {
+			ul {
 				.active {
 					font-weight: bold;
-			  		a {
+					a {
 						background-color: inherit;
-			  		}
+					}
 				}
 
 				li {
 					font-size: 18px;
-			  		list-style: none;
-			  		a {
+					list-style: none;
+					a {
 						color: $wusb-white;
-			  		}
+					}
 				}
-		  	}
+			}
 		}
 
 		.collapsing {
@@ -108,6 +90,62 @@ body {
 			}
 		}
 
+	}
+}
+
+#body {
+	.grid {
+		max-width: 1140px;
+
+		a {
+			color: $wusb-white;
+			text-decoration: none;
+			
+			.panel {
+				border-radius: 4px;
+			}
+		}
+
+		a:hover {
+			text-decoration: none;
+			
+			.panel {
+				background-color: $wusb-grey;
+			}
+		}
+		
+		.panel {
+			border-radius: 4px;
+			background-color: $wusb-blue;
+			transition: all 0.5s ease;
+
+			h3 {
+				margin-top: 10px
+			}
+
+			
+		}
+	}
+
+	/* clearfix */
+	.grid:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.grid-sizer, .grid-item {
+		float: left;
+		width: 220px;
+		padding: 10px 10px 0 0;
+	}
+
+	.grid-item--width2 {
+		width: 440px;
+	}
+
+	.grid-item--width3 {
+		width: 880px;
 	}
 }
 
@@ -127,15 +165,7 @@ body {
 
 
 #body {
-
-  	.jumbotron {
-		background-color: $body-bg;
-		border-radius: 0;
-		color: $wusb-white;
-		padding-top: 10px;
-	  	padding-right: 0;
-	  	padding-left: 0;
-  	}
+	color: $wusb-white;
 }
 
 input[type='text'], textarea {
