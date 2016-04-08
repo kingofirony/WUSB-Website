@@ -119,6 +119,15 @@ body {
 			background-color: $wusb-blue;
 			transition: all 0.5s ease;
 
+			.btn-delete {
+				color: $wusb-white;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0;
+				margin: 12px 14px;
+			}
+			
 			h3 {
 				margin-top: 10px
 			}
@@ -146,6 +155,20 @@ body {
 
 	.grid-item--width3 {
 		width: 880px;
+	}
+	
+	.btn-fab {
+		position: absolute;
+		right: 3vw;
+		bottom: 3vh;
+	}
+	
+	.btn-fab:hover {
+		
+	}
+	
+	.jumbotron {
+		background-color: $wusb-blue;
 	}
 }
 

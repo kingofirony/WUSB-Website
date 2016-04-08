@@ -8497,6 +8497,13 @@ body {
       border-radius: 4px;
       background-color: #519AC8;
       transition: all 0.5s ease; }
+      #body .grid .panel .btn-delete {
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0;
+        margin: 12px 14px; }
       #body .grid .panel h3 {
         margin-top: 10px; }
   #body .grid:after {
@@ -8511,6 +8518,12 @@ body {
     width: 440px; }
   #body .grid-item--width3 {
     width: 880px; }
+  #body .btn-fab {
+    position: absolute;
+    right: 3vw;
+    bottom: 3vh; }
+  #body .jumbotron {
+    background-color: #519AC8; }
 
 #footer {
   margin-top: 30px;
@@ -8554,15 +8567,6 @@ input[type='text'], textarea {
   100% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); } }
-
-#body .btn-delete {
-  color: white;
-  position: absolute;
-  transition: all 0.5s ease;
-  top: 0;
-  right: 0;
-  padding: 0;
-  margin: 11px 11px; }
 
 #body #new-post {
   text-align: center;

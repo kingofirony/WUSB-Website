@@ -12,7 +12,11 @@ mixin programs()
 						.panel-heading
 							h4
 								!=program.title
-	
+						.panel-body
+							p 
+								!=program.genre
+							p
+								!=program.description
 
 mixin program()
 	h2!=program.title

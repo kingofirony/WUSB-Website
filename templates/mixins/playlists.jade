@@ -1,10 +1,4 @@
 mixin playlists()
-	if user
-		.row
-			.playlist
-				a(href='/playlist')
-					span.glyphicon.glyphicon-plus
-					span  Add playlist
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for playlist in playlists
 			if playlist.isPublished || (user && playlist.author.id == user.id)
@@ -55,60 +49,60 @@ mixin playlist()
 						td!=track.title
 
 mixin post-playlist(editing)
-	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
-		input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
-
-		.row: .col-sm-8.col-sm-offset-2
-
-			h2 Post playlist
-
-			if editing
-				p
-					a(href='/playlist/' + playlist.id) View
-
-			//- Program
-			.form-group
-				label(for='program') Program:
-				input(id='program', name='program', class='typeahead', type='text', value=editing ? playlist.program.title : '')
-
-			//- Description
-			.form-group
-				label(for='description') Description:
-				textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-
-			//- Tracks
-			table
-				thead
-					tr
-						th Artist
-						th Album
-						th Song
-				tbody
-					if editing
-						for track in playlist.tracks
+		.row
+			
+			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
+				fieldset
+					legend Post a new playlist
+					//input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
+					//if editing
+						p
+							a(href='/playlist/' + playlist.id) View
+		
+					//- Program
+					.form-group
+						label(for='program' class="col-md-1 control-label") Program:
+						.col-md-11
+							input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
+		
+					//- Description
+					.form-group
+						label(for='description') Description:
+						textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
+		
+					//- Tracks
+					table
+						thead
 							tr
-								td
-									input(type='text' name="artist" value=track.artist)
-								td
-									input(type='text' name="album" value=track.album)
-								td
-									input(type='text' name="title" value=track.title)
-
-					- for(var i = 0; i < 10; i++)
-						tr
-							td
-								input(type='text' name="artist")
-							td
-								input(type='text' name="album")
-							td
-								input(type='text' name="title")
-
-			//- Is Published
-			.form-group
-				label(for='isPublished') Published:
-				input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
-
-			//- Submit
-			.form-group
-				button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue
-				button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Exit
+								th Artist
+								th Album
+								th Song
+						tbody
+							if editing
+								for track in playlist.tracks
+									tr
+										td
+											input(type='text' name="artist" value=track.artist)
+										td
+											input(type='text' name="album" value=track.album)
+										td
+											input(type='text' name="title" value=track.title)
+		
+							- for(var i = 0; i < 10; i++)
+								tr
+									td
+										input(type='text' name="artist")
+									td
+										input(type='text' name="album")
+									td
+										input(type='text' name="title")
+		
+					//- Is Published
+					.form-group
+						label(for='isPublished') Published:
+						input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
+		
+					//- Submit
+					.form-group
+						button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue
+						button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Exit

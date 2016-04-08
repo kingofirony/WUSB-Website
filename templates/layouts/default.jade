@@ -14,6 +14,7 @@ html
 
 		//- Customise the stylesheet for your site by editing /public/styles/site.sass
 		link(href="/styles/site.css", rel="stylesheet")
+		link(rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons")
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
@@ -44,10 +45,11 @@ html
 				a(href="/")
 					img(src="/images/wusb-tower.svg")
 				div.stream
-					h5 Listen to Dreamseville
-					h5 NobelSobel and Goldenrod
+					h5 
+						span live on 90.1fm 
+						i.material-icons radio
+					
 					i.glyphicon.glyphicon-play.play &nbsp;
-					i.glyphicon.glyphicon-stop.stop
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
 					button.navbar-toggle.collapsed(data-toggle="collapse" data-target=".navbar-collapse")
