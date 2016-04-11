@@ -25,8 +25,8 @@ mixin show-post(post)
 			div(id='post-id-' + post.id, class='post')
 				.media
 					.media-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
+						h3=post.title
+						h4=post.author.name.first + ' ' + post.author.name.last
 						p!=post.textContent.replace(/\n/g, '<br>')
 						if user && user.id === post.author.id
 							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm

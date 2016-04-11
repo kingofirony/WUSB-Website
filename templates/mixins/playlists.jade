@@ -13,18 +13,18 @@ mixin playlists()
 						h4
 							span.glyphicon.glyphicon-music
 							&nbsp
-							!=playlist.title
+							=playlist.title
 							span  for
-							!=playlist.date
+							=playlist.date
 						h5
 							span by
-							!=playlist.program.title
+							=playlist.program.title
 						h6
-							!=playlist.description
+							=playlist.description
 							if !playlist.isPublished
 								span (draft)
 mixin playlist()
-	h2!=playlist.title
+	h2=playlist.title
 	div.col-sm-12
 		if user && user.id == playlist.author.id
 			button
@@ -36,9 +36,9 @@ mixin playlist()
 				a(href='/playlist/' + playlist.id + '/edit')
 
 		p Program:
-			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
-		p!=playlist.description
+		p=playlist.description
 
 		//- Tracks
 		table(style='width:100%')
@@ -50,9 +50,9 @@ mixin playlist()
 			tbody
 				for track in playlist.tracks
 					tr
-						td!=track.artist
-						td!=track.album
-						td!=track.title
+						td=track.artist
+						td=track.album
+						td=track.title
 
 mixin post-playlist(editing)
 	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form

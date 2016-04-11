@@ -3,19 +3,19 @@ include ../mixins/users
 mixin programs()
 	for program in programs
 		.program
-			a(href='/program/' + program.slug)!=program.title
+			a(href='/program/' + program.slug)=program.title
 	if user && user.isAdmin
 		hr
 		p
 			a(href='/program') Create new program
 
 mixin program()
-	h2!=program.title
+	h2=program.title
 	if user && user.isAdmin
 		p
 			a(href='/program/' + program.slug + '/edit') Edit
-	p!='Genre: ' + program.genre
-	p!=program.description
+	p='Genre: ' + program.genre
+	p=program.description
 	hr
 	h4 DJs
 	div
@@ -26,7 +26,7 @@ mixin program()
 	ul
 		for playlist in program.playlists
 			li
-				a(href='/playlist/' + playlist.id)!=playlist.title
+				a(href='/playlist/' + playlist.id)=playlist.title
 
 mixin post-program(editing)
 	form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
@@ -102,11 +102,11 @@ mixin post-program(editing)
 
 mixin live-program(prg)
 	if prg
-		h2!='Title: ' + prg.title
-		p!='Genre: ' + prg.genre
+		h2='Title: ' + prg.title
+		p='Genre: ' + prg.genre
 		- var names = 'Djs:'
 		for dj in prg.djs
 			- names += ' ' + dj.name.first + ' ' + dj.name.last
-		p!=names
+		p=names
 	else
-		p!='No program right now.'
+		p='No program right now.'
