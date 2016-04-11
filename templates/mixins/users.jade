@@ -30,7 +30,7 @@ mixin user-picture(user)
 mixin user-picture-with-name(user)
 	div
 		+user-picture(user)
-		p!=user.name.first + ' ' + user.name.last
+		p=user.name.first + ' ' + user.name.last
 	
 mixin edit-profile()
 	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
