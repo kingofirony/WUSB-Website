@@ -41,9 +41,11 @@ html
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
 			div.tower.text-center
-				img(src="/images/wusb-tower.svg")
+				a(href="/")
+					img(src="/images/wusb-tower.svg")
 				div.stream
-					<h5>Listen to Dreamseville </br> with </br> NobelSobel and Goldenrod <h5>
+					h5 Listen to Dreamseville
+					h5 NobelSobel and Goldenrod
 					i.glyphicon.glyphicon-play.play &nbsp;
 					i.glyphicon.glyphicon-stop.stop
 			div(role="navigation").navbar.navbar-default
@@ -112,7 +114,7 @@ html
 		//- Add scripts that are globally required by your site here.
 		script(src='/js/masonry/masonry.pkgd.min.js')
 		script(src='/js/typeahead.bundle.min.js')
-			
+
 		script(src='/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.all.min.js')
 		link(href="/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.min.css", rel="stylesheet")
 

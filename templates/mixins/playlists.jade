@@ -1,29 +1,45 @@
 mixin playlists()
+	if user
+		.row
+			div.playlist
+				a(href='/playlist')
+					span.glyphicon.glyphicon-plus
+					span  Add playlist
 	for playlist in playlists
 		if playlist.isPublished || (user && playlist.author.id == user.id)
-			p
-				a(href='/playlist/' + playlist.id)!=playlist.itemTitle
-				if !playlist.isPublished
-					span (draft)
-	if user
-		hr
-		p
-			a(href='/playlist') Add playlist
-
+			.row
+				div.playlist
+					a(href='/playlist/' + playlist.id)
+						h4
+							span.glyphicon.glyphicon-music
+							&nbsp
+							=playlist.title
+							span  for
+							=playlist.date
+						h5
+							span by
+							=playlist.program.title
+						h6
+							=playlist.description
+							if !playlist.isPublished
+								span (draft)
 mixin playlist()
-	.row: .col-sm-8.col-sm-offset-2
-	
-		h2 Playlist
-
+	h2=playlist.title
+	div.col-sm-12
 		if user && user.id == playlist.author.id
-			p
-				a(href='/playlist/' + playlist.id + '/edit') Edit			
+			button
+				a(href='/playlist/' + playlist.id + '/edit')
+					span.glyphicon.glyphicon-pencil
+					span  Edit
 		
 		p Program:
-			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+				a(href='/playlist/' + playlist.id + '/edit')
 
-		p!=playlist.description
-	
+		p Program:
+			a(href='/program/' + playlist.program.slug)=playlist.program.title
+
+		p=playlist.description
+
 		//- Tracks
 		table(style='width:100%')
 			thead
@@ -34,9 +50,9 @@ mixin playlist()
 			tbody
 				for track in playlist.tracks
 					tr
-						td!=track.artist
-						td!=track.album
-						td!=track.title
+						td=track.artist
+						td=track.album
+						td=track.title
 
 mixin post-playlist(editing)
 	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
@@ -45,11 +61,11 @@ mixin post-playlist(editing)
 		.row: .col-sm-8.col-sm-offset-2
 
 			h2 Post playlist
-			
+
 			if editing
 				p
 					a(href='/playlist/' + playlist.id) View
-			
+
 			//- Program
 			.form-group
 				label(for='program') Program:
@@ -59,7 +75,7 @@ mixin post-playlist(editing)
 			.form-group
 				label(for='description') Description:
 				textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-						
+
 			//- Tracks
 			table
 				thead
@@ -77,7 +93,7 @@ mixin post-playlist(editing)
 									input(type='text' name="album" value=track.album)
 								td
 									input(type='text' name="title" value=track.title)
-						
+
 					- for(var i = 0; i < 10; i++)
 						tr
 							td
@@ -86,12 +102,12 @@ mixin post-playlist(editing)
 								input(type='text' name="album")
 							td
 								input(type='text' name="title")
-			
+
 			//- Is Published
 			.form-group
 				label(for='isPublished') Published:
 				input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
-			
+
 			//- Submit
 			.form-group
 				button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue

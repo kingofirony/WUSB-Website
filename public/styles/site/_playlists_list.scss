@@ -1,0 +1,33 @@
+
+.playlist-list {
+	h2 {
+		margin-bottom: 20px;
+	}
+	
+	.row {
+		margin: 10px 0 10px 0;
+	}
+
+	.playlist {
+		color: $wusb-white;
+		background-color: $wusb-blue;
+		padding: 5px 10px 5px 10px;
+		display: inline-block;
+		transition: all 0.5s ease;
+		-webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75);
+		-moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75);
+		box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.75);
+
+		a {
+			color: $wusb-white;
+			font-size: 20px;
+			text-decoration: none;
+		}
+	}
+
+	.playlist:hover {
+		background-color: $wusb-grey;
+	}
+}
+
+
