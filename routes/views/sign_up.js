@@ -13,7 +13,7 @@ exports = module.exports = (req, res) => {
 	
 	// Accept form post submit
 	view.on('post', { action: 'sign-up' }, next => {
-
+		
 		// handle form
 		let newUser = new User.model({
 			}),
@@ -31,7 +31,7 @@ exports = module.exports = (req, res) => {
 				locals.validationErrors = err.errors;
 				next();
 			} else {
-				req.flash('success', 'User added');
+				req.flash('success', 'Go ahead - log in!');
 				res.redirect('/');
 			}
 		});

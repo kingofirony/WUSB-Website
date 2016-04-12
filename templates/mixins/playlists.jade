@@ -13,14 +13,13 @@ mixin playlists()
 						h4
 							span.glyphicon.glyphicon-music
 							&nbsp
-							=playlist.title
-							span  for
+							span  Posted on 
 							=playlist.date
 						h5
-							span by
+							span Posted by 
 							=playlist.program.title
 						h6
-							=playlist.description
+							!=playlist.description
 							if !playlist.isPublished
 								span (draft)
 mixin playlist()
@@ -38,7 +37,7 @@ mixin playlist()
 		p Program:
 			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
-		p=playlist.description
+		p!=playlist.description
 
 		//- Tracks
 		table(style='width:100%')

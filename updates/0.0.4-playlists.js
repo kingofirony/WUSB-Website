@@ -8,7 +8,6 @@ const keystone = require('keystone'),
 if (env === 'development') {
 	const playlists = [
 		{
-			title: 'Playlist 1',
 			genre: 'J-Pop',
 			isPublished: true,
 			tracks: [
