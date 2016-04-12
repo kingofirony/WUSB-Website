@@ -38,6 +38,10 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = app => {
 	
+	// Run on every page load
+	app.get('*', middleware.getLiveProgram);
+
+	// Standard views/middleware
 	app.all('/', routes.views.index);
 	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
@@ -60,7 +64,6 @@ exports = module.exports = app => {
 	app.get('/program/:slug/edit', middleware.requireAdmin, routes.views.edit_program);
 	app.post('/program', middleware.requireAdmin, routes.post.post_program);
 	app.post('/program/:slug/edit', middleware.requireAdmin, routes.post.post_program);
-	app.get('/live', routes.views.live);
 	
 	// API
 	app.get('/api/users', middleware.loadUsers, routes.api.users);
