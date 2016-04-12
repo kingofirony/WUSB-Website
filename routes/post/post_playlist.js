@@ -39,7 +39,7 @@ exports = module.exports = (req, res) => {
 			updater.process(data, {
 				flashErrors: true,
 				logErrors: true,
-				fields: 'title, description, isPublished'
+				fields: 'description, isPublished'
 			}, err => {
 				if (err) return reject(err);
 				addTracksToPlaylist(playlist, data);

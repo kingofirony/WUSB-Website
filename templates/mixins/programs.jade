@@ -62,7 +62,7 @@ mixin post-program(editing)
 					if editing
 						for dj in program.djs
 							li
-								input(id='dj', name='dj', class='typeahead', type='text', value=dj.fullName)
+								input(id='dj', name='dj', class='typeahead', type='text', value=dj.name.full)
 					for i in [1, 2]
 						li
 							input(id='dj' name='dj' class='typeahead' type='text')

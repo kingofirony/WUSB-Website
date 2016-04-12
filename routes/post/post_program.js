@@ -18,7 +18,7 @@ exports = module.exports = (req, res) => {
 	function fillDJs(program, djs) {
 		program.djs = [];
 		return Promise.all(_.map(_.filter(djs, dj => dj != ''), dj => {
-			return User.model.findByFullName(dj).exec().then(user => {
+			return User.model.findOne({'name.full': dj}).exec().then(user => {
 				program.djs.push(user.id);
 				return Promise.resolve();
 			})
