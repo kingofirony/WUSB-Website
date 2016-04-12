@@ -149,3 +149,12 @@ exports.loadProgram = (req, res, next) => {
 		next();
 	}
 };
+
+exports.getLiveProgram = (req, res, next) => {
+	Program.model.getLiveProgram(function (err, prg) {
+		keystone.populateRelated(prg, 'djs', (err) => {
+			res.locals.prg = prg;
+			next();
+		});
+	});
+}
