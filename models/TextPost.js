@@ -87,8 +87,7 @@ TextPost.schema.pre('update', function (next) {
 TextPost.schema.post('update', function () {
 	if (this.silentEdit) {
 		this.silentEdit = false;
-		console.log('An admin attempted a silent edit at ' + new Date() +
-			'.');
+		console.log('An admin attempted a silent edit at ' + new Date() + '.');
 	}
 });
 

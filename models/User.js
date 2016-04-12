@@ -39,6 +39,11 @@ User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
+User.schema.statics.findByFullName = function(name, cb) {
+	const parts = name.split(' ');
+	return this.findOne({'name.first': parts[0], 'name.last': parts[1]}, cb)
+};
+
 /* When someone is browsing the admin pane, they'll see the DB columns
 	in this order. */
 User.defaultColumns = 'name, email, isAdmin';
