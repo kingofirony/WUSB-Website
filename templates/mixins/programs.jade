@@ -102,11 +102,12 @@ mixin post-program(editing)
 
 mixin live-program(prg)
 	if prg
-		h2='Title: ' + prg.title
-		p='Genre: ' + prg.genre
+		h5='Listen to ' + prg.title
+		h5='Genre: ' + prg.genre
 		- var names = 'Djs:'
 		for dj in prg.djs
-			- names += ' ' + dj.name.first + ' ' + dj.name.last
-		p=names
+			- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
+		- names = names.substring(0, names.length - 4)
+		h5=names
 	else
-		p='No program right now.'
+		h5='Listen to WUSB (no program live right now)'
