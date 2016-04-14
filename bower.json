@@ -1,0 +1,21 @@
+{
+  "name": "WUSB",
+  "description": "Site for WUSB",
+  "main": "server.js",
+  "authors": [
+    "Philippe Kimura-Thollander <philippekimurathollander@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "radio"
+  ],
+  "homepage": "https://github.com/kingofirony/WUSB-Website",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}

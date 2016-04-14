@@ -38,3 +38,6 @@ database.js
 
 # Ignore user profile images
 public/images/profile
+
+#Ignore bower files
+app/
