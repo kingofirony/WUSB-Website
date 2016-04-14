@@ -1,4 +1,5 @@
 include ../mixins/flash-messages
+include ../mixins/programs
 
 doctype html
 html
@@ -45,10 +46,7 @@ html
 				a(href="/")
 					img(src="/images/wusb-tower.svg")
 				div.stream
-					h5 
-						span live on 90.1fm 
-						i.material-icons radio
-					
+					+live-program(prg)
 					i.glyphicon.glyphicon-play.play &nbsp;
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
@@ -119,7 +117,7 @@ html
 
 		script(src='/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.all.min.js')
 		link(href="/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.min.css", rel="stylesheet")
-		
+
 		script(src='/js/material-bootstrap/material.js')
 		script(src='js/material-bootstrap/ripples.js')
 
@@ -131,6 +129,9 @@ html
 
 	//- Make form text areas WYSIWYG
 	script(src='/js/site/wysiwyg.js')
+
+	//- Disable form ENTER
+	script(src='/js/site/disable-form-enter.js')
 
 	//- Include template-specific javascript files by extending the js block
 	block js

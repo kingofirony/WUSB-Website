@@ -39,10 +39,6 @@ User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
-User.schema.virtual('fullName').get(function() {
-	return this.name.first + ' ' + this.name.last;
-});
-
 User.schema.statics.findByFullName = function(name, cb) {
 	const parts = name.split(' ');
 	return this.findOne({'name.first': parts[0], 'name.last': parts[1]}, cb)

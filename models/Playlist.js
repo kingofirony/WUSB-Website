@@ -6,8 +6,6 @@ const Types = keystone.Field.Types;
 
 // Docs: http://keystonejs.com/docs/database/#lists-options
 const options = {
-	autokey: { path: 'slug', from: 'title', unique: true },
-	map: { name: 'title' },
 	singular: 'Playlist',
 	plural: 'Playlists',
 	sortable: true,
@@ -17,12 +15,11 @@ const options = {
 
 const Playlist = new keystone.List('Playlist', options);
 
-/* On Create Playlist: Add title, author, date if not today.
+/* On Create Playlist: Add author, date if not today.
 	Description is optional. Set isPublished and isPromoted if necessary.
 	You should treat "tracks" below as if it were in Playlist.add and
 	the constructor works like you'd expect. */
 Playlist.add({
-	title: { type: Types.Text },
 	author: { type: Types.Relationship, ref: 'User', required: true,
 		initial: true, noedit: true },
 	program: { type: Types.Relationship, ref: 'Program', required: true,
@@ -94,11 +91,10 @@ Playlist.schema.pre('update', function (next) {
 });
 
 Playlist.schema.virtual('itemTitle').get(function() {
-	return this.title ? this.title : this.program.title + ' - ' +
-			this.date.toLocaleDateString();
+	return this.program.title + ' - ' + this.date.toLocaleDateString();
 });
 
-Playlist.defaultColumns = 'title, author, date, description,' +
+Playlist.defaultColumns = 'author, date, description,' +
 	' isPublished, isPromoted, serializedTracks';
 
 Playlist.register();

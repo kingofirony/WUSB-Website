@@ -18,19 +18,19 @@ mixin playlists()
 										if !playlist.isPublished
 											span (draft)
 mixin playlist()
-	h2!=playlist.title
+	h2=playlist.title
 	div.col-sm-12
 		if user && user.id == playlist.author.id
 			button
 				a(href='/playlist/' + playlist.id + '/edit')
 					span.glyphicon.glyphicon-pencil
 					span  Edit
-		
+
 		p Program:
 				a(href='/playlist/' + playlist.id + '/edit')
 
 		p Program:
-			a(href='/program/' + playlist.program.slug)!=playlist.program.title
+			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
 		p!=playlist.description
 
@@ -44,13 +44,13 @@ mixin playlist()
 			tbody
 				for track in playlist.tracks
 					tr
-						td!=track.artist
-						td!=track.album
-						td!=track.title
+						td=track.artist
+						td=track.album
+						td=track.title
 
 mixin post-playlist(editing)
 		.row
-			
+
 			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
 				fieldset
 					legend Post a new playlist
@@ -58,18 +58,18 @@ mixin post-playlist(editing)
 					//if editing
 						p
 							a(href='/playlist/' + playlist.id) View
-		
+
 					//- Program
 					.form-group
 						label(for='program' class="col-md-1 control-label") Program:
 						.col-md-11
 							input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
-		
+
 					//- Description
 					.form-group
 						label(for='description') Description:
 						textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-		
+
 					//- Tracks
 					table
 						thead
@@ -87,7 +87,7 @@ mixin post-playlist(editing)
 											input(type='text' name="album" value=track.album)
 										td
 											input(type='text' name="title" value=track.title)
-		
+
 							- for(var i = 0; i < 10; i++)
 								tr
 									td
@@ -96,12 +96,12 @@ mixin post-playlist(editing)
 										input(type='text' name="album")
 									td
 										input(type='text' name="title")
-		
+
 					//- Is Published
 					.form-group
 						label(for='isPublished') Published:
 						input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
-		
+
 					//- Submit
 					.form-group
 						button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue

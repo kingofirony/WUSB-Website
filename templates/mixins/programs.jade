@@ -19,12 +19,12 @@ mixin programs()
 								!=program.description
 
 mixin program()
-	h2!=program.title
+	h2=program.title
 	if user && user.isAdmin
 		p
 			a(href='/program/' + program.slug + '/edit') Edit
-	p!='Genre: ' + program.genre
-	p!=program.description
+	p='Genre: ' + program.genre
+	p=program.description
 	hr
 	h4 DJs
 	div
@@ -35,7 +35,7 @@ mixin program()
 	ul
 		for playlist in program.playlists
 			li
-				a(href='/playlist/' + playlist.id)!=playlist.title
+				a(href='/playlist/' + playlist.id)=playlist.title
 
 mixin post-program(editing)
 	form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
@@ -71,7 +71,7 @@ mixin post-program(editing)
 					if editing
 						for dj in program.djs
 							li
-								input(id='dj', name='dj', class='typeahead', type='text', value=dj.fullName)
+								input(id='dj', name='dj', class='typeahead', type='text', value=dj.name.full)
 					for i in [1, 2]
 						li
 							input(id='dj' name='dj' class='typeahead' type='text')
@@ -111,11 +111,12 @@ mixin post-program(editing)
 
 mixin live-program(prg)
 	if prg
-		h2!='Title: ' + prg.title
-		p!='Genre: ' + prg.genre
+		h5='Listen to ' + prg.title
+		h5='Genre: ' + prg.genre
 		- var names = 'Djs:'
 		for dj in prg.djs
-			- names += ' ' + dj.name.first + ' ' + dj.name.last
-		p!=names
+			- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
+		- names = names.substring(0, names.length - 4)
+		h5=names
 	else
-		p!='No program right now.'
+		h5='Listen to WUSB (no program live right now)'
