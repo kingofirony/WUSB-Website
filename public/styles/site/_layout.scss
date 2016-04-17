@@ -94,6 +94,10 @@ body {
 }
 
 #body {
+	
+	h2 {
+		display: inline-block;
+	}
 	.grid {
 		max-width: 1140px;
 
@@ -184,6 +188,13 @@ body {
 			}
 			
 			input {
+				color: $wusb-white;
+			}
+			
+			input::-moz-placeholder{
+				color: $wusb-white;
+			}
+			input::-webkit-input-placeholder{
 				color: $wusb-white;
 			}
 		}

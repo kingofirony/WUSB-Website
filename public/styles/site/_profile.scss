@@ -1,0 +1,26 @@
+.profile {
+	.form-group {
+		margin-top: 10px;
+		.profile_pic {
+			position: absolute;
+			
+			.material-icons {
+				font-size: 16px;
+			}
+		}
+	}
+	.name {
+		.input {
+			font-weight: bold;
+			font-size: 24px;
+		}
+		
+		.first-name {
+			text-align: right;
+		}
+	}
+	input {
+		background: none;
+		border: none;
+	}
+}

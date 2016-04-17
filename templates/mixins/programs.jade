@@ -21,7 +21,8 @@ mixin programs()
 mixin program()
 	h2=program.title
 	if user && user.isAdmin
-		p
+		button.btn.btn-raised.btn-xs
+			i.material-icons mode_edit
 			a(href='/program/' + program.slug + '/edit') Edit
 	p='Genre: ' + program.genre
 	p=program.description
