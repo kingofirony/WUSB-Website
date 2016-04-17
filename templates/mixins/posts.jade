@@ -11,10 +11,11 @@ mixin create-post()
 					.form-group.label-floating
 						label(class="control-label", for="post-title") Post title
 						input(type='text', id='post-title').form-control
+						span.material-input
 
 					//- Content
 					.form-group
-						textarea(name='textContent', placeholder='Post content', class='wysiwyg', rows="3").form-control.col-sm-12
+						textarea(name='textContent', class='wysiwyg', rows="3").form-control.col-sm-12
 
 					//- Submit
 					.form-group

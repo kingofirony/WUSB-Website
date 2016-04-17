@@ -169,6 +169,79 @@ body {
 	
 	.jumbotron {
 		background-color: $wusb-blue;
+		
+		.row {
+			margin: 0;
+		}
+	}
+
+	form {
+		text-align: left;
+
+		.form-group {
+			label {
+				color: $wusb-white;
+			}
+			
+			input {
+				color: $wusb-white;
+			}
+		}
+
+		.wysihtml5-toolbar {
+
+			li {
+				a {
+					color: $wusb-white;
+				}
+
+				a:hover, a:focus {
+					background-color: $wusb-light;
+					-webkit-box-shadow: none hoff voff blur color;
+					-moz-box-shadow: none hoff voff blur color;
+					box-shadow: none hoff voff blur color;
+				}
+				
+				.wysihtml5-command-active {
+					background-color: $wusb-grey;
+				}
+			}
+			
+			.dropdown {
+				.dropdown-menu {
+					background-color: $wusb-blue;
+					li a {
+						color: $wusb-white;
+					}
+				}
+			}
+			
+			.open {
+				.dropdown-toggle {
+					background-color: $wusb-grey;
+				}
+			}
+			
+		}
+
+		iframe {
+			border: none !important;
+		}
+		
+		table {
+			
+			tr:hover {
+				background-color: $wusb-grey;
+			}
+			td {
+				input {
+					width: 100%;
+					border: none;
+					color: white;
+					background-color: transparent;
+				}
+			}
+		}
 	}
 }
 

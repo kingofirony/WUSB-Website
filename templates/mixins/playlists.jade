@@ -49,60 +49,54 @@ mixin playlist()
 						td=track.title
 
 mixin post-playlist(editing)
-		.row
+	h2.col-sm-offset-1 Post a new playlist
+	.row
+		form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
+			fieldset
+				//- Program
+				.form-group.label-floating
+					label(for='program' class="control-label")
+					input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
+					span.material-input
 
-			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
-				fieldset
-					legend Post a new playlist
-					//input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
-					//if editing
-						p
-							a(href='/playlist/' + playlist.id) View
+				//- Description
+				.form-group
+					label(for='description') Description:
+					textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
 
-					//- Program
-					.form-group
-						label(for='program' class="col-md-1 control-label") Program:
-						.col-md-11
-							input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
-
-					//- Description
-					.form-group
-						label(for='description') Description:
-						textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-
-					//- Tracks
-					table
-						thead
-							tr
-								th Artist
-								th Album
-								th Song
-						tbody
-							if editing
-								for track in playlist.tracks
-									tr
-										td
-											input(type='text' name="artist" value=track.artist)
-										td
-											input(type='text' name="album" value=track.album)
-										td
-											input(type='text' name="title" value=track.title)
-
-							- for(var i = 0; i < 10; i++)
+				//- Tracks
+				table.table.table-hover.form-group
+					thead
+						tr
+							th Artist
+							th Album
+							th Song
+					tbody
+						if editing
+							for track in playlist.tracks
 								tr
 									td
-										input(type='text' name="artist")
+										input(type='text' name="artist" value=track.artist)
 									td
-										input(type='text' name="album")
+										input(type='text' name="album" value=track.album)
 									td
-										input(type='text' name="title")
+										input(type='text' name="title" value=track.title)
 
-					//- Is Published
-					.form-group
-						label(for='isPublished') Published:
-						input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
+						- for(var i = 0; i < 10; i++)
+							tr
+								td
+									input(type='text' name="artist")
+								td
+									input(type='text' name="album")
+								td
+									input(type='text' name="title")
 
-					//- Submit
-					.form-group
-						button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue
-						button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Exit
+				//- Is Published
+				.form-group
+					.checkbox
+						label(for='isPublished')
+							input(type='checkbox', name='isPublished', value="Published", id='isPublished' checked=editing && playlist.isPublished)
+				//- Submit
+				.form-group
+					button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save and Continue
+					button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-raised Save and Exit

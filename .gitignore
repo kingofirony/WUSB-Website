@@ -41,3 +41,5 @@ public/images/profile
 
 #Ignore bower files
 app/
+
+public/styles/site.css
