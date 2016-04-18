@@ -3,4 +3,10 @@ include ../mixins/programs
 
 block content
 	.col-md-12
+		h2 here's who we play
 		+programs()
+	if user && user.isAdmin
+		a(href='/program')
+			.btn.btn-fab
+				i.material-icons add_to_queue
+				.ripple-container

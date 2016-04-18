@@ -19,17 +19,13 @@ mixin playlists()
 											span (draft)
 mixin playlist()
 	h2=playlist.title
-	div.col-sm-12
-		if user && user.id == playlist.author.id
-			button
-				a(href='/playlist/' + playlist.id + '/edit')
-					span.glyphicon.glyphicon-pencil
-					span  Edit
-
-		p Program:
-				a(href='/playlist/' + playlist.id + '/edit')
-
-		p Program:
+	if user && user.id == playlist.author.id
+		button.btn.btn-raised
+			a(href='/playlist/' + playlist.id + '/edit')
+				span.glyphicon.glyphicon-pencil
+				span Edit
+	.row
+		p Program: 
 			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
 		p!=playlist.description
@@ -55,7 +51,7 @@ mixin post-playlist(editing)
 			fieldset
 				//- Program
 				.form-group.label-floating
-					label(for='program' class="control-label")
+					label(for='program' class="control-label") Program
 					input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
 					span.material-input
 
