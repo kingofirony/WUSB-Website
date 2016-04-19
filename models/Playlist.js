@@ -107,10 +107,6 @@ Playlist.schema.pre('update', function (next) {
 	next();
 });
 
-Playlist.schema.virtual('itemTitle').get(function() {
-	return this.program.title + ' - ' + this.date.toLocaleDateString();
-});
-
 Playlist.defaultColumns = 'author, date, description,' +
 	' isPublished, isPromoted, serializedTracks';
 

@@ -1,6 +1,7 @@
 'use strict';
 const keystone = require('keystone');
 const _ = require('underscore');
+require('../utils/date');  // Loads in Date extensions
 
 // Docs: http://keystonejs.com/docs/database/#fieldtypes
 const Types = keystone.Field.Types;
@@ -158,12 +159,34 @@ function getTime() {
 	return (now.getHours() * 100) + now.getMinutes()
 }
 
+function getDayString(dayNumber) {
+	switch(dayNumber) {
+		case 0: return 'Sunday';
+		case 1: return 'Monday';
+		case 2: return 'Tuesday';
+		case 3: return 'Wednesday';
+		case 4: return 'Thursday';
+		case 5: return 'Friday';
+		case 6: return 'Saturday';
+	}
+}
+
 Program.schema.virtual('startTimeString').get(function() {
 	return toTimeString(this.startTime);
 });
 
 Program.schema.virtual('endTimeString').get(function() {
 	return toTimeString(this.endTime);
+});
+
+Program.schema.virtual('dayString').get(function() {
+	return getDayString(this.day);
+});
+
+Program.schema.virtual('airTimeString').get(function() {
+	return (this.isBiweekly ? 'Every other ' : 'Every ') +
+		getDayString(this.day) + ' ' + toTimeString(this.startTime) + ' - ' +
+		toTimeString(this.endTime)
 });
 
 Program.schema.virtual('nextAirDate').get(function() {
@@ -196,6 +219,17 @@ Program.schema.virtual('isLiveNow').get(function () {
 	return false; // No sense in repeating this
 });
 
+/**
+ * Length of an episode in minutes
+ */
+Program.schema.virtual('lengthInMinutes').get(function () {
+	// What if a program starts before midnight and ends the next day?
+	const difference = this.endTime - this.startTime;
+	const hours = difference / 100;
+	const minutes = difference % 100;
+	return hours * 60 + minutes;
+});
+
 /* Call this with a callback expecting an error object
 	and a program. If program is null there is no live
 	program at the moment. */
@@ -218,8 +252,31 @@ Program.schema.statics.getTimeSlots = function() {
 	}));
 };
 
-Program.schema.statics.findBySlot = function(day, time, cb) {
-	return this.findOne({'day': day, 'startTime': time}, cb)
+/**
+ * 
+ * @param week - 1 = this week, 2 = next week
+ * @param day - day of week
+ * @param time - start time
+ * @param cb - callback
+ * @returns {Promise}
+ */
+Program.schema.statics.findBySlot = function(week, day, time, cb) {
+	const currentWeek = new Date().getWeekOfYear();
+	const isWeekA = currentWeek % 2 === week % 2;  // Week A vs. Week B
+	return this.findOne({
+		$or: [
+			{
+				'day': day,
+				'startTime': time,
+				'isBiweekly': false
+			},
+			{
+				'day': day,
+				'startTime': time,
+				'biweeklyState': isWeekA
+			}
+		]
+	}, cb)
 };
 
 Program.register();
