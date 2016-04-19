@@ -3,13 +3,7 @@ const _ = require('underscore');
 const keystone = require('keystone');
 const Program = keystone.list('Program');
 const User = keystone.list('User');
-
-Date.prototype.getWeekOfYear = function(){
-	var d = new Date(+this);
-	d.setHours(0,0,0);
-	d.setDate(d.getDate()+4-(d.getDay()||7));
-	return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
-};
+require('../../utils/date');  // Loads in Date extensions
 
 exports = module.exports = (req, res) => {
 	const locals = res.locals;

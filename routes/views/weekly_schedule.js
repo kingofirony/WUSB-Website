@@ -13,7 +13,8 @@ exports = module.exports = (req, res) => {
 	_.each(_.range(7), i => {
 		locals.calendar[locals.days[i]] = {};
 		_.each(locals.timeslots, timeslot => {
-			Program.model.findBySlot(i, timeslot.number).exec().then(p => {
+			const week = req.query.week || 1;
+			Program.model.findBySlot(week, i, timeslot.number).exec().then(p => {
 				locals.calendar[locals.days[i]][timeslot.number] = p
 			});
 		});
