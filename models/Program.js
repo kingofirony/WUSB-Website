@@ -72,7 +72,7 @@ Program.schema.pre('save', function (next) {
 						.remove((err) => {
 							console.log('Time conflict detected.');
 							next(new Error('This program has a time ' +
-								'conflict in ' + 'range: ' +
+								'conflict in range: ' + 
 								start + ' - ' + end));
 						});
 					}
@@ -103,7 +103,7 @@ Program.schema.pre('save', function (next) {
 						.remove((err) => {
 							console.log('Time conflict detected.');
 							next(new Error('This program has a time ' +
-								'conflict in ' + 'range: ' +
+								'conflict in range: ' +
 								start + ' - ' + end));
 						});
 					}

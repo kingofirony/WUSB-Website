@@ -37,9 +37,6 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = app => {
-	
-	// Run on every page load
-	app.get('*', middleware.getLiveProgram);
 
 	// Standard views/middleware
 	app.all('/', routes.views.index);

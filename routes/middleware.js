@@ -33,7 +33,12 @@ exports.initLocals = function(req, res, next) {
 		{label:'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'}
 	];
 	locals.user = req.user;
-	next();
+	Program.model.getLiveProgram(function (err, prg) {
+		keystone.populateRelated(prg, 'djs', (err) => {
+			locals.prg = prg;
+			next();
+		});
+	});
 };
 
 
@@ -149,12 +154,3 @@ exports.loadProgram = (req, res, next) => {
 		next();
 	}
 };
-
-exports.getLiveProgram = (req, res, next) => {
-	Program.model.getLiveProgram(function (err, prg) {
-		keystone.populateRelated(prg, 'djs', (err) => {
-			res.locals.prg = prg;
-			next();
-		});
-	});
-}

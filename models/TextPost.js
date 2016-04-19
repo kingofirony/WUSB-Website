@@ -32,6 +32,7 @@ TextPost.add({
 	editCount: { type: Types.Number, default: 0, noedit: true },
 	textContent: { type: Types.Html, required: true, initial: true, 
 		wysiwyg: true, note: 'Can be expanded' },
+	// Add images using local file
 	silentEdit: { type: Types.Boolean, default: false,
 		note: 'Use to edit a post from the admin UI without \
 			changing the edit counter. Be sure to set to false again after \

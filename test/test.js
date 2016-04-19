@@ -196,9 +196,9 @@ describe('Keystone', function () {
 					.exec(function (err, prg) {
 						if (err) throw err;
 						const pList = new Playlist.model({
-							title: 'First Test',
 							author: user._id,
 							program: prg._id,
+							description: 'a'
 						});
 						pList.save(function (err) {
 							if (err) throw err;
@@ -212,7 +212,7 @@ describe('Keystone', function () {
 		it('should update assoc\'d program when published', function (done) {
 			const Playlist = keystone.list('Playlist');
 			const Program = keystone.list('Program');
-			Playlist.model.findOneAndUpdate({ title: 'First Test' }, { isPublished: true }, {},
+			Playlist.model.findOneAndUpdate({ description: 'a' }, { isPublished: true }, {},
 				function (err) {
 					if (err) throw err;
 					Program.model.findOne({ title: 'Prg1' })
@@ -224,7 +224,7 @@ describe('Keystone', function () {
 		});
 		it('should accept JSON for serializedTracks', function (done) {
 			const Playlist = keystone.list('Playlist');
-			Playlist.model.findOneAndUpdate({ title: 'First Test' },
+			Playlist.model.findOneAndUpdate({ description: 'a' },
 				{ serializedTracks: { $push: JSON.stringify({obj: 'Hi'})}},
 			function (err) {
 					if (err) throw err;
@@ -240,7 +240,7 @@ describe('Keystone', function () {
 			const Program = keystone.list('Program');
 			Program.model.remove({ title: 'Prg1' }, function (err) {});
 			const Playlist = keystone.list('Playlist');
-			Playlist.model.remove({ title: 'First Test' }, 
+			Playlist.model.remove({ description: 'a' }, 
 				function (err) {}
 			);
 		});
