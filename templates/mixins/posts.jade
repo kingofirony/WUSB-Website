@@ -1,3 +1,5 @@
+include ../mixins/pagination
+
 mixin create-post()
 	if user
 		#new-post
@@ -36,5 +38,6 @@ mixin show-post(post)
 
 mixin show-posts(posts)
 	.grid(data-masonry='{ "columnWidth": 220, "itemSelector": ".grid-item" }')
-		for post in posts
+		for post in posts.results
 			+show-post(post)
+	+pagination(posts)

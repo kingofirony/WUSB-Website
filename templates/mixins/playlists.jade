@@ -1,3 +1,5 @@
+include ../mixins/pagination
+
 mixin playlists()
 	if user
 		.row
@@ -22,20 +24,7 @@ mixin playlists()
 							!=playlist.description
 							if !playlist.isPublished
 								span (draft)
-	if playlists.totalPages > 1
-		ul.pagination
-			if playlists.previous
-				li: a(href='?page=' + playlists.previous): span.glyphicon.glyphicon-chevron-left
-			else
-				li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
-			each p, i in playlists.pages
-				li(class=playlists.currentPage === p ? 'active' : null)
-					a(href='?page=' + (p === '...' ? (i ? playlists.totalPages : 1) : p ))= p
-			if playlists.next
-				li: a(href='?page=' + playlists.next): span.glyphicon.glyphicon-chevron-right
-			else
-				li.disabled: a(href='?page=' + playlists.totalPages): span.glyphicon.glyphicon-chevron-right
-
+	+pagination(playlists)
 mixin playlist()
 	h2=playlist.title
 	div.col-sm-12

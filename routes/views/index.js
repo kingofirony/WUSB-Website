@@ -20,7 +20,7 @@ exports = module.exports = (req, res) => {
 		.sort('-publishedAt')
 		.populate('author', 'name')
 		.exec((err, posts) => {
-			locals.posts = posts.results;
+			locals.posts = posts;
 			next();
 		});
 	});
