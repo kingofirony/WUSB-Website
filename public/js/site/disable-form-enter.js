@@ -1,6 +1,6 @@
 $(function(){
 	var keyStop = {
-		8: ":not(input:text, textarea, input:file, input:password)", // stop backspace = back
+		8: ":not(textarea, input:text, input:email, input:file, input:password)", // stop backspace = back
 		13: "input:text, input:password", // stop enter = submit 
 
 		end: null
