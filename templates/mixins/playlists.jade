@@ -14,7 +14,7 @@ mixin playlists()
 							span.glyphicon.glyphicon-music
 							&nbsp
 							span  Posted on 
-							=playlist.date
+							=playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()
 						h5
 							span Posted by 
 							=playlist.program.title

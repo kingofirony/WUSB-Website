@@ -160,12 +160,34 @@ function getTime() {
 	return (now.getHours() * 100) + now.getMinutes()
 }
 
+function getDayString(dayNumber) {
+	switch(dayNumber) {
+		case 0: return 'Sunday';
+		case 1: return 'Monday';
+		case 2: return 'Tuesday';
+		case 3: return 'Wednesday';
+		case 4: return 'Thursday';
+		case 5: return 'Friday';
+		case 6: return 'Saturday';
+	}
+}
+
 Program.schema.virtual('startTimeString').get(function() {
 	return toTimeString(this.startTime);
 });
 
 Program.schema.virtual('endTimeString').get(function() {
 	return toTimeString(this.endTime);
+});
+
+Program.schema.virtual('dayString').get(function() {
+	return getDayString(this.day);
+});
+
+Program.schema.virtual('airTimeString').get(function() {
+	return (this.isBiweekly ? 'Every other ' : 'Every ') +
+		getDayString(this.day) + ' ' + toTimeString(this.startTime) + ' - ' +
+		toTimeString(this.endTime)
 });
 
 Program.schema.virtual('nextAirDate').get(function() {
