@@ -202,8 +202,11 @@ Program.schema.virtual('isLiveNow').get(function () {
  * Length of an episode in minutes
  */
 Program.schema.virtual('lengthInMinutes').get(function () {
-	// Not implemented yet
-	return 90;
+	// What if a program starts before midnight and ends the next day?
+	const difference = this.endTime - this.startTime;
+	const hours = difference / 100;
+	const minutes = difference % 100;
+	return hours * 60 + minutes;
 });
 
 /* Call this with a callback expecting an error object
