@@ -25,7 +25,7 @@ mixin sign-up()
 				button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary Sign up
 
 mixin user-picture(user)
-	img(style='width:64px;height:64px' src=user.hasProfilePicture ? '/images/profile/' + user.slug + '.jpg' : '/images/alien.svg')
+	img(style='width:64px;height:64px' src=user.profileImage.exists ? user.profileImage.href : '/images/alien.svg')
 		
 mixin user-picture-with-name(user)
 	div

@@ -79,13 +79,21 @@ Playlist.schema.pre('save', function (next) {
 Playlist.schema.pre('update', function (next) {
 	if ((this.isModified('program') && this.isPublished) ||
 	  (this.isModified('isPublished') && this.isPublished)) {
-		keystone.list('Program').model.update(
-			{ _id: this.program }, 
-			{ $push: { playlists: this } },
-			function (err) {
+	  	const Program = keystone.list('Program');
+		Program.model.update(
+			{ $in: { playlists: this._id } }, 
+			{ $pull: { playlists: this._id } },
+			{ multi: true },
+			(err, out) => {
 				if (err) throw err;
-			}
-		);
+				Program.model.findOneAndUpdate(
+					{ _id: this.program }, 
+					{ $push: { playlists: this._id } },
+					(err) => {
+						if (err) throw err;
+					}
+				);
+		});
 	}
 	next();
 });

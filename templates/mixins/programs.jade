@@ -15,7 +15,7 @@ mixin program()
 		p
 			a(href='/program/' + program.slug + '/edit') Edit
 	p='Genre: ' + program.genre
-	p=program.description
+	p!=program.description
 	hr
 	h4 DJs
 	div

@@ -26,7 +26,7 @@ User.add({
 			return item.slug + '.' + file.extension;
 		},
 		format: function (item, file) {
-			return '<img src="/images/profile/'+file.filename+'">'
+			return '/images/profile/'+ file.filename;
 		} 
 	}
 }, 'Permissions', {

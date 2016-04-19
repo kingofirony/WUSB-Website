@@ -1,5 +1,7 @@
 'use strict';
 const keystone = require('keystone');
+const fs = require('fs');
+const mkdirp = require('mkdirp');
 const TextPost = keystone.list('TextPost');
 
 exports = module.exports = (req, res) => {
@@ -28,6 +30,44 @@ exports = module.exports = (req, res) => {
 	// Accept form post submit
 	view.on('post', { action: 'create-post' }, next => {
 
+		function saveImage(post, image, next) {
+			const dir = 'public/images/posts/';
+			const fileName = post.slug
+			mkdirp(dir, function (err) {	// Create directory
+				if (err) throw err;
+				// Gives .jpg, .png, etc even if ext is not 3 char long
+				const fileExt = image.name.substr(
+					image.name.search(/\..+$/), image.name.length);
+	
+				fs.readFile(image.path, (err, image) => {
+					fs.writeFile(dir + fileName + fileExt, 
+					  image, (err) => {
+						if (err) throw err;
+						console.log('Saved ' + fileName + fileExt + '...');
+						console.log('to public/images/posts');
+					});
+				});
+				next(post);
+			});
+		}
+		
+		function acceptImageUpload(post, next) {
+			const image = req.files.post_image;
+			if (image) {
+				saveImage(post, image, (post, err) => {
+					if (err) {
+						next(err);
+					}
+					else {
+						post.save(next);
+					}
+				});
+			}
+			else {
+				next();
+			}
+		}
+
 		// handle form
 		let newPost = new TextPost.model({
 			author: locals.user.id
@@ -51,8 +91,16 @@ exports = module.exports = (req, res) => {
 				locals.validationErrors = err.errors;
 				next();
 			} else {
-				req.flash('success', 'Post added');
-				res.redirect('/');
+				acceptImageUpload(newPost, err => {
+					if (err) {
+						locals.validationErrors = err.errors;
+						next();
+					}
+					else {
+						req.flash('success', 'Post added');
+						res.redirect('/');
+					}
+				});
 			}
 		});
 	});
@@ -80,7 +128,7 @@ exports = module.exports = (req, res) => {
 						' could not be found.');
 					return next();
 				}
-				if (post.author != req.user.id) {
+				if (!req.user.isAdmin && post.author != req.user.id) {
 					req.flash('error', 'Sorry, you must be the author' + 
 						' of a post to delete it.');
 					return next();
