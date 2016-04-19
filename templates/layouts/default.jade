@@ -48,6 +48,7 @@ html
 				div.stream
 					+live-program(prg)
 					i.glyphicon.glyphicon-play.play &nbsp;
+					i.glyphicon.glyphicon-stop.stop
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
 					button.navbar-toggle.collapsed(data-toggle="collapse" data-target=".navbar-collapse")
@@ -89,6 +90,7 @@ html
 
 		//- FOOTER
 		.container: #footer
+			p &copy; Copyright WUSB
 
 		//- JAVASCRIPT
 
@@ -115,7 +117,10 @@ html
 		link(href="/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.min.css", rel="stylesheet")
 
 		script(src='/js/material-bootstrap/material.js')
+		link(href='/styles/material/bootstrap-material-design.min.css')
+		
 		script(src='/js/material-bootstrap/ripples.js')
+		link(href='/styles/material/ripples.min.css')
 
 		script(src='/js/bootstrap-timepicker/bootstrap-timepicker.min.js')
 		link(href="/js/bootstrap-timepicker/bootstrap-timepicker.min.css", rel="stylesheet")

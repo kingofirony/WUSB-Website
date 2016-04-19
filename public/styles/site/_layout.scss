@@ -94,6 +94,8 @@ body {
 }
 
 #body {
+
+	color: $wusb-white;
 	
 	h2 {
 		display: inline-block;
@@ -269,12 +271,11 @@ body {
     height: auto;
 }
 
-
-
-#body {
+#footer {
 	color: $wusb-white;
 }
 
 input[type='text'], textarea {
   	color: black;
 }
+

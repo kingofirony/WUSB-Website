@@ -17,5 +17,11 @@
     "app/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "^0.5.9",
+    "bootstrap3-wysihtml5-bower": "^0.3.3",
+    "bootstrap-timepicker": "^0.5.2",
+    "bootstrap-datepicker": "^1.6.0"
+  }
 }
