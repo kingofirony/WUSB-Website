@@ -30,44 +30,6 @@ exports = module.exports = (req, res) => {
 	// Accept form post submit
 	view.on('post', { action: 'create-post' }, next => {
 
-		function saveImage(post, image, next) {
-			const dir = 'public/images/posts/';
-			const fileName = post.slug
-			mkdirp(dir, function (err) {	// Create directory
-				if (err) throw err;
-				// Gives .jpg, .png, etc even if ext is not 3 char long
-				const fileExt = image.name.substr(
-					image.name.search(/\..+$/), image.name.length);
-	
-				fs.readFile(image.path, (err, image) => {
-					fs.writeFile(dir + fileName + fileExt, 
-					  image, (err) => {
-						if (err) throw err;
-						console.log('Saved ' + fileName + fileExt + '...');
-						console.log('to public/images/posts');
-					});
-				});
-				next(post);
-			});
-		}
-		
-		function acceptImageUpload(post, next) {
-			const image = req.files.post_image;
-			if (image) {
-				saveImage(post, image, (post, err) => {
-					if (err) {
-						next(err);
-					}
-					else {
-						post.save(next);
-					}
-				});
-			}
-			else {
-				next();
-			}
-		}
-
 		// handle form
 		let newPost = new TextPost.model({
 			author: locals.user.id
@@ -77,30 +39,22 @@ exports = module.exports = (req, res) => {
 			errorMessage: 'There was an error creating your new post:'
 		});
 
-		// automatically publish posts by admin users
-		if (locals.user.isAdmin) {
+		// !!! TODO: Remove when proper drafts system in place !!!
+		if (locals.user.isConfirmed) {
 			newPost.isPublished = true;
 		}
 
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
-			fields: 'title, textContent'
+			fields: 'title, textContent, postImage'
 		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
 				next();
 			} else {
-				acceptImageUpload(newPost, err => {
-					if (err) {
-						locals.validationErrors = err.errors;
-						next();
-					}
-					else {
-						req.flash('success', 'Post added');
-						res.redirect('/');
-					}
-				});
+				req.flash('success', 'Post added');
+				res.redirect('/');
 			}
 		});
 	});

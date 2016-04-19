@@ -42,8 +42,8 @@ mixin edit-profile()
 			
 			.form-group
 				+user-picture(locals.user)
-				label(for="profile_picture") Change profile picture
-				input(type='file', id='profile_picture' name='profile_picture')
+				label(for="profileImage_upload") Change profile picture
+				input(type='file', id='profileImage_upload' name='profileImage_upload')
 			.form-group
 				label(for="email") Email
 				input(type='email', value=locals.user.email, size="40", id='email', name='email', placeholder='email').input.input-xl.input-faded
