@@ -17,7 +17,7 @@ mixin program()
 	p='Genre: ' + program.genre
 	p=program.airTimeString
 	p='Airs next on ' + program.nextAirDateMMDDYY
-	p=program.description
+	p!=program.description
 	hr
 	h4 DJs
 	div

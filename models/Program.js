@@ -37,9 +37,8 @@ Program.add({
 });
 
 Program.schema.pre('save', function (next) {
-	if ((this.isModified('isBiweekly') || this.isNew) && this.isBiweekly &&
-		(this.biweeklyState === null)) {
-		this.biweekylState = false;
+	if ((this.isModified('isBiweekly') || this.isNew) && this.isBiweekly) {
+		this.biweeklyState = getCurrentBiweeklyState();
 	} else if (this.isModified('isBiweekly') && !this.isBiweekly) {
 		this.bieeklyState = null;
 	}

@@ -36,5 +36,6 @@ node_modules
 # Ignore the DB URI
 database.js
 
-# Ignore user profile images
+# Ignore image folders 
 public/images/profile
+public/images/posts

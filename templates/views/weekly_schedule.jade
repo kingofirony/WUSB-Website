@@ -2,6 +2,8 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron
+		
+		h2= 'Currently displaying the week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
 		div
 			div
 				a(href='?week=1') <---- Week A
