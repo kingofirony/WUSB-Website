@@ -36,10 +36,11 @@ node_modules
 # Ignore the DB URI
 database.js
 
-# Ignore user profile images
+# Ignore image folders 
 public/images/profile
 
 #Ignore bower files
 app/
 
 public/styles/site.css
+public/images/posts

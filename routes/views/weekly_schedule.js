@@ -13,10 +13,15 @@ exports = module.exports = (req, res) => {
 	_.each(_.range(7), i => {
 		locals.calendar[locals.days[i]] = {};
 		_.each(locals.timeslots, timeslot => {
-			Program.model.findBySlot(i, timeslot.number).exec().then(p => {
+			const week = req.query.week || 1;
+			Program.model.findBySlot(week, i, timeslot.number).exec().then(p => {
 				locals.calendar[locals.days[i]][timeslot.number] = p
 			});
 		});
 	});
+	locals.date1 = new Date();
+	locals.date2 = new Date();
+	locals.date1.setDate(locals.date1.getDate() - locals.date1.getDay());
+	locals.date2.setDate(locals.date2.getDate() + (6 - locals.date2.getDay()));
 	view.render('weekly_schedule');
 };

@@ -1,5 +1,5 @@
 mixin create-post()
-	if user
+	if user && user.isConfirmed
 		#new-post
 			span.glyphicon.glyphicon-plus.plus
 			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
@@ -16,6 +16,11 @@ mixin create-post()
 					//- Content
 					.form-group
 						textarea(name='textContent', class='wysiwyg', rows="3").form-control.col-sm-12
+
+					//- Image
+					.form-group
+						label(for="postImage_upload") Add an image to this post
+						input(type='file', id='postImage_upload' name='postImage_upload').form-control.col-sm-12
 
 					//- Submit
 					.form-group
@@ -36,8 +41,11 @@ mixin show-post(post)
 						button.btn.btn-default.btn-delete
 							span.glyphicon.glyphicon-remove
 
-
 mixin show-posts(posts)
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for post in posts
 			+show-post(post)
+
+mixin show-post-image(post)
+	if post.postImage.exists
+		img(style='width:64px;height:64px' src=post.postImage.href)

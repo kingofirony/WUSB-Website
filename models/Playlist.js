@@ -6,6 +6,7 @@ const Types = keystone.Field.Types;
 
 // Docs: http://keystonejs.com/docs/database/#lists-options
 const options = {
+	autokey: { path: 'slug', from: '_id', unique: true },
 	singular: 'Playlist',
 	plural: 'Playlists',
 	sortable: true,
@@ -65,13 +66,21 @@ Playlist.schema.pre('save', function (next) {
 	if ((this.isNew && this.isPublished) || 
 	 (this.isModified('program') && this.isPublished) ||
 	 (this.isModified('isPublished') && this.isPublished)) {
-		keystone.list('Program').model.update(
-			{ _id: this.program }, 
-			{ $push: { playlists: this } },
-			function (err) {
+		const Program = keystone.list('Program');
+		Program.model.update(
+			{ playlists: this._id }, 
+			{ $pull: { playlists: this._id } },
+			{ multi: true },
+			(err, out) => {
 				if (err) throw err;
-			}
-		);
+				Program.model.findOneAndUpdate(
+					{ _id: this.program }, 
+					{ $push: { playlists: this._id } },
+					(err) => {
+						if (err) throw err;
+					}
+				);
+		});
 	}
 	next();
 });
@@ -79,19 +88,23 @@ Playlist.schema.pre('save', function (next) {
 Playlist.schema.pre('update', function (next) {
 	if ((this.isModified('program') && this.isPublished) ||
 	  (this.isModified('isPublished') && this.isPublished)) {
-		keystone.list('Program').model.update(
-			{ _id: this.program }, 
-			{ $push: { playlists: this } },
-			function (err) {
+	  	const Program = keystone.list('Program');
+		Program.model.update(
+			{ playlists: this._id },
+			{ $pull: { playlists: this._id } },
+			{ multi: true },
+			(err, out) => {
 				if (err) throw err;
-			}
-		);
+				Program.model.findOneAndUpdate(
+					{ _id: this.program }, 
+					{ $push: { playlists: this._id } },
+					(err) => {
+						if (err) throw err;
+					}
+				);
+		});
 	}
 	next();
-});
-
-Playlist.schema.virtual('itemTitle').get(function() {
-	return this.program.title + ' - ' + this.date.toLocaleDateString();
 });
 
 Playlist.defaultColumns = 'author, date, description,' +

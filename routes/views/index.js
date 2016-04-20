@@ -1,5 +1,7 @@
 'use strict';
 const keystone = require('keystone');
+const fs = require('fs');
+const mkdirp = require('mkdirp');
 const TextPost = keystone.list('TextPost');
 
 exports = module.exports = (req, res) => {
@@ -37,15 +39,15 @@ exports = module.exports = (req, res) => {
 			errorMessage: 'There was an error creating your new post:'
 		});
 
-		// automatically publish posts by admin users
-		if (locals.user.isAdmin) {
+		// !!! TODO: Remove when proper drafts system in place !!!
+		if (locals.user.isConfirmed) {
 			newPost.isPublished = true;
 		}
 
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
-			fields: 'title, textContent'
+			fields: 'title, textContent, postImage'
 		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
@@ -80,7 +82,7 @@ exports = module.exports = (req, res) => {
 						' could not be found.');
 					return next();
 				}
-				if (post.author != req.user.id) {
+				if (!req.user.isAdmin && post.author != req.user.id) {
 					req.flash('error', 'Sorry, you must be the author' + 
 						' of a post to delete it.');
 					return next();

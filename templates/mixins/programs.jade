@@ -22,7 +22,9 @@ mixin program()
 			i.material-icons mode_edit
 			a(href='/program/' + program.slug + '/edit') Edit
 	p='Genre: ' + program.genre
-	p=program.description
+	p=program.airTimeString
+	p='Airs next on ' + program.nextAirDateMMDDYY
+	p!=program.description
 	hr
 	h4 DJs
 	div
@@ -33,7 +35,7 @@ mixin program()
 	ul
 		for playlist in program.playlists
 			li
-				a(href='/playlist/' + playlist.id)=playlist.title
+				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
 
 mixin post-program(editing)
 	h2.col-sm-offset-1 Create a new program

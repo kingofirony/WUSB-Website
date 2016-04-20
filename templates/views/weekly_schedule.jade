@@ -2,18 +2,28 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron
+		
+		h2= 'Currently displaying the week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
+		div
+			div
+				a(href='?week=1') <---- Week A
+			div
+				a(href='?week=2') ----> Week B
 		table(style='width:100%; table-layout:fixed')
 			thead
 				tr
 					th
 					for day in days
-						th!=day
+						th(style='text-align:center')!=day
 			tbody
 				for timeslot in timeslots
 					tr
 						td!=timeslot.string
 						for day in days
 							- var program = calendar[day][timeslot.number]
-							td
-								if program
+							if program 
+								td(style='background-color:orange; text-align:center', rowspan!=program.lengthInMinutes/30)
 									a(href='/program/' + program.slug)!=program.title
+							else
+								td
+									

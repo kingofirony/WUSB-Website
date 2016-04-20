@@ -11,7 +11,7 @@ mixin playlists()
 									h4
 										span by #{playlist.program.title}
 									h4
-										span #{playlist.date.toISOString().slice(0, 10)}
+										span #{playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()}
 								.panel-body
 									p
 										!=playlist.description
