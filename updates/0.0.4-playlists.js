@@ -45,7 +45,77 @@ if (env === 'development') {
 		},
 		{
 			genre: 'Experimental',
-			isPublished: false,
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
+			tracks: [
+
+			]
+		},
+		{
+			genre: 'Experimental',
+			isPublished: true,
 			tracks: [
 
 			]
@@ -83,8 +153,7 @@ if (env === 'development') {
 	};
 } else {
 	exports = module.exports = done => {
-		console.log('Patch 0.0.4 is not applicable in production or ' +
-			'testing.');
+		console.log('Patch 0.0.4 is not applicable in production or testing.');
 		done();
 	}
 }

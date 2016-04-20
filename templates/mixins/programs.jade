@@ -1,9 +1,11 @@
 include ../mixins/users
+include ../mixins/pagination
 
 mixin programs()
-	for program in programs
+	for program in programs.results
 		.program
 			a(href='/program/' + program.slug)=program.title
+	+pagination(programs)
 	if user && user.isAdmin
 		hr
 		p
