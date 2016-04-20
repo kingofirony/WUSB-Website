@@ -1,7 +1,7 @@
 include ../mixins/pagination
 
 mixin create-post()
-	if user
+	if user && user.isConfirmed
 		#new-post
 			span.glyphicon.glyphicon-plus.plus
 			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
@@ -17,6 +17,11 @@ mixin create-post()
 					.form-group
 						textarea(name='textContent', placeholder='Post content', class='wysiwyg', rows="3").form-control.col-sm-12
 
+					//- Image
+					.form-group
+						label(for="postImage_upload") Add an image to this post
+						input(type='file', id='postImage_upload' name='postImage_upload').form-control.col-sm-12
+
 					//- Submit
 					.form-group
 						button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Create post
@@ -27,10 +32,11 @@ mixin show-post(post)
 			div(id='post-id-' + post.id, class='post')
 				.media
 					.media-body
+						+show-post-image(post)
 						h3=post.title
 						h4=post.author.name.first + ' ' + post.author.name.last
 						p!=post.textContent.replace(/\n/g, '<br>')
-						if user && user.id === post.author.id
+						if user && (user.isAdmin || user.id === post.author.id)
 							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
 								button
 									span.glyphicon.glyphicon-remove
@@ -41,3 +47,7 @@ mixin show-posts(posts)
 		for post in posts.results
 			+show-post(post)
 	+pagination(posts)
+
+mixin show-post-image(post)
+	if post.postImage.exists
+		img(style='width:64px;height:64px' src=post.postImage.href)

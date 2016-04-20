@@ -19,5 +19,9 @@ exports = module.exports = (req, res) => {
 			});
 		});
 	});
+	locals.date1 = new Date();
+	locals.date2 = new Date();
+	locals.date1.setDate(locals.date1.getDate() - locals.date1.getDay());
+	locals.date2.setDate(locals.date2.getDate() + (6 - locals.date2.getDay()));
 	view.render('weekly_schedule');
 };
