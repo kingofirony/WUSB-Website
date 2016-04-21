@@ -10,12 +10,14 @@ mixin create-post()
 				.col-sm-10.col-sm-offset-1
 
 					//- Title
-					.form-group
-						input(type='text', id='post-title', name='title', placeholder='Post title').form-control.col-sm-12
+					.form-group.label-floating
+						label(class="control-label", for="post-title") Post title
+						input(type='text', id='post-title').form-control
+						span.material-input
 
 					//- Content
 					.form-group
-						textarea(name='textContent', placeholder='Post content', class='wysiwyg', rows="3").form-control.col-sm-12
+						textarea(name='textContent', class='wysiwyg', rows="3").form-control.col-sm-12
 
 					//- Image
 					.form-group
@@ -24,26 +26,25 @@ mixin create-post()
 
 					//- Submit
 					.form-group
-						button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Create post
+						button(type='submit', data-loading-text="Changing...").btn.btn-default.btn-lg.btn-block.btn-raised Create post
+							.ripple-container
 
 mixin show-post(post)
 	if post.author
 		div.grid-item
-			div(id='post-id-' + post.id, class='post')
-				.media
-					.media-body
-						+show-post-image(post)
-						h3=post.title
-						h4=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-						if user && (user.isAdmin || user.id === post.author.id)
-							a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-								button
-									span.glyphicon.glyphicon-remove
-									span  delete
+			div(id='post-id-' + post.id, class='panel panel-primary')
+				.panel-heading
+					h3!=post.title
+					h4!=post.author.name.first + ' ' + post.author.name.last
+				.panel-body
+					p!=post.textContent.replace(/\n/g, '<br>')
+				if user && user.id === post.author.id
+					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
+						button.btn.btn-default.btn-delete
+							span.glyphicon.glyphicon-remove
 
 mixin show-posts(posts)
-	.grid(data-masonry='{ "columnWidth": 220, "itemSelector": ".grid-item" }')
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for post in posts.results
 			+show-post(post)
 	+pagination(posts)

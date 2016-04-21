@@ -15,6 +15,7 @@ html
 
 		//- Customise the stylesheet for your site by editing /public/styles/site.sass
 		link(href="/styles/site.css", rel="stylesheet")
+		link(rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons")
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
@@ -89,10 +90,7 @@ html
 
 		//- FOOTER
 		.container: #footer
-
-			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
-			p Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
-
+			p &copy; Copyright WUSB
 
 		//- JAVASCRIPT
 
@@ -100,7 +98,7 @@ html
 		//- and the KeystoneJS Content Editor. If you are not targeting IE8,
 		//- you can upgrade to 2.1.4 (also bundled) for better performance.
 		script(src='/js/jquery/jquery-1.11.3.min.js')
-		script(src='js/site/stream.js')
+		script(src='/js/site/stream.js')
 
 		//- Customise which Bootstrap javascript files are served by including
 		//- them specifically here, instead of bootstrap-3.3.5.min.js
@@ -117,6 +115,12 @@ html
 
 		script(src='/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.all.min.js')
 		link(href="/js/bootstrap3-wysiwyg/bootstrap3-wysihtml5.min.css", rel="stylesheet")
+
+		script(src='/js/material-bootstrap/material.js')
+		link(href='/styles/material/bootstrap-material-design.min.css')
+		
+		script(src='/js/material-bootstrap/ripples.js')
+		link(href='/styles/material/ripples.min.css')
 
 		script(src='/js/bootstrap-timepicker/bootstrap-timepicker.min.js')
 		link(href="/js/bootstrap-timepicker/bootstrap-timepicker.min.css", rel="stylesheet")

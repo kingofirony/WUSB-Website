@@ -2,19 +2,26 @@ include ../mixins/users
 include ../mixins/pagination
 
 mixin programs()
-	for program in programs.results
-		.program
-			a(href='/program/' + program.slug)=program.title
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+		for program in programs.results
+			.grid-item
+				a(href='/program/' + program.slug)
+					.panel.panel-primary
+						.panel-heading
+							h4
+								!=program.title
+						.panel-body
+							p 
+								!=program.genre
+							p
+								!=program.description
 	+pagination(programs)
-	if user && user.isAdmin
-		hr
-		p
-			a(href='/program') Create new program
 
 mixin program()
 	h2=program.title
 	if user && user.isAdmin
-		p
+		button.btn.btn-raised.btn-xs
+			i.material-icons mode_edit
 			a(href='/program/' + program.slug + '/edit') Edit
 	p='Genre: ' + program.genre
 	p=program.airTimeString
@@ -33,76 +40,78 @@ mixin program()
 				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
 
 mixin post-program(editing)
-	form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
-		input(type='hidden', name='action', value=editing ? 'edit-program' : 'add-program')
+	h2.col-sm-offset-1 Create a new program
+	.row
+		form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form.create-form.profile-form
+			input(type='hidden', name='action', value=editing ? 'edit-program' : 'add-program')
+			fieldset
+				if editing
+					p
+						a(href='/program/' + program.slug) View
 
-		.row: .col-sm-8.col-sm-offset-2
-
-			h2 Post program
-
-			if editing
-				p
-					a(href='/program/' + program.slug) View
-
-			//- Program
-			.form-group
-				label(for='title') Title:
-				input(type='text' id='title', name='title' value=editing ? program.title : '')
-
-			//- Genre
-			.form-group
-				label(for='genre') Genre:
-				input(type='text' id='genre', name='genre' value=editing ? program.genre : '')
-
-			//- Description
-			.form-group
-				label(for='description') Description:
-				textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
-
-			//- DJs
-			.form-group
-				label(for='dj') DJs:
-				ul
-					if editing
-						for dj in program.djs
+				//- Program
+				.form-group.label-floating
+					label(for='title', class="control-label") Title:
+					input(type='text' id='title', name='title' value=editing ? program.title : '').form-control
+					span.material-input
+					
+				//- Genre
+				.form-group.label-floating
+					label(for='genre', class="control-label") Genre:
+					input(type='text' id='genre', name='genre' value=editing ? program.genre : '').form-control
+					span.material-input
+	
+				//- Description
+				.form-group
+					label(for='description') Description:
+					textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
+	
+				//- DJs
+				.form-group.label-floating
+					label(for='dj', class="control-label") DJs:
+					ul
+						if editing
+							for dj in program.djs
+								li
+									input(id='dj', name='dj', class='typeahead', type='text', value=dj.name.full)
+						for i in [1, 2]
 							li
-								input(id='dj', name='dj', class='typeahead', type='text', value=dj.name.full)
-					for i in [1, 2]
-						li
-							input(id='dj' name='dj' class='typeahead' type='text')
-
-			//- Start time
-			.form-group
-				label(for='startTime') Start time:
-				div(class="input-group bootstrap-timepicker timepicker")
-					input(id="startTime", name="startTime", type="text", class="form-control input-small", value=editing ? program.startTimeString : '')
-					span(class="input-group-addon")
-						i(class="glyphicon glyphicon-time")
-
-			//- End time
-			.form-group
-				label(for='endTime') End time:
-				div(class="input-group bootstrap-timepicker timepicker")
-					input(id="endTime", name="endTime", type="text", class="form-control input-small", value=editing ? program.endTimeString : '')
-					span(class="input-group-addon")
-						i(class="glyphicon glyphicon-time")
-
-			//- Date
-			.form-group
-				label(for='date') Date:
-				div(class="input-group date")
-					input(id="date", name="date", type="text", class="form-control", value=editing ? program.nextAirDateMMDDYY : '')
-					span(class="input-group-addon")
-						i(class="glyphicon glyphicon-th")
-
-			//- Biweekly
-			.form-group
-				label(for='isBiweekly') Biweekly:
-				input(type='checkbox' id='isBiweekly', name='isBiweekly' checked=editing && program.isBiweekly)
-
-			//- Submit
-			.form-group
-				button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-block Save program
+								input(id='dj' name='dj' class='typeahead' type='text')
+	
+				//- Start time
+				.form-group
+					label(for='startTime') Start time:
+					div(class="input-group bootstrap-timepicker timepicker")
+						input(id="startTime", name="startTime", type="text", class="form-control input-small", value=editing ? program.startTimeString : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-time")
+	
+				//- End time
+				.form-group
+					label(for='endTime') End time:
+					div(class="input-group bootstrap-timepicker timepicker")
+						input(id="endTime", name="endTime", type="text", class="form-control input-small", value=editing ? program.endTimeString : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-time")
+	
+				//- Date
+				.form-group.label-floating
+					label(for='date', class="control-label") Date:
+					div(class="input-group date")
+						input(id="date", name="date", type="text", class="form-control", value=editing ? program.nextAirDateMMDDYY : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-th")
+	
+				//- Biweekly
+				.form-group
+					label(for='isBiweekly') Biweekly:
+					input(type='checkbox' id='isBiweekly', name='isBiweekly' checked=editing && program.isBiweekly)
+					label Checkbox
+						input(type="checkbox")
+						
+				//- Submit
+				.form-group
+					button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save program
 
 mixin live-program(prg)
 	if prg

@@ -38,4 +38,9 @@ database.js
 
 # Ignore image folders 
 public/images/profile
+
+#Ignore bower files
+app/
+
+public/styles/site.css
 public/images/posts

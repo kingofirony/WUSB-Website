@@ -4,6 +4,7 @@
 // Bootstrap can be removed entirely by deleting this line.
 
 @import "bootstrap/bootstrap";
+@import "bootstrap/sass/bootstrap-material-design";
 
 // The easiest way to customise Bootstrap variables while
 // being able to easily override the source files with new
@@ -25,3 +26,5 @@
 @import "site/wysiwyg";
 @import "site/playlists_list";
 @import "site/single_playlist";
+@import "site/program";
+@import "site/profile";

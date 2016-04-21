@@ -1,43 +1,34 @@
 include ../mixins/pagination
 
 mixin playlists()
-	if user
-		.row
-			div.playlist
-				a(href='/playlist')
-					span.glyphicon.glyphicon-plus
-					span  Add playlist
-	for playlist in playlists.results
-		if playlist.isPublished || (user && playlist.author.id == user.id)
-			.row
-				div.playlist
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+		for playlist in playlists.results
+			if playlist.isPublished || (user && playlist.author.id == user.id)
+				.grid-item
 					a(href='/playlist/' + playlist.id)
-						h4
-							span.glyphicon.glyphicon-music
-							&nbsp
-							span  Posted on 
-							=playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()
-						h5
-							span Posted by 
-							=playlist.program.title
-						h6
-							!=playlist.description
-							if !playlist.isPublished
-								span (draft)
+						.panel.panel-primary
+							.panel-heading
+									h3
+										!=playlist.title
+									h4
+										span by #{playlist.program.title}
+									h4
+										span #{playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()}
+								.panel-body
+									p
+										!=playlist.description
+										if !playlist.isPublished
+											span (draft)
 	+pagination(playlists)
 mixin playlist()
 	h2=playlist.title
-	div.col-sm-12
-		if user && user.id == playlist.author.id
-			button
-				a(href='/playlist/' + playlist.id + '/edit')
-					span.glyphicon.glyphicon-pencil
-					span  Edit
-		
-		p Program:
-				a(href='/playlist/' + playlist.id + '/edit')
-
-		p Program:
+	if user && user.id == playlist.author.id
+		button.btn.btn-raised
+			a(href='/playlist/' + playlist.id + '/edit')
+				span.glyphicon.glyphicon-pencil
+				span Edit
+	.row
+		p Program: 
 			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
 		p!=playlist.description
@@ -57,60 +48,54 @@ mixin playlist()
 						td=track.title
 
 mixin post-playlist(editing)
-	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.profile-form
-		input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
+	h2.col-sm-offset-1 Post a new playlist
+	.row
+		form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
+			fieldset
+				//- Program
+				.form-group.label-floating
+					label(for='program' class="control-label") Program
+					input(id='program', name='program', class='typeahead form-control', type='text', value=editing ? playlist.program.title : '')
+					span.material-input
 
-		.row: .col-sm-8.col-sm-offset-2
+				//- Description
+				.form-group
+					label(for='description') Description:
+					textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
 
-			h2 Post playlist
+				//- Tracks
+				table.table.table-hover.form-group
+					thead
+						tr
+							th Artist
+							th Album
+							th Song
+					tbody
+						if editing
+							for track in playlist.tracks
+								tr
+									td
+										input(type='text' name="artist" value=track.artist)
+									td
+										input(type='text' name="album" value=track.album)
+									td
+										input(type='text' name="title" value=track.title)
 
-			if editing
-				p
-					a(href='/playlist/' + playlist.id) View
-
-			//- Program
-			.form-group
-				label(for='program') Program:
-				input(id='program', name='program', class='typeahead', type='text', value=editing ? playlist.program.title : '')
-
-			//- Description
-			.form-group
-				label(for='description') Description:
-				textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
-
-			//- Tracks
-			table
-				thead
-					tr
-						th Artist
-						th Album
-						th Song
-				tbody
-					if editing
-						for track in playlist.tracks
+						- for(var i = 0; i < 10; i++)
 							tr
 								td
-									input(type='text' name="artist" value=track.artist)
+									input(type='text' name="artist")
 								td
-									input(type='text' name="album" value=track.album)
+									input(type='text' name="album")
 								td
-									input(type='text' name="title" value=track.title)
+									input(type='text' name="title")
 
-					- for(var i = 0; i < 10; i++)
-						tr
-							td
-								input(type='text' name="artist")
-							td
-								input(type='text' name="album")
-							td
-								input(type='text' name="title")
-
-			//- Is Published
-			.form-group
-				label(for='isPublished') Published:
-				input(type='checkbox', name='isPublished', id='isPublished' checked=editing && playlist.isPublished)
-
-			//- Submit
-			.form-group
-				button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Continue
-				button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary Save and Exit
+				//- Is Published
+				.form-group
+					.checkbox
+						label(for='isPublished')
+							input(type='checkbox', name='isPublished', value="Published", id='isPublished' checked=editing && playlist.isPublished)
+				//- Submit
+				.form-group
+					button(type='submit', name='save-and-continue' value='true' data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save and Continue
+					button(type='submit', name='save-and-exit' value='true' data-loading-text="Changing...").btn.btn-lg.btn-primary.btn-raised Save and Exit

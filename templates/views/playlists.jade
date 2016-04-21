@@ -2,6 +2,11 @@ extends ../layouts/default
 include ../mixins/playlists
 
 block content
-	.jumbotron.col-md-12.col-xs-12.col-sm-12.playlist-list
+	.col-md-12.col-xs-12.col-sm-12.playlist-list
 		h2 here's what we've played
 		+playlists()
+	if user
+		a(href='/playlist')
+			.btn.btn-fab
+				i.material-icons add_to_queue
+				.ripple-container

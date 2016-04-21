@@ -45,32 +45,14 @@ body {
 		}
 	}
 
-  	.navbar-toggle {
-	  	background-color: inherit;
-	  	border: none;
-
-		.icon-bar {
-		  	background-color: $wusb-white;
-		}
-
-	}
-
-  	.navbar-toggle:hover {
-
-	}
-
 	.navbar {
-	  	background-color: $wusb-blue;
-	  	border: none;
-  		border-radius: 0;
-	  	text-align: center;
-		box-shadow: 0 2px 6px 0px rgba(0,0,0,0.75);
-
+		background-color: $wusb-blue;
+		border: none;
+		border-radius: 0;
+		text-align: center;
 
 		.navbar-collapse {
-
-		  	border: none;
-
+			
 			.nav {
 				display:inline-block;
 				float: none;
@@ -78,22 +60,22 @@ body {
 				border: none;
 			}
 
-		  	ul {
+			ul {
 				.active {
 					font-weight: bold;
-			  		a {
+					a {
 						background-color: inherit;
-			  		}
+					}
 				}
 
 				li {
 					font-size: 18px;
-			  		list-style: none;
-			  		a {
+					list-style: none;
+					a {
 						color: $wusb-white;
-			  		}
+					}
 				}
-		  	}
+			}
 		}
 
 		.collapsing {
@@ -111,6 +93,171 @@ body {
 	}
 }
 
+#body {
+
+	color: $wusb-white;
+	
+	h2 {
+		display: inline-block;
+	}
+	.grid {
+		max-width: 1140px;
+
+		a {
+			color: $wusb-white;
+			text-decoration: none;
+			
+			.panel {
+				border-radius: 4px;
+			}
+		}
+
+		a:hover {
+			text-decoration: none;
+			
+			.panel {
+				background-color: $wusb-grey;
+			}
+		}
+		
+		.panel {
+			border-radius: 4px;
+			background-color: $wusb-blue;
+			transition: all 0.5s ease;
+
+			.btn-delete {
+				color: $wusb-white;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0;
+				margin: 12px 14px;
+			}
+			
+			h3 {
+				margin-top: 10px
+			}
+
+			
+		}
+	}
+
+	/* clearfix */
+	.grid:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.grid-sizer, .grid-item {
+		float: left;
+		width: 220px;
+		padding: 10px 10px 0 0;
+	}
+
+	.grid-item--width2 {
+		width: 440px;
+	}
+
+	.grid-item--width3 {
+		width: 880px;
+	}
+	
+	.btn-fab {
+		position: absolute;
+		right: 3vw;
+		bottom: 3vh;
+	}
+	
+	.btn-fab:hover {
+		
+	}
+	
+	.jumbotron {
+		background-color: $wusb-blue;
+		
+		.row {
+			margin: 0;
+		}
+	}
+
+	form {
+		text-align: left;
+
+		.form-group {
+			label {
+				color: $wusb-white;
+			}
+			
+			input {
+				color: $wusb-white;
+			}
+			
+			input::-moz-placeholder{
+				color: #dfdee0;
+			}
+			input::-webkit-input-placeholder{
+				color: #dfdee0;
+			}
+		}
+
+		.wysihtml5-toolbar {
+
+			li {
+				a {
+					color: $wusb-white;
+				}
+
+				a:hover, a:focus {
+					background-color: $wusb-light;
+					-webkit-box-shadow: none hoff voff blur color;
+					-moz-box-shadow: none hoff voff blur color;
+					box-shadow: none hoff voff blur color;
+				}
+				
+				.wysihtml5-command-active {
+					background-color: $wusb-grey;
+				}
+			}
+			
+			.dropdown {
+				.dropdown-menu {
+					background-color: $wusb-blue;
+					li a {
+						color: $wusb-white;
+					}
+				}
+			}
+			
+			.open {
+				.dropdown-toggle {
+					background-color: $wusb-grey;
+				}
+			}
+			
+		}
+
+		iframe {
+			border: none !important;
+		}
+		
+		table {
+			
+			tr:hover {
+				background-color: $wusb-grey;
+			}
+			td {
+				input {
+					width: 100%;
+					border: none;
+					color: white;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+}
+
 #footer {
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;
@@ -124,20 +271,11 @@ body {
     height: auto;
 }
 
-
-
-#body {
-
-  	.jumbotron {
-		background-color: $body-bg;
-		border-radius: 0;
-		color: $wusb-white;
-		padding-top: 10px;
-	  	padding-right: 0;
-	  	padding-left: 0;
-  	}
+#footer {
+	color: $wusb-white;
 }
 
 input[type='text'], textarea {
   	color: black;
 }
+
