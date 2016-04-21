@@ -1,6 +1,8 @@
+include ../mixins/pagination
+
 mixin playlists()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
-		for playlist in playlists
+		for playlist in playlists.results
 			if playlist.isPublished || (user && playlist.author.id == user.id)
 				.grid-item
 					a(href='/playlist/' + playlist.id)
@@ -17,6 +19,7 @@ mixin playlists()
 										!=playlist.description
 										if !playlist.isPublished
 											span (draft)
+	+pagination(playlists)
 mixin playlist()
 	h2=playlist.title
 	if user && user.id == playlist.author.id

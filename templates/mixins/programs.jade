@@ -1,8 +1,9 @@
 include ../mixins/users
+include ../mixins/pagination
 
 mixin programs()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
-		for program in programs
+		for program in programs.results
 			.grid-item
 				a(href='/program/' + program.slug)
 					.panel.panel-primary
@@ -14,6 +15,7 @@ mixin programs()
 								!=program.genre
 							p
 								!=program.description
+	+pagination(programs)
 
 mixin program()
 	h2=program.title

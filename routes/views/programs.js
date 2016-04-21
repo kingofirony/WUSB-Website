@@ -14,7 +14,7 @@ exports = module.exports = (req, res) => {
 			perPage: 10
 		}).populate(['djs'])
 			.exec(function (err, programs) {
-				locals.programs = programs.results;
+				locals.programs = programs;
 				next();
 			});
 	});

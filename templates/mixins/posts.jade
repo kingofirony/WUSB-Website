@@ -1,3 +1,5 @@
+include ../mixins/pagination
+
 mixin create-post()
 	if user && user.isConfirmed
 		#new-post
@@ -43,8 +45,9 @@ mixin show-post(post)
 
 mixin show-posts(posts)
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
-		for post in posts
+		for post in posts.results
 			+show-post(post)
+	+pagination(posts)
 
 mixin show-post-image(post)
 	if post.postImage.exists
