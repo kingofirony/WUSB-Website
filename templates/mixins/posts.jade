@@ -29,7 +29,7 @@ mixin create-post()
 
 mixin show-post(post)
 	if post.author
-		div.grid-item
+		div(class='grid-item')
 			div(id='post-id-' + post.id, class='panel panel-primary')
 				.panel-heading
 					h3!=post.title
@@ -40,6 +40,7 @@ mixin show-post(post)
 					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
 						button.btn.btn-default.btn-delete
 							i.material-icons clear
+		
 
 mixin show-posts(posts)
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')

@@ -161,7 +161,7 @@ body {
 	.btn-fab {
 		position: absolute;
 		right: 3vw;
-		bottom: 3vh;
+		bottom: 5vh;
 	}
 	
 	.btn-fab:hover {
@@ -268,6 +268,18 @@ body {
 
 #footer {
 	color: $wusb-white;
+	
+	.social-media {
+		float: right;
+		margin: 0 10px 0 10px;
+		a:hover {
+			cursor: default;
+		}
+		object {
+			height: 1em;
+		}
+		
+	}
 }
 
 input[type='text'], textarea {
