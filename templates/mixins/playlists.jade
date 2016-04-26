@@ -52,6 +52,8 @@ mixin post-playlist(editing)
 	.row
 		form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form
 			fieldset
+				input(type='hidden', name='action', value=editing ? 'edit-playlist' : 'add-playlist')
+			
 				//- Program
 				.form-group.label-floating
 					label(for='program' class="control-label") Program
