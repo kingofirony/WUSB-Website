@@ -9,13 +9,14 @@ mixin playlists()
 						.panel.panel-primary
 							.panel-heading
 									h3
-										!=playlist.title
+										=playlist.title
 									h4
 										span by #{playlist.program.title}
 									h4
 										span #{playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()}
 								.panel-body
 									p
+										//- != okay
 										!=playlist.description
 										if !playlist.isPublished
 											span (draft)
@@ -31,6 +32,7 @@ mixin playlist()
 		p Program: 
 			a(href='/program/' + playlist.program.slug)=playlist.program.title
 
+		//- != okay
 		p!=playlist.description
 
 		//- Tracks
@@ -63,6 +65,7 @@ mixin post-playlist(editing)
 				//- Description
 				.form-group
 					label(for='description') Description:
+					//- != okay
 					textarea(id='description', name='description', class='wysiwyg')!=editing ? playlist.description : ''
 
 				//- Tracks

@@ -47,8 +47,9 @@ html
 					img(src="/images/wusb-tower.svg")
 				div.stream
 					+live-program(prg)
-					i.glyphicon.glyphicon-play.play &nbsp;
-					i.glyphicon.glyphicon-stop.stop
+					h5
+						span Click here to listen in! 
+						i.material-icons.play play_circle_outline
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
 					button.navbar-toggle.collapsed(data-toggle="collapse" data-target=".navbar-collapse")
@@ -90,7 +91,12 @@ html
 
 		//- FOOTER
 		.container: #footer
-			p &copy; Copyright WUSB
+			p 
+				span.copyright &copy; Copyright WUSB
+				a(href="https://www.facebook.com/WUSBfm/").social-media
+					object(type="image/svg+xml" data="/images/facebook.svg")
+				a(href="https://twitter.com/wusbradio").social-media
+					object(type="image/svg+xml" data="/images/twitter.svg")
 
 		//- JAVASCRIPT
 

@@ -20,40 +20,11 @@
 
 
 #body {
-  
-	#new-post {
-	  	text-align: center;
-	  	background-color: $wusb-blue;
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
-		margin: 0;
-		-webkit-transition: width 1s ease,
-						    height 2s ease;
-		-moz-transition: width 1s ease,
-						 height 2s ease;
-		-o-transition: width 1s ease,
-					   height 2s ease;
-		transition: width 1s ease,
-					height 2s ease;
-		
-		
-		.rotate-right {
-			-webkit-animation: spin-right 1s linear;
-			-moz-animation: spin-right 1s linear;
-			animation: spin-right 1s linear;
-		}
-
-		.rotate-left {
-			-webkit-animation: spin-left 1s linear;
-			-moz-animation: spin-left 1s linear;
-			animation: spin-left 1s linear;
+	.modal-content {
+		background-color: $wusb-blue;
+		textarea {
+			color: $wusb-white;
 		}
 	}
-	
-	#new-post:hover {
-		cursor: pointer;
-	}
-	
   
 }

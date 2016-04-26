@@ -53,13 +53,11 @@ mixin post-program(editing)
 				.form-group.label-floating
 					label(for='title', class="control-label") Title:
 					input(type='text' id='title', name='title' value=editing ? program.title : '').form-control
-					span.material-input
 					
 				//- Genre
 				.form-group.label-floating
 					label(for='genre', class="control-label") Genre:
 					input(type='text' id='genre', name='genre' value=editing ? program.genre : '').form-control
-					span.material-input
 	
 				//- Description
 				.form-group
@@ -114,6 +112,9 @@ mixin post-program(editing)
 					button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save program
 
 mixin live-program(prg)
+	h5
+		span Listen to WUSB on 90.1fm 
+		i.material-icons radio
 	if prg
 		h5='Listen to ' + prg.title
 		h5='Genre: ' + prg.genre
@@ -122,5 +123,4 @@ mixin live-program(prg)
 			- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
 		- names = names.substring(0, names.length - 4)
 		h5=names
-	else
-		h5='Listen to WUSB (no program live right now)'
+	
