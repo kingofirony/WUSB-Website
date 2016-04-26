@@ -53,13 +53,11 @@ mixin post-program(editing)
 				.form-group.label-floating
 					label(for='title', class="control-label") Title:
 					input(type='text' id='title', name='title' value=editing ? program.title : '').form-control
-					span.material-input
 					
 				//- Genre
 				.form-group.label-floating
 					label(for='genre', class="control-label") Genre:
 					input(type='text' id='genre', name='genre' value=editing ? program.genre : '').form-control
-					span.material-input
 	
 				//- Description
 				.form-group

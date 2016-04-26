@@ -1,33 +1,31 @@
 include ../mixins/pagination
 
 mixin create-post()
-	if user && user.isConfirmed
-		#new-post
-			span.glyphicon.glyphicon-plus.plus
-			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
-				input(type='hidden', name='action', value='create-post')
-
-				.col-sm-10.col-sm-offset-1
-
-					//- Title
-					.form-group.label-floating
-						label(class="control-label", for="post-title") Post title
-						input(type='text', id='post-title').form-control
-						span.material-input
-
-					//- Content
-					.form-group
-						textarea(name='textContent', class='wysiwyg', rows="3").form-control.col-sm-12
-
-					//- Image
-					.form-group
-						label(for="postImage_upload") Add an image to this post
-						input(type='file', id='postImage_upload' name='postImage_upload').form-control.col-sm-12
-
-					//- Submit
-					.form-group
-						button(type='submit', data-loading-text="Changing...").btn.btn-default.btn-lg.btn-block.btn-raised Create post
-							.ripple-container
+	.modal.fade(id="myModal", role="dialog", aria-labelledby="myModalLabel", tabindex="-1")
+		.modal-dialog(role="document")
+			.modal-content
+				.modal-header
+					h4.modal-title Create a new post
+				.modal-body
+					form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).create-form.profile-form
+						input(type='hidden', name='action', value='create-post')
+						//- Title
+						.form-group.label-floating
+							label(class="control-label", for="post-title") Post title
+							input(type='text', id='post-title').form-control
+	
+						//- Content
+						.form-group
+							textarea(name='textContent', class='wysiwyg', rows="3").form-control
+	
+						//- Image
+						.form-group
+							label(for="postImage_upload") Add an image to this post
+							input(type='file', id='postImage_upload' name='postImage_upload').form-control
+	
+						//- Submit
+						.form-group
+							button(type='submit', data-loading-text="Changing...").btn.btn-default.btn-lg.btn-block Create post
 
 mixin show-post(post)
 	if post.author
