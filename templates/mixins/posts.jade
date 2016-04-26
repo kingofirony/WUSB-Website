@@ -39,7 +39,7 @@ mixin show-post(post)
 				if user && user.id === post.author.id
 					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
 						button.btn.btn-default.btn-delete
-							span.glyphicon.glyphicon-remove
+							i.material-icons clear
 
 mixin show-posts(posts)
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')

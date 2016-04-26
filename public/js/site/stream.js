@@ -1,10 +1,18 @@
 var stream = new Audio("http://stream.wusb.stonybrook.edu:8090/;");
+var playButton = $('.play');
 
-$('.play').click(function() {
-  stream.load();
-  stream.play();
-});
+console.log(playButton);
+playButton.on('click', function() {
+  	stream.load();
 
-$('.stop').click(function() {
-  stream.pause();
+	if (playButton.text() == 'play_circle_outline') {
+		playButton.text('stop');
+		stream.play()
+	}
+	else {
+		playButton.text('play_circle_outline');
+		stream.pause()
+	}
+	
+	
 });

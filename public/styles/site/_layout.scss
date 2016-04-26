@@ -11,31 +11,26 @@ body {
 	}
 
     .stream {
-      position: absolute;
-      background-color: $wusb-grey;
-      text-align: left;
-      color: $wusb-white;
-      top:.5em;
-      right: .5em;
-      h5 {
-        font-size: 1em;
-        text-align: center;
-      }
-      i {
-        font-size: 1.2em;
-      }
-      i.play:hover {
-        color: $wusb-blue;
-      }
-      i.stop:hover {
-        color: $wusb-blue;
-      }
-      i.play:active {
-        font-size: 1.35em;
-      }
-      i.stop:active {
-        font-size: 1.35em;
-      }
+      	position: absolute;
+      	background-color: $wusb-grey;
+	  	text-align: right;
+	  	color: $wusb-white;
+	  	top: 1vh;
+	  	right: 1vw;
+		
+      	h5 {
+			font-size: 1em;
+			font-weight: 500;
+
+			i {
+				font-size: 1em;
+				vertical-align: top;
+			}
+		}
+		
+		.play:hover {
+			cursor: pointer;
+		}
     }
 
   	.tower {
@@ -170,7 +165,7 @@ body {
 	}
 	
 	.btn-fab:hover {
-		
+		color: $wusb-white;
 	}
 	
 	.jumbotron {

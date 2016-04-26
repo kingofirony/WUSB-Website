@@ -1,14 +1,18 @@
 extends ../layouts/default
 
 block content
-	.container: .jumbotron
+	.container: .jumbotron.schedule
 		
 		h2= 'Currently displaying the week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
 		div
 			div
-				a(href='?week=1') <---- Week A
-			div
-				a(href='?week=2') ----> Week B
+				a(href='?week=1').previous
+					i.material-icons skip_previous
+					span Previous Week
+					
+				a(href='?week=2').next
+					span Next Week
+					i.material-icons skip_next
 		table(style='width:100%; table-layout:fixed')
 			thead
 				tr
@@ -22,7 +26,7 @@ block content
 						for day in days
 							- var program = calendar[day][timeslot.number]
 							if program 
-								td(style='background-color:orange; text-align:center', rowspan!=program.lengthInMinutes/30)
+								td(rowspan!=program.lengthInMinutes/30).program.panel.panel-default
 									a(href='/program/' + program.slug)!=program.title
 							else
 								td

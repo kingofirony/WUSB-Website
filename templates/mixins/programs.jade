@@ -112,6 +112,9 @@ mixin post-program(editing)
 					button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save program
 
 mixin live-program(prg)
+	h5
+		span Listen to WUSB on 90.1fm 
+		i.material-icons radio
 	if prg
 		h5='Listen to ' + prg.title
 		h5='Genre: ' + prg.genre
@@ -121,4 +124,4 @@ mixin live-program(prg)
 		- names = names.substring(0, names.length - 4)
 		h5=names
 	else
-		h5='Listen to WUSB (no program live right now)'
+		h5 (no program live right now)
