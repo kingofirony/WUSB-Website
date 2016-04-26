@@ -1,0 +1,24 @@
+.schedule {
+	
+	a {
+		color: $wusb-white;
+	}
+	a:hover {
+		cursor: pointer;
+	}
+	.previous {
+		float: left;
+	}
+	
+	.next {
+		float: right;
+	}
+	
+	
+	.program {
+		text-align: center;
+		font-weight: bold;
+		background-color: orange;
+	}
+	
+}

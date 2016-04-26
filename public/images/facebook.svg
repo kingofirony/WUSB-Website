@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="115px" height="220px" viewBox="0 0 115 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<style>
+		* {
+			transition: all 0.1s linear;
+		}
+		:hover {
+			fill: #417A9E;
+			cursor: pointer;
+		}
+	</style>
+    <!-- Generator: Sketch 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>f</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-1" transform="translate(-184.000000, -118.000000)" fill="#FFFFFF">
+            <g id="F_icon" transform="translate(184.000000, 118.000000)">
+                <g id="Layer_1">
+                    <path d="M74.409,219.307 L74.409,119.504 L107.908,119.504 L112.924,80.609 L74.409,80.609 L74.409,55.777 C74.409,44.516 77.536,36.842 93.684,36.842 L114.28,36.833 L114.28,2.045 C110.718,1.571 98.492,0.512 84.268,0.512 C54.573,0.512 34.243,18.638 34.243,51.925 L34.243,80.609 L0.658,80.609 L0.658,119.504 L34.243,119.504 L34.243,219.307 L74.409,219.307 L74.409,219.307 Z" id="f"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

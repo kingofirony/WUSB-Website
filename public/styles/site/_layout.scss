@@ -11,31 +11,26 @@ body {
 	}
 
     .stream {
-      position: absolute;
-      background-color: $wusb-grey;
-      text-align: left;
-      color: $wusb-white;
-      top:.5em;
-      right: .5em;
-      h5 {
-        font-size: 1em;
-        text-align: center;
-      }
-      i {
-        font-size: 1.2em;
-      }
-      i.play:hover {
-        color: $wusb-blue;
-      }
-      i.stop:hover {
-        color: $wusb-blue;
-      }
-      i.play:active {
-        font-size: 1.35em;
-      }
-      i.stop:active {
-        font-size: 1.35em;
-      }
+      	position: absolute;
+      	background-color: $wusb-grey;
+	  	text-align: right;
+	  	color: $wusb-white;
+	  	top: 1vh;
+	  	right: 1vw;
+		
+      	h5 {
+			font-size: 1em;
+			font-weight: 500;
+
+			i {
+				font-size: 1em;
+				vertical-align: top;
+			}
+		}
+		
+		.play:hover {
+			cursor: pointer;
+		}
     }
 
   	.tower {
@@ -166,11 +161,11 @@ body {
 	.btn-fab {
 		position: absolute;
 		right: 3vw;
-		bottom: 3vh;
+		bottom: 5vh;
 	}
 	
 	.btn-fab:hover {
-		
+		color: $wusb-white;
 	}
 	
 	.jumbotron {
@@ -258,13 +253,6 @@ body {
 	}
 }
 
-#footer {
-	margin-top: 30px;
-	border-top: 1px solid #eeeeee;
-	padding-top: 30px;
-	color: #777777;
-}
-
 .gallery-image img{
     display: block;
     max-width: 100%;
@@ -273,6 +261,25 @@ body {
 
 #footer {
 	color: $wusb-white;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	border-top: 1px solid #eeeeee;
+	padding-top: 15px;
+	
+	.copyright {
+		margin-right: 10px;	
+	}
+	
+	.social-media {
+		margin: 0 10px 0 10px;
+		a:hover {
+			cursor: default;
+		}
+		object {
+			height: 1em;
+		}
+		
+	}
 }
 
 input[type='text'], textarea {
