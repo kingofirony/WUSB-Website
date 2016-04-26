@@ -253,13 +253,6 @@ body {
 	}
 }
 
-#footer {
-	margin-top: 30px;
-	border-top: 1px solid #eeeeee;
-	padding-top: 30px;
-	color: #777777;
-}
-
 .gallery-image img{
     display: block;
     max-width: 100%;
@@ -268,9 +261,16 @@ body {
 
 #footer {
 	color: $wusb-white;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	border-top: 1px solid #eeeeee;
+	padding-top: 15px;
+	
+	.copyright {
+		margin-right: 10px;	
+	}
 	
 	.social-media {
-		float: right;
 		margin: 0 10px 0 10px;
 		a:hover {
 			cursor: default;
