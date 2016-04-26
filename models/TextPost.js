@@ -30,16 +30,16 @@ TextPost.add({
 	publishedAt: { type: Types.Datetime, noedit: true },
 	lastEditedAt: { type: Types.Datetime, noedit: true },
 	editCount: { type: Types.Number, default: 0, noedit: true },
-	textContent: { type: Types.Html, required: true, initial: true, 
+	textContent: { type: Types.Html, required: true, initial: true,
 		wysiwyg: true, note: 'Can be expanded' },
 	postImage: { type: Types.LocalFile, dest: 'public/images/posts',
-		prefix: 'images/posts', 
+		prefix: 'images/posts',
 		filename: function (item, file) {
 			return item.slug + '.' + file.extension;
 		},
 		format: function (item, file) {
 			return '/images/posts/'+ file.filename;
-		} 
+		}
 	},
 	silentEdit: { type: Types.Boolean, default: false,
 		note: 'Use to edit a post from the admin UI without \
@@ -63,13 +63,13 @@ TextPost.schema.virtual('textLength').get(function() {
 	else return 'l';
 });
 
-/* Set the published date when the post first gets published 
+/* Set the published date when the post first gets published
 	or set the edit date and the edit counter */
 TextPost.schema.pre('save', function (next) {
 	if (this.isModified('isPublished') && this.isPublished &&
 		!this.publishedAt) {
 		this.publishedAt = moment();
-	} else if (this.isModified('textContent') && this.isPublished 
+	} else if (this.isModified('textContent') && this.isPublished
 		&& !this.silentEdit) {
 		this.lastEditedAt = moment();
 		this.editCount += 1;
