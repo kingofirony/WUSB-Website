@@ -11,8 +11,8 @@ mixin create-post()
 						input(type='hidden', name='action', value='create-post')
 						//- Title
 						.form-group.label-floating
-							label(class="control-label", for="post-title") Post title
-							input(type='text', id='post-title').form-control
+							label(class="control-label", for="title") Post title
+							input(type='text', name='title', id='title').form-control
 	
 						//- Content
 						.form-group
