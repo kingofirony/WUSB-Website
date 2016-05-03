@@ -1,7 +1,6 @@
 'use strict';
 const keystone = require('keystone');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 
 exports = module.exports = (req, res) => {
 
