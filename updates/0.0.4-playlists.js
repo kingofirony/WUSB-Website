@@ -8,7 +8,6 @@ const keystone = require('keystone'),
 if (env === 'development') {
 	const playlists = [
 		{
-			genre: 'J-Pop',
 			isPublished: true,
 			tracks: [
 				{
@@ -41,83 +40,6 @@ if (env === 'development') {
 					album: 'Aspect',
 					title: 'All Day Long'
 				}
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
-			]
-		},
-		{
-			genre: 'Experimental',
-			isPublished: true,
-			tracks: [
-
 			]
 		}
 	];
