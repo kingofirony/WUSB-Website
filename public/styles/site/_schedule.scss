@@ -13,7 +13,23 @@
 	.next {
 		float: right;
 	}
+
+	table { 
+		border: none; border-collapse: collapse; 
 	
+		td {
+			border-left: 1px solid #FFFFFF;
+			p {
+				font-size: 14px;
+			}
+		}
+		td:first-child {
+			border-left: none;
+		}
+		td:nth-child(2) {
+			border-left: none;	
+		}
+	}
 	
 	.program {
 		text-align: center;

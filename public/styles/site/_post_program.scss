@@ -1,0 +1,21 @@
+.post-program {
+	.djs {
+		margin-top: 10px;
+		padding: 0px;
+		list-style: none;
+		
+		li {
+			span {
+				input {
+					background-color: $wusb-blue !important;
+					border: 0 !important;
+					border-bottom: 1px solid $wusb-white !important;
+					height: 38px;
+					padding: 7px 0;
+					font-size: 16px;
+					line-height: 1.42857;
+				}
+			}
+		}
+	}
+}

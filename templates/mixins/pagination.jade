@@ -4,7 +4,7 @@ mixin pagination(items)
 			if items.previous
 				li: a(href='?page=' + items.previous): i.material-icons keyboard_arrow_left
 			else
-				li.disabled: a(href='?page=' + 1): i.material-icons keyboard_arrow_right
+				li.disabled: a(href='?page=' + 1): i.material-icons keyboard_arrow_left
 			each p, i in items.pages
 				li(class=items.currentPage === p ? 'active' : null)
 					a(href='?page=' + (p === '...' ? (i ? items.totalPages : 1) : p ))= p

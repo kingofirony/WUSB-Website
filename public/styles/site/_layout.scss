@@ -99,7 +99,7 @@ body {
 		max-width: 1140px;
 
 		a {
-			color: $wusb-white;
+			color: $wusb-grey;
 			text-decoration: none;
 			
 			.panel {
@@ -158,8 +158,12 @@ body {
 		width: 880px;
 	}
 	
+	.grid-item--width4 {
+		width: 1100px;
+	}
+	
 	.btn-fab {
-		position: absolute;
+		position: fixed;
 		right: 3vw;
 		bottom: 5vh;
 	}
@@ -194,6 +198,13 @@ body {
 			input::-webkit-input-placeholder{
 				color: #dfdee0;
 			}
+			
+		}
+
+		.tt-menu {
+			padding: 5px;
+			background-color: $wusb-white;
+			color: $wusb-blue;
 		}
 
 		.wysihtml5-toolbar {
@@ -251,6 +262,12 @@ body {
 			}
 		}
 	}
+	
+	.pagination {
+		.material-icons {
+			font-size:inherit;
+		}
+	}
 }
 
 .gallery-image img{
@@ -262,7 +279,7 @@ body {
 #footer {
 	color: $wusb-white;
 	margin-top: 30px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	border-top: 1px solid #eeeeee;
 	padding-top: 15px;
 	
