@@ -26,5 +26,18 @@
 			color: $wusb-white;
 		}
 	}
+	
+	.card {
+		.post-delete {
+			position: absolute;
+			top: 0;
+			right: 0;
+			
+			.btn {
+				padding: 0;
+				margin: 5px 5px;
+			}
+		}
+	}
   
 }

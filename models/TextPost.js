@@ -55,7 +55,7 @@ TextPost.schema.methods.wasEdited = function () {
 	return this.editCount > 0;
 };
 
-TextPost.schema.virtual('textLength').get(function() {
+TextPost.schema.virtual('textLength').get(function () {
 	const length = this.textContent.length;
 	if (length < 35) return 'xs';
 	else if (length <= 70) return 's';

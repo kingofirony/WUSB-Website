@@ -17,7 +17,8 @@ exports.create = env !== 'development' ? {} : {
 			'name.last': 'User',
 			email: 'user@keystonejs.com',
 			password: 'admin',
-			isAdmin: true
+			isAdmin: true,
+			isConfirmed: true
 		},
 		{
 			'name.first': 'Ken',

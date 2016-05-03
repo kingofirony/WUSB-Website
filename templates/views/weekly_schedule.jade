@@ -2,15 +2,15 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron.schedule
-		
-		h2= 'Currently displaying the week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
+		h2= 'The week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
 		div
 			div
-				a(href='?week=1').previous
+				- var week = weekState === '1' ? 0 : 1;
+				a(href='?weekState=' + week + '&week=back&date1=' + date1.getMonth() + 'q' + date1.getDate() + '&date2=' + date2.getMonth() + 'q' + date2.getDate()).previous
 					i.material-icons skip_previous
 					span Previous Week
 					
-				a(href='?week=2').next
+				a(href='?weekState=' + week + '&week=fwd&date1=' + date1.getMonth() + 'q' + date1.getDate() + '&date2=' + date2.getMonth() + 'q' + date2.getDate()).next
 					span Next Week
 					i.material-icons skip_next
 		table(style='width:100%; table-layout:fixed')
@@ -28,6 +28,23 @@ block content
 							if program 
 								td(rowspan!=program.lengthInMinutes/30).program.panel.panel-default
 									a(href='/program/' + program.slug)!=program.title
+									//code to display airing times of stations
+									if program.startTime - 1200 >= 100
+										- var start = String(program.startTime-1200)
+									else
+										- var start = String(program.startTime)
+									if program.endTime - 1200 >= 100
+										- var end = String(program.endTime-1200)
+									else
+										- var end = String(program.endTime)
+									if start.length === 3 && end.length === 3
+										p #{start.substr(0,1)}:#{start.substr(1,3)}  - #{end.substr(0,1)}:#{end.substr(1,3)}
+									else if start.length === 3
+										p #{start.substr(0,1)}:#{start.substr(1,3)}  - #{end.substr(0,2)}:#{end.substr(2,4)}
+									else if end.length === 3
+										p #{start.substr(0,2)}:#{start.substr(2,4)}  - #{end.substr(0,1)}:#{end.substr(1,3)}
+									else
+										p #{start.substr(0,2)}:#{start.substr(2,4)}  - #{end.substr(0,2)}:#{end.substr(2,4)}
 							else
 								td
 									

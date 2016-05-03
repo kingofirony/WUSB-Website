@@ -3,7 +3,9 @@
   "description": "Site for WUSB",
   "main": "server.js",
   "authors": [
-    "Philippe Kimura-Thollander <philippekimurathollander@gmail.com>"
+    "Philippe Kimura-Thollander <philippekimurathollander@gmail.com>",
+    "Peter Geiss",
+    "Ken Fehling"
   ],
   "license": "MIT",
   "keywords": [

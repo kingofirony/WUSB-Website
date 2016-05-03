@@ -41,6 +41,7 @@ public/images/profile
 
 #Ignore bower files
 app/
+bower_components
 
 public/styles/site.css
 public/images/posts

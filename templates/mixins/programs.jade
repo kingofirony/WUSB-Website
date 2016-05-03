@@ -6,12 +6,11 @@ mixin programs()
 		for program in programs.results
 			.grid-item
 				a(href='/program/' + program.slug)
-					.panel.panel-primary
-						.panel-heading
+					.card.card-content
+						.card-body
 							h4
 								!=program.title
-						.panel-body
-							p 
+							h5 
 								!=program.genre
 							p
 								!=program.description
@@ -20,9 +19,9 @@ mixin programs()
 mixin program()
 	h2=program.title
 	if user && user.isAdmin
-		button.btn.btn-raised.btn-xs
-			i.material-icons mode_edit
-			a(href='/program/' + program.slug + '/edit') Edit
+		div.btn.btn-fab
+			a(href='/program/' + program.slug + '/edit')
+				i.material-icons mode_edit
 	p='Genre: ' + program.genre
 	p=program.airTimeString
 	p='Airs next on ' + program.nextAirDateMMDDYY
@@ -67,7 +66,7 @@ mixin post-program(editing)
 				//- DJs
 				.form-group.label-floating
 					label(for='dj', class="control-label") DJs:
-					ul
+					ul.djs
 						if editing
 							for dj in program.djs
 								li
@@ -104,8 +103,6 @@ mixin post-program(editing)
 				.form-group
 					label(for='isBiweekly') Biweekly:
 					input(type='checkbox' id='isBiweekly', name='isBiweekly' checked=editing && program.isBiweekly)
-					label Checkbox
-						input(type="checkbox")
 						
 				//- Submit
 				.form-group

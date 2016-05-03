@@ -3,4 +3,17 @@
 	h2 {
 		margin-bottom: 20px;
 	}
+
+	.btn-fab {
+		a {
+			color: $wusb-grey;
+		}
+		
+	}
+	
+	.btn-fab:hover {
+		a {
+			color: $wusb-white;
+		}
+	}
 }
