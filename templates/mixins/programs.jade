@@ -67,7 +67,7 @@ mixin post-program(editing)
 				//- DJs
 				.form-group.label-floating
 					label(for='dj', class="control-label") DJs:
-					ul
+					ul.djs
 						if editing
 							for dj in program.djs
 								li
@@ -104,8 +104,6 @@ mixin post-program(editing)
 				.form-group
 					label(for='isBiweekly') Biweekly:
 					input(type='checkbox' id='isBiweekly', name='isBiweekly' checked=editing && program.isBiweekly)
-					label Checkbox
-						input(type="checkbox")
 						
 				//- Submit
 				.form-group

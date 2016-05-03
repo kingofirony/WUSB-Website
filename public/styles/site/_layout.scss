@@ -198,6 +198,13 @@ body {
 			input::-webkit-input-placeholder{
 				color: #dfdee0;
 			}
+			
+		}
+
+		.tt-menu {
+			padding: 5px;
+			background-color: $wusb-white;
+			color: $wusb-blue;
 		}
 
 		.wysihtml5-toolbar {
