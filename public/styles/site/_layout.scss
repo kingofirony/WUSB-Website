@@ -255,6 +255,12 @@ body {
 			}
 		}
 	}
+	
+	.pagination {
+		.material-icons {
+			font-size:inherit;
+		}
+	}
 }
 
 .gallery-image img{
@@ -266,7 +272,7 @@ body {
 #footer {
 	color: $wusb-white;
 	margin-top: 30px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	border-top: 1px solid #eeeeee;
 	padding-top: 15px;
 	
