@@ -1,7 +1,13 @@
 .program {
-	.btn-xs {
-		.material-icons {
-			font-size: 16px;
+	.btn-fab {
+		a {
+			color: $wusb-grey;
+		}
+	}
+	
+	.btn-fab:hover {
+		a {
+			color: $wusb-white;
 		}
 	}
 }

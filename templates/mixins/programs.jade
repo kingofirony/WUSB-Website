@@ -6,12 +6,11 @@ mixin programs()
 		for program in programs.results
 			.grid-item
 				a(href='/program/' + program.slug)
-					.panel.panel-primary
-						.panel-heading
+					.card.card-content
+						.card-body
 							h4
 								!=program.title
-						.panel-body
-							p 
+							h5 
 								!=program.genre
 							p
 								!=program.description
@@ -20,9 +19,9 @@ mixin programs()
 mixin program()
 	h2=program.title
 	if user && user.isAdmin
-		button.btn.btn-raised.btn-xs
-			i.material-icons mode_edit
-			a(href='/program/' + program.slug + '/edit') Edit
+		div.btn.btn-fab
+			a(href='/program/' + program.slug + '/edit')
+				i.material-icons mode_edit
 	p='Genre: ' + program.genre
 	p=program.airTimeString
 	p='Airs next on ' + program.nextAirDateMMDDYY

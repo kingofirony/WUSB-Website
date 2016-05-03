@@ -1,14 +1,12 @@
 
 .sign-up {
-  
-	
 	.sign-up-form{
-		margin-top: 10px;
-		background-color: $wusb-blue;
-		-webkit-box-shadow: 1px 2px 6px 0px rgba(0,0,0,0.75);
-		-moz-box-shadow: 1px 2px 6px 0px rgba(0,0,0,0.75);
-		box-shadow: 1px 2px 6px 0px rgba(0,0,0,0.75);
+		background:none;
 
+		h2 {
+			padding: 0 15px;
+		}
+		
 		.form-group {
 			
 			.col-xs-12 {
@@ -17,6 +15,10 @@
 			
 			button {
 				font-size: 16px;
+			}
+			
+			input {
+				color: $wusb-grey !important;
 			}
 		}
 	}

@@ -6,32 +6,29 @@ mixin playlists()
 			if playlist.isPublished || (user && playlist.author.id == user.id)
 				.grid-item
 					a(href='/playlist/' + playlist.id)
-						.panel.panel-primary
-							.panel-heading
-									h3
-										=playlist.title
-									h4
-										span by #{playlist.program.title}
-									h4
-										span #{playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()}
-								.panel-body
-									p
-										//- != okay
-										!=playlist.description
-										if !playlist.isPublished
-											span (draft)
+						.card.card-content
+							.card-body
+								h3
+									=playlist.title
+								h4
+									span by #{playlist.program.title}
+								h5
+									span #{playlist.date.toLocaleDateString() + ' at ' + playlist.date.toLocaleTimeString()}
+								p
+									//- != okay
+									!=playlist.description
+									if !playlist.isPublished
+										span (draft)
 	+pagination(playlists)
 mixin playlist()
 	h2=playlist.title
 	if user && user.id == playlist.author.id
-		button.btn.btn-raised
+		div.btn.btn-fab
 			a(href='/playlist/' + playlist.id + '/edit')
-				span.glyphicon.glyphicon-pencil
-				span Edit
+				i.material-icons mode_edit
 	.row
 		p Program: 
 			a(href='/program/' + playlist.program.slug)=playlist.program.title
-
 		//- != okay
 		p!=playlist.description
 

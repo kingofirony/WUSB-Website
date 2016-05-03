@@ -34,7 +34,7 @@ mixin show-post(post)
 				div(id='post-id-' + post.id, class='card card-content')
 					.card-image
 						if post.postImage.exists
-							img(src=(post.postImage.path).replace('public', '') + '/' + post.postImage.filename)
+							img(src=post.postImage.href)
 					.card-body
 						h3!=post.title
 						h4!=post.author.name.first + ' ' + post.author.name.last
