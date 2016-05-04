@@ -35,7 +35,7 @@ TextPost.add({
 	postImage: { type: Types.LocalFile, dest: 'public/images/posts',
 		prefix: 'images/posts',
 		filename: function (item, file) {
-			return item.slug + '.' + file.extension;
+			return item._id + '.' + file.extension;
 		},
 		format: function (item, file) {
 			return '/images/posts/'+ file.filename;

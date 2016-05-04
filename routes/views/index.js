@@ -33,7 +33,6 @@ exports = module.exports = (req, res) => {
 		let newPost = new TextPost.model({
 			author: locals.user.id
 		});
-
 		let updater = newPost.getUpdateHandler(req, res, {
 			errorMessage: 'There was an error creating your new post:'
 		});
@@ -46,7 +45,7 @@ exports = module.exports = (req, res) => {
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
-			fields: 'title, textContent, postImage'
+			fields: 'postImage, title, textContent'
 		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
