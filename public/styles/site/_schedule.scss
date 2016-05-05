@@ -15,26 +15,27 @@
 	}
 
 	table { 
-		border: none; border-collapse: collapse; 
-	
+		border: none;
+	  	border-collapse: collapse;
+	  	width:100%;
+	  	table-layout: fixed;
+		th {
+		  text-align: center;
+		}
 		td {
 			border-left: 1px solid #FFFFFF;
 			p {
 				font-size: 14px;
 			}
 		}
-		td:first-child {
+		td:first-child, td:nth-child(2) {
 			border-left: none;
-		}
-		td:nth-child(2) {
-			border-left: none;	
 		}
 	}
 	
 	.program {
 		text-align: center;
 		font-weight: bold;
-		background-color: orange;
 	}
 	
 }

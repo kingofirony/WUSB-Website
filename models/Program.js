@@ -38,7 +38,7 @@ Program.add({
 
 Program.schema.pre('save', function (next) {
 	if ((this.isModified('isBiweekly') || this.isNew) && this.isBiweekly) {
-		this.biweeklyState = getCurrentBiweeklyState();
+		this.biweeklyState = isTodayInWeekA();
 	} else if (this.isModified('isBiweekly') && !this.isBiweekly) {
 		this.bieeklyState = null;
 	}
@@ -135,28 +135,40 @@ function toTimeString(value) {
 	}
 }
 
-/* Jan 1 is 0, etc. JS Date objects handle leap years.
-	Argument is optional. */
-function daysSinceBeginningOfYear(date) {
-	const now = (date === undefined) ? new Date() : date;
-	const janFirst = new Date(now.getFullYear(), 0, 0);
-	const diff = now - janFirst;
-	const millisPerDay = 86400000;
-	// Think units: millisec div (millisec div day) = days
-	return Math.floor(diff / millisPerDay);
+function isDateInWeekA(date) {
+	return date.getWeekOfYear() % 2 === 0;
 }
 
-/* Uses daysSinceBeginningOfYear to get this week's 
-	biweekly state. */
-function getCurrentBiweeklyState() {
-	return Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2) == 0;
+function isTodayInWeekA() {
+	return isDateInWeekA(new Date());
 }
 
 /* Uses JS Date object functions to get the time
-	in the format expected by the DB */
-function getTime() {
-	const now = new Date();
-	return (now.getHours() * 100) + now.getMinutes()
+ in the format expected by the DB */
+function getTimeOfDate(date) {
+	return (date.getHours() * 100) + date.getMinutes()
+}
+
+function getCurrentTime() {
+	return getTimeOfDate(new Date());
+}
+
+/**
+ * @param week - 0 = this week, 1 = next week
+ * @param day - day of week
+ * @param time - time of day the program starts (1620 = 4:20 PM)
+ * @returns Date object
+ */
+function createDateFromWeekDayTime(week, day, time) {
+	var date = new Date();
+	date = date.addDays(day - date.getDay());
+	if (date.getWeekOfYear() % 2 !== week) {
+		date = date.addDays(7);
+	}
+	date.setHours(time / 100);
+	date.setMinutes(time % 100);
+	date.setSeconds(0);
+	return date;
 }
 
 function getDayString(dayNumber) {
@@ -203,15 +215,14 @@ Program.schema.virtual('nextAirDateMMDDYY').get(function() {
 Program.schema.virtual('isLiveNow').get(function () {
 	// Check biweekly first, then do a general bounds check.
 	if (this.isBiweekly) {
-		const state = getCurrentBiweeklyState();
-		if (this.biweeklyState != state) {
+		if (this.biweeklyState !== isTodayInWeekA()) {
 			return false;
 		}
 	}
 	// General bounds check
 	const now = new Date();
 	if (this.day == now.getDay()) {
-		const time = getTime();
+		const time = getCurrentTime();
 		if (this.startTime < time && this.endTime > time) {
 			return true;
 		}
@@ -230,19 +241,22 @@ Program.schema.virtual('lengthInMinutes').get(function () {
 	return hours * 60 + minutes;
 });
 
-/* Call this with a callback expecting an error object
-	and a program. If program is null there is no live
-	program at the moment. */
-Program.schema.statics.getLiveProgram = function (next) {
-	const state = getCurrentBiweeklyState();
-	const now = new Date();
-	const time = getTime();
-	this.findOne({ 
-		day: now.getDay(),
+/**
+ Call this with a callback expecting an error object
+ and a program. If program is null there is no live
+ program at the moment. */
+function getProgramAtTime(date, schemaObject, callback) {
+	const time = getTimeOfDate(date);
+	return schemaObject.findOne({
+		day: date.getDay(),
 		startTime: {$lte: time},
-		endTime: {$gte: time},
-		biweeklyState: {$ne: !state} //capture undefined+null
-	}).populate(['djs']).exec(next);
+		endTime: {$gt: time},
+		biweeklyState: {$ne: !isDateInWeekA(date)} //capture undefined+null
+	}).populate(['djs']).exec(callback);
+}
+
+Program.schema.statics.getLiveProgram = function (callback) {
+	return getProgramAtTime(new Date(), this, callback);
 };
 
 Program.schema.statics.getTimeSlots = function() {
@@ -253,30 +267,47 @@ Program.schema.statics.getTimeSlots = function() {
 };
 
 /**
- * 
- * @param week - 1 = this week, 2 = next week
+ * @param week - 0 = this week, 1 = next week
  * @param day - day of week
- * @param time - start time
+ * @param startTime - time of day the program starts (1620 = 4:20 PM)
  * @param cb - callback
  * @returns {Promise}
  */
-Program.schema.statics.findBySlot = function(week, day, time, cb) {
+Program.schema.statics.findBySlotStart = function(week, day, startTime, cb) {
 	const currentWeek = new Date().getWeekOfYear();
-	const isWeekA = currentWeek % 2 === week % 2;  // Week A vs. Week B
+	const isWeekA = currentWeek % 2 === week;  // Week A vs. Week B
 	return this.findOne({
 		$or: [
 			{
 				'day': day,
-				'startTime': time,
+				'startTime': startTime,
 				'isBiweekly': false
 			},
 			{
 				'day': day,
-				'startTime': time,
+				'startTime': startTime,
 				'biweeklyState': isWeekA
 			}
 		]
 	}, cb)
+};
+
+/**
+ * @param week - 0 = this week, 1 = next week
+ * @param day - day of week
+ * @param time - time of day (1620 = 4:20 PM)
+ * @param cb - callback
+ * @returns {Promise}
+ */
+Program.schema.statics.slotHasProgram = function(week, day, time, cb) {
+	const date = createDateFromWeekDayTime(week, day, time);
+	return getProgramAtTime(date, this).then(p => {
+		const bool = !!p;
+		if (cb) {
+			cb(bool);
+		}
+		return Promise.resolve(bool);
+	});
 };
 
 Program.register();

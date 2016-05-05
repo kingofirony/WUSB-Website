@@ -43,7 +43,7 @@ exports = module.exports = (req, res) => {
 	function fillDate(program, dateString) {
 		const date = new Date(dateString);
 		program.day = date.getDay();
-		program.biweeklyState = program.isBiweekly && date.getWeekOfYear() % 2 == 1;
+		program.biweeklyState = program.isBiweekly && date.getWeekOfYear() % 2 == 0;
 		return Promise.resolve(program);
 	}
 	
