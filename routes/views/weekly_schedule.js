@@ -3,6 +3,11 @@ const keystone = require('keystone');
 const _ = require('underscore');
 const Program = keystone.list('Program');
 
+const COLORS = [
+	['blue', 'green'],  // Even columns
+	['red', 'orange']	// Odd columns
+];
+
 /* Jan 1 is 0, etc. JS Date objects handle leap years.
 	Argument is optional. */
 function daysSinceBeginningOfYear(date) {
@@ -14,26 +19,30 @@ function daysSinceBeginningOfYear(date) {
 	return Math.floor(diff / millisPerDay);
 }
 
-/* Uses daysSinceBeginningOfYear to get this week's 
-	biweekly state. */
-function getCurrentBiweeklyState() {
-	return Math.floor(Math.floor(daysSinceBeginningOfYear() / 7) / 2);
-}
-
 exports = module.exports = (req, res) => {
 	const view = new keystone.View(req, res);
 	const locals = res.locals;
 	const today = new Date();
+	locals.week = parseInt(req.query.weekState || new Date().getWeekOfYear() % 2);
 	locals.section = 'schedule';
 	locals.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	locals.timeslots = Program.model.getTimeSlots();
 	locals.calendar = {};
-	_.each(_.range(7), i => {
-		locals.calendar[locals.days[i]] = {};
+	_.each(_.range(7), day => {
+		locals.calendar[locals.days[day]] = {};
+		var programNumberOfTheDay = 0;
+		const colorSet = COLORS[day % 2];
+		const colorSetLength = colorSet.length;
 		_.each(locals.timeslots, timeslot => {
-			const week = req.query.weekState || 1;
-			Program.model.findBySlot(week, i, timeslot.number).exec().then(p => {
-				locals.calendar[locals.days[i]][timeslot.number] = p
+			Program.model.findBySlotStart(locals.week, day, timeslot.number)
+			.exec().then(p => {
+				if (p) {
+					locals.calendar[locals.days[day]][timeslot.number] = {
+						color: colorSet[programNumberOfTheDay % colorSetLength],
+						program: p
+					};
+					programNumberOfTheDay += 1;
+				}
 			});
 		});
 	});
@@ -42,14 +51,16 @@ exports = module.exports = (req, res) => {
 		locals.date1 = new Date();
 	} else {
 		const dateString = req.query.date1.split('q');
-		const dateObj = new Date((Number(dateString[0]) + 1) + ' ' + dateString[1] + ' ' + today.getFullYear());
+		const dateObj = new Date((Number(dateString[0]) + 1) + ' ' +
+			dateString[1] + ' ' + today.getFullYear());
 		locals.date1 = dateObj;
 	}
 	if (req.query.date2 === undefined) {
 		locals.date2 = new Date();
 	} else {
 		const dateString = req.query.date2.split('q');
-		const dateObj = new Date((Number(dateString[0]) + 1) + ' ' + dateString[1] + ' ' + today.getFullYear());
+		const dateObj = new Date((Number(dateString[0]) + 1) + ' ' +
+			dateString[1] + ' ' + today.getFullYear());
 		locals.date2 = dateObj;
 	}
 	if (req.query.week === 'back') {
@@ -62,11 +73,14 @@ exports = module.exports = (req, res) => {
 		locals.date1.setDate(locals.date1.getDate() - locals.date1.getDay());
 		locals.date2.setDate(locals.date2.getDate() + (6 - locals.date2.getDay()));
 	}
-
-	if (req.query.weekState === undefined) {
-		locals.weekState = Math.abs(1 - getCurrentBiweeklyState());
-	} else {
-		locals.weekState = req.query.weekState;
-	}
-	view.render('weekly_schedule');
+	
+	Promise.all(_.map(_.range(7), day => {
+		return Promise.all(_.map(locals.timeslots, timeslot => {
+			return Program.model.slotHasProgram(locals.week, day, timeslot.number)
+				.then(p => Promise.resolve(!!p));
+		}));
+	})).then(x => {
+		locals.slotBoolMatrix = x;
+		view.render('weekly_schedule');
+	});
 };
