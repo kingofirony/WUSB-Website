@@ -19,9 +19,18 @@ if (env === 'development') {
 			genre: 'Dream pop',
 			description: 'Dream pop and shoegaze',
 			isBiweekly: true,
+			biweeklyState: true,
 			day: '1',
 			startTime: '1200',
 			endTime: '1400'
+		},
+		{
+			title: "Ken's Playhouse",
+			genre: 'Experimental',
+			description: 'LOL',
+			day: '1',
+			startTime: '1630',
+			endTime: '1830'
 		}
 	];
 
