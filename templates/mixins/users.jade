@@ -43,7 +43,8 @@ mixin edit-profile()
 			h2 Your Profile
 			
 			.form-group
-				+user-picture(locals.user)
+				.profile-pic
+					+user-picture(locals.user)
 				label(for="profileImage_upload").profile_pic
 					i.material-icons mode_edit
 				input(type='file', id='profileImage_upload' name='profileImage_upload')

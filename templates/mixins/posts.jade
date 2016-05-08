@@ -29,7 +29,6 @@ mixin create-post()
 
 	if user && (user.isConfirmed || user.isAdmin)
 		#new-post
-			span.glyphicon.glyphicon-plus.plus
 			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
 				input(type='hidden', name='action', value='create-post')
 
