@@ -1,4 +1,10 @@
 .program {
+	
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	
 	.btn-fab {
 		a {
 			color: $wusb-grey;

@@ -1,22 +1,40 @@
 .profile {
 	.form-group {
 		margin-top: 10px;
-		.profile_pic {
-			position: absolute;
+
+		
+	}
+	
+	.profile-pic {
+		width: 200px;
+		margin-right: auto;
+		margin-left: auto;
+		
+		.profile-picture {
+			height: 200px;
+			width: 200px;
+			object-fit: cover;
+			border-radius: 9999px;
+		}
+
+		.profile_pic-edit {
+			position: relative;
+			top: -200px;
+			right: -100px;
 			
 			.material-icons {
 				font-size: 16px;
 			}
 		}
 	}
+	
 	.name {
+		margin-top: 0;
+		
 		.input {
 			font-weight: bold;
 			font-size: 24px;
-		}
-		
-		.first-name {
-			text-align: right;
+			text-align: center;
 		}
 	}
 	input {

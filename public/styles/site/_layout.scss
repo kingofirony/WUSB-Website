@@ -2,6 +2,16 @@ body {
   background-color: $body-bg;
 }
 
+a {
+	color: #6C23AB;
+}
+a:hover {
+	color: #6C23AB;
+}
+
+p {
+	font-size: 1.2em !important;
+}
 
 #header {
   	.container {
@@ -94,9 +104,10 @@ body {
 	
 	h2 {
 		display: inline-block;
+		margin-top: 0;
 	}
 	.grid {
-		max-width: 1140px;
+		max-width: 80vw;
 
 		a {
 			color: $wusb-grey;
@@ -137,6 +148,12 @@ body {
 		}
 	}
 
+	.card-body {
+		h1, h2, h3 {
+			margin: 0;
+		}
+	}
+	
 	/* clearfix */
 	.grid:after {
 		content: '';
@@ -146,7 +163,7 @@ body {
 
 	.grid-sizer, .grid-item {
 		float: left;
-		width: 220px;
+		width: 24vw;
 		padding: 10px 10px 0 0;
 	}
 
@@ -160,6 +177,15 @@ body {
 	
 	.grid-item--width4 {
 		width: 1100px;
+	}
+	
+	.grid-item--expand {
+		width: 75vw;
+
+		.card {
+			height: auto;
+			background: white;
+		}
 	}
 	
 	.btn-fab {
@@ -303,3 +329,86 @@ input[type='text'], textarea {
   	color: black;
 }
 
+/*
+@media only screen and (min-width: 768px) {
+	/* tablets and desktop */
+
+
+@media only screen and (max-width: 767px) {
+	/* phones */
+	
+	#header {
+		.stream {
+			position: relative;
+			text-align: center;
+			top: auto;
+			right: auto;
+			padding-bottom: 10px;
+		}
+	}
+}
+
+/*
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 80px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 270px;
+
+		}
+	}
+}
+
+
+/* iPhone 6 ----------- 
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 100px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 300px;
+
+		}
+	}
+}
+
+/* iPhone 6+ ----------- 
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 110px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 330px;
+
+		}
+	}
+}
+*/

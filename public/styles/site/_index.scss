@@ -19,7 +19,7 @@
 }
 
 
-#body {
+.index {
 	.modal-content {
 		background-color: $wusb-blue;
 		textarea {
@@ -28,6 +28,15 @@
 	}
 	
 	.card {
+		height: 50vh;
+		overflow: hidden;
+
+		.card-image {
+			img {
+				object-fit: cover;
+			}	
+		}
+		
 		.post-delete {
 			position: absolute;
 			top: 0;
@@ -39,5 +48,52 @@
 			}
 		}
 	}
+	
+	.card-overflow {
+		background: linear-gradient(white 45vh, grey);
+	}
+	
+	.card-overflow:hover {
+		cursor: pointer;
+	};
   
+}
+
+@media only screen and (min-width: 768px) {
+	/* tablets and desktop */
+}
+
+@media only screen and (max-width: 767px) {
+	/* phones */
+	.index {
+		
+		h3 {
+			font-size: 1.2em;
+		}
+		
+		h4 {
+			font-size: 1em;
+			margin: 5px 0;
+		}
+		.card {
+			height: 140px;
+			
+			.card-body {
+				padding: 4px;
+			}
+			
+			.post-delete {
+				.btn {
+					margin: 0 5px;
+				}
+				.material-icons {
+					font-size: 1em;
+				}
+			}
+		}
+		
+		.card-overflow {
+			background: linear-gradient(white 120px, darkgrey);
+		}
+	}
 }

@@ -29,7 +29,6 @@ mixin create-post()
 
 	if user && (user.isConfirmed || user.isAdmin)
 		#new-post
-			span.glyphicon.glyphicon-plus.plus
 			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.hidden.profile-form
 				input(type='hidden', name='action', value='create-post')
 
@@ -57,69 +56,24 @@ mixin create-post()
 
 mixin show-post(post)
 	if post.author
-		if post.textLength === "xs"
-			div(class='grid-item')
-				div(id='post-id-' + post.id, class='card card-content')
-					.card-image
-						if post.postImage.exists
-							img(src=post.postImage.href)
-					.card-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-					if user && user.id === post.author.id
-						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-							button.btn.btn-default.btn-delete
-								i.material-icons clear
-		if post.textLength === "s"
-			div(class='grid-item grid-item--width2 card')
-				div(id='post-id-' + post.id, class='card-content')
-					.card-image
-						if post.postImage.exists
-							img(src=(post.postImage.path).replace('public', '') + '/' + post.postImage.filename)
-					.card-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-					if user && user.id === post.author.id
-						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-							button.btn.btn-default.btn-delete
-								i.material-icons clear
-		if post.textLength === "m"
-			div(class='grid-item grid-item--width3')
-				div(id='post-id-' + post.id, class='card card-content')
-					.card-image
-						if post.postImage.exists
-							img(src=(post.postImage.path).replace('public', '') + '/' + post.postImage.filename)
-					.card-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-					if user && user.id === post.author.id
-						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-							button.btn.btn-default.btn-delete
-								i.material-icons clear
-		if post.textLength === "l"
-			div(class='grid-item grid-item--width4')
-				div(id='post-id-' + post.id, class='card card-content')
-					.card-image
-						if post.postImage.exists
-							img(src=(post.postImage.path).replace('public', '') + '/' + post.postImage.filename)
-					.card-body
-						h3!=post.title
-						h4!=post.author.name.first + ' ' + post.author.name.last
-						p!=post.textContent.replace(/\n/g, '<br>')
-					if user && user.id === post.author.id
-						a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-							button.btn.btn-default.btn-delete
-								i.material-icons clear
+		div.grid-sizer
+		div(class='grid-item')
+			div(id='post-id-' + post.id, class='card card-content')
+				.card-image
+					if post.postImage.exists
+						img(src=post.postImage.href)
+				.card-body
+					h3!=post.title
+					h4!=post.author.name.first + ' ' + post.author.name.last
+					p!=post.textContent.replace(/\n/g, '<br>')
+				if user && user.id === post.author.id
+					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
+						button.btn.btn-default.btn-delete
+							i.material-icons clear
+		
 
 mixin show-posts(posts)
-	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+	.grid
 		for post in posts.results
 			+show-post(post)
 	+pagination(posts)
-
-mixin show-post-image(post)
-	if post.postImage.exists
-		img(style='width:64px;height:64px' src=post.postImage.href)
