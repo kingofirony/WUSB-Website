@@ -22,9 +22,9 @@ mixin program()
 		div.btn.btn-fab
 			a(href='/program/' + program.slug + '/edit')
 				i.material-icons mode_edit
-	p='Genre: ' + program.genre
-	p=program.airTimeString
-	p='Airs next on ' + program.nextAirDateMMDDYY
+	h3='Genre: ' + program.genre
+	p!=program.airTimeString
+	p Airs next on #{program.nextAirDateMMDDYY}
 	p!=program.description
 	hr
 	h4 DJs

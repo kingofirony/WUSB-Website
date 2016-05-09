@@ -4,8 +4,8 @@ const _ = require('underscore');
 const Program = keystone.list('Program');
 
 const COLORS = [
-	['blue', 'green'],  // Even columns
-	['red', 'orange']	// Odd columns
+	['#FF9547', '#47BBFF'],  // Even columns
+	['#5AE064', '#E05A5A']	// Odd columns
 ];
 
 /* Jan 1 is 0, etc. JS Date objects handle leap years.
