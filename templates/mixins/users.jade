@@ -29,7 +29,7 @@ mixin user-picture(user)
 	img(class="profile-picture" src=user.profileImage.exists ? user.profileImage.href : '/images/alien.svg')
 		
 mixin user-picture-with-name(user)
-	div
+	div.user-picture-with-name
 		+user-picture(user)
 		p=user.name.first + ' ' + user.name.last
 	

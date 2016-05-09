@@ -5,7 +5,6 @@ function expandCards() {
 	});
 
 	$('.card').each(function () {
-		console.log(this);
 		if (this.offsetHeight < this.scrollHeight) {
 			$(this).addClass("card-overflow");
 

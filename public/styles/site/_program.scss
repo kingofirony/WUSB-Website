@@ -5,6 +5,15 @@
 		padding: 0;
 	}
 	
+	.dj-image {
+		img {
+			height: 200px;
+			width: 200px;
+			object-fit: cover;
+			border-radius: 9999px;
+		}
+	}
+	
 	.btn-fab {
 		a {
 			color: $wusb-grey;
