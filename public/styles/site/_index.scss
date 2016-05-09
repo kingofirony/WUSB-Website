@@ -28,6 +28,15 @@
 	}
 	
 	.card {
+		height: 350px;
+		overflow: hidden;
+		
+		.card-image {
+			img {
+				object-fit: cover;
+			}	
+		}
+		
 		.post-delete {
 			position: absolute;
 			top: 0;
