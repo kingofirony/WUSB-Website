@@ -137,6 +137,12 @@ body {
 		}
 	}
 
+	.card-body {
+		h1, h2, h3 {
+			margin: 0;
+		}
+	}
+	
 	/* clearfix */
 	.grid:after {
 		content: '';
@@ -146,7 +152,7 @@ body {
 
 	.grid-sizer, .grid-item {
 		float: left;
-		width: 220px;
+		width: 300px;
 		padding: 10px 10px 0 0;
 	}
 

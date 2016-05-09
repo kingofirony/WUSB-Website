@@ -19,7 +19,7 @@
 }
 
 
-#body {
+.index {
 	.modal-content {
 		background-color: $wusb-blue;
 		textarea {
@@ -30,7 +30,7 @@
 	.card {
 		height: 350px;
 		overflow: hidden;
-		
+
 		.card-image {
 			img {
 				object-fit: cover;
