@@ -21,7 +21,7 @@ User.add({
 	password: { type: Types.Password, initial: true, required: true },
 	isConfirmed: { type: Boolean, default: false },
 	profileImage: { type: Types.LocalFile, dest: 'public/images/profile',
-		prefix: 'images/profile', 
+		prefix: '/images/profile', 
 		filename: function (item, file) {
 			return item.slug + '.' + file.extension;
 		},
