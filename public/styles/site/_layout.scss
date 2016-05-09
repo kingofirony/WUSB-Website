@@ -168,6 +168,15 @@ body {
 		width: 1100px;
 	}
 	
+	.grid-item--expand {
+		width: 880px;
+
+		.card {
+			height: auto;
+			background: white;
+		}
+	}
+	
 	.btn-fab {
 		position: fixed;
 		right: 3vw;

@@ -48,5 +48,13 @@
 			}
 		}
 	}
+	
+	.card-overflow {
+		background: linear-gradient(white 310px, grey);
+	}
+	
+	.card-overflow:hover {
+		cursor: pointer;
+	};
   
 }
