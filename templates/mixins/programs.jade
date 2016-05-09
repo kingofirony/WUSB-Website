@@ -28,7 +28,7 @@ mixin program()
 	p!=program.description
 	hr
 	h4 DJs
-	div
+	div.dj-image
 		for dj in program.djs
 			+user-picture-with-name(dj)
 	hr

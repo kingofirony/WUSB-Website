@@ -206,6 +206,19 @@ p {
 		}
 	}
 
+	
+	.user-picture-with-name {
+		display: inline-block;
+		
+		p {
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: 0;
+			font-weight: bold;
+		}
+	}
+	
+	
 	form {
 		text-align: left;
 
