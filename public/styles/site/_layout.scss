@@ -333,33 +333,22 @@ input[type='text'], textarea {
 @media only screen and (min-width: 768px) {
 	/* tablets and desktop */
 
-/*
+
 @media only screen and (max-width: 767px) {
-	/* phones 
+	/* phones */
 	
-	body {
-		font-size: 10px;
-	}
-	#body {
-		.grid {
-			max-width: 400px;
-		}
-
-		.grid-sizer, .grid-item {
-			float: left;
-			width: 120px;
-			padding: 5px 5px 0 0;
-		}
-
-		
-		.grid-item--expand {
-			width: 360px;
-			
+	#header {
+		.stream {
+			position: relative;
+			text-align: center;
+			top: auto;
+			right: auto;
+			padding-bottom: 10px;
 		}
 	}
 }
 
-
+/*
 @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
 	#body {
 		.grid {

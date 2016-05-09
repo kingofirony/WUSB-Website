@@ -28,7 +28,7 @@
 	}
 	
 	.card {
-		height: 350px;
+		height: 50vh;
 		overflow: hidden;
 
 		.card-image {
@@ -50,7 +50,7 @@
 	}
 	
 	.card-overflow {
-		background: linear-gradient(white 310px, grey);
+		background: linear-gradient(white 45vh, grey);
 	}
 	
 	.card-overflow:hover {
