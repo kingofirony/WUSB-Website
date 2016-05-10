@@ -3,6 +3,8 @@ This is the source for the WUSB main website at wusb.fm.
 
 [![Circle CI](https://circleci.com/gh/kingofirony/WUSB-Website.png?circle-token=:circle-token)](https://circleci.com/gh/kingofirony/WUSB-Website)
 
+Live demo exists at : http://159.203.71.125:3000/
+
 ##Team:
 Manager: Peter Jasko
 
