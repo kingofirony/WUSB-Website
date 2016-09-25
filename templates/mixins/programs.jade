@@ -146,3 +146,22 @@ mixin djs()
 	//- 	-console.log(arrayOfDJs)
 	//- div
 	+pagination(programs)
+
+mixin dj()
+	h2=dj.slug
+	div.dj-image
+		+user-picture-with-name(dj)
+	hr
+	h3 Programs
+	hr
+	ul
+		for program in programs
+			a(href='/program/' + program.slug)
+				h4=program.title
+			if (program.playlists.length > 0)
+				h5 Playlists
+				ul
+					for playlist in program.playlists
+						li
+							a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
+			hr

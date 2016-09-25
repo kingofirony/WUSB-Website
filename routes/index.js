@@ -51,8 +51,8 @@ exports = module.exports = app => {
 	// READ THIS https://gist.github.com/wuhaixing/e90b8497f925ff9c7bfc
 
 	// DJs
-	app.all('/dj/:slug*', middleware.loadUsers);
-	app.get('/dj/:slug', middleware.loadUsers, routes.views.dj);
+	app.all('/dj/:slug*', middleware.loadDJ);
+	app.get('/dj/:slug', middleware.loadDJ, routes.views.dj);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);

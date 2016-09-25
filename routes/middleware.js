@@ -155,3 +155,32 @@ exports.loadProgram = (req, res, next) => {
 		next();
 	}
 };
+
+/**
+ Load a dj
+ */
+
+exports.loadDJ = (req, res, next) => {
+	const theDJ
+	const djSlug = req.params.slug;
+	if (djSlug) {
+		User.model.findOne({ slug: djSlug })
+			.exec((err, user) => {
+				if (err) return next(err);
+				req.dj = user;
+				res.locals.dj = user;
+				theDJ = user;
+				Program.model.find({ djs: user })
+				.populate(['playlists'])
+					.exec((err, programs) => {
+						if (err) return next(err);
+						req.programs = programs;
+						res.locals.programs = programs;
+						next();
+					});
+			});
+	}
+	else {
+		next();
+	}
+};
