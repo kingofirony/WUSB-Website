@@ -114,12 +114,12 @@ mixin live-program(prg)
 		i.material-icons radio
 	if prg
 		h5='Listen to ' + prg.title
-		h5='Genre: ' + prg.genre
-		- var names = 'Djs:'
-		for dj in prg.djs
-			- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
-		- names = names.substring(0, names.length - 4)
-		h5=names
+		//- h5='Genre: ' + prg.genre
+		//- - var names = 'Djs:'
+		//- for dj in prg.djs
+		//- 	- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
+		//- - names = names.substring(0, names.length - 4)
+		//- h5=names
 	
 mixin djs()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
@@ -141,27 +141,29 @@ mixin djs()
 										//- #body .grid-sizer, #body .grid-item
 										//- css makes it looks bad when using vw/vh due to how centered and small 
 										//- the center-view is
+										//- the problem is probably in here:
+										//- <div data-masonry="{&quot;itemSelector&quot;: &quot;.grid-item&quot;}" class="grid" style="position: relative; height: 137px;"> in chrome
+										//- <div style="position: relative; height: 209.8px;" data-masonry="{&quot;itemSelector&quot;: &quot;.grid-item&quot;}" class="grid"> in firefox
 
-	//- div
-	//- 	-console.log(arrayOfDJs)
-	//- div
 	+pagination(programs)
 
 mixin dj()
+	- var arrayOfPlaylists = []
 	h2=dj.slug
 	div.dj-image
 		+user-picture-with-name(dj)
 	hr
 	h3 Programs
-	hr
 	ul
 		for program in programs
 			a(href='/program/' + program.slug)
-				h4=program.title
+				h5=program.title
 			if (program.playlists.length > 0)
-				h5 Playlists
-				ul
-					for playlist in program.playlists
-						li
-							a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
-			hr
+				for playlist in program.playlists
+					- arrayOfPlaylists.push(playlist)
+	hr
+	h3 Playlists
+	ul
+		for playlist in arrayOfPlaylists
+			li
+				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()

@@ -6,9 +6,6 @@ exports = module.exports = (req, res) => {
 	const view = new keystone.View(req, res);
 	let locals = res.locals;
 
-	console.log('dj locals')
-	console.log(locals)
-
 	if (locals.dj) {
 		view.render('dj');
 	}
