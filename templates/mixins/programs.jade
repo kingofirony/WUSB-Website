@@ -137,10 +137,7 @@ mixin djs()
 									h4
 										!=dj.slug
 									div.dj-image
-										+user-picture-with-name(dj)
-										//- #body .grid-sizer, #body .grid-item
-										//- css makes it looks bad when using vw/vh due to how centered and small 
-										//- the center-view is
+										img(class="profile-picture" src=dj.profileImage.exists ? dj.profileImage.href : '/images/alien.svg')
 										//- the problem is probably in here:
 										//- <div data-masonry="{&quot;itemSelector&quot;: &quot;.grid-item&quot;}" class="grid" style="position: relative; height: 137px;"> in chrome
 										//- <div style="position: relative; height: 209.8px;" data-masonry="{&quot;itemSelector&quot;: &quot;.grid-item&quot;}" class="grid"> in firefox
