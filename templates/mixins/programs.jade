@@ -166,3 +166,6 @@ mixin dj()
 		for playlist in arrayOfPlaylists
 			li
 				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
+	hr
+	h3 Description
+	p=dj.description
