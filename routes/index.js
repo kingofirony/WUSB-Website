@@ -48,8 +48,6 @@ exports = module.exports = app => {
 	app.get('/pledge', routes.views.pledge);
 	app.get('/djs', routes.views.djs);
 
-	// READ THIS https://gist.github.com/wuhaixing/e90b8497f925ff9c7bfc
-
 	// DJs
 	app.all('/dj/:slug*', middleware.loadDJ);
 	app.get('/dj/:slug', middleware.loadDJ, routes.views.dj);

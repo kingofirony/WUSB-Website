@@ -31,7 +31,8 @@ exports.initLocals = function(req, res, next) {
 		{label: 'Programs', key: 'programs', href: '/programs'},
 		{label: 'DJs', key: 'djs', href: '/djs'},
 		{label: 'Schedule', key: 'schedule', href: '/schedule'},
-		{label: 'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'}
+		{label: 'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'},
+		{label: 'Pledge', key: 'pledge', href: '/pledge'}
 	];
 	locals.user = req.user;
 	Program.model.getLiveProgram(function (err, prg) {

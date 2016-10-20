@@ -20,7 +20,7 @@ exports = module.exports = (req, res) => {
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
-			fields: 'profileImage, email, name, password'
+			fields: 'profileImage, email, name, password, description'
 		}, err => {
 			if (err) {
 				locals.validationErrors = err.errors;
