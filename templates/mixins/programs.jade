@@ -1,6 +1,12 @@
 include ../mixins/users
 include ../mixins/pagination
 
+script(src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js")
+//- script(src="../../public/js/masonry/imagesloaded.pkgd.min.js")
+script(src="../../public/js/site/masonry-fix.js")
+
+//- check this out : https://github.com/desandro/imagesloaded
+
 mixin programs()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for program in programs.results
@@ -122,7 +128,7 @@ mixin live-program(prg)
 		//- h5=names
 	
 mixin djs()
-	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+	.grid(data-masonry='{"itemSelector": ".grid-item"}' id="dj-grid")
 		//- Need an array of DJs to filter out duplicates
 		- var arrayOfDJs = []
 		for program in programs.results
