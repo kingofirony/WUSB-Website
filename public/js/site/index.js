@@ -11,7 +11,17 @@ function expandCards() {
 			$(this).click(function () {
 				console.log("clicked");
 				console.log($grid);
-				$(this).parent().toggleClass("grid-item--expand");
+				document.getElementById("popOut").style.visibility = "visible";
+				document.getElementById("popOutBG").style.visibility = "visible";
+				//document.style.transfrom.translateY(-400px);
+
+				$('html,body').animate({
+        	scrollTop: $("h2").offset().top},
+        	'slow');
+
+				$('#popOut').append($(this).html())
+				//$('#popOut').append($(this).parent().addClass("grid-item--expand").html());
+				//$(this).parent().toggleClass("grid-item--expand");
 				$grid.masonry();
 			});
 		} else {
@@ -19,6 +29,12 @@ function expandCards() {
 		}
 	});
 }
+
+$('#popOutBG').click(function () {
+	$('#popOut').empty();
+	document.getElementById ("popOutBG").style.visibility = "hidden";
+	document.getElementById ("popOut").style.visibility = "hidden";
+});
 
 $(window).resize(function() {
 	expandCards();
