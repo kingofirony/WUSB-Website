@@ -162,7 +162,7 @@ exports.loadProgram = (req, res, next) => {
  */
 
 exports.loadDJ = (req, res, next) => {
-	const theDJ
+	var theDJ;
 	const djSlug = req.params.slug;
 	if (djSlug) {
 		User.model.findOne({ slug: djSlug })
