@@ -17,6 +17,14 @@ exports = module.exports = (req, res) => {
 			errorMessage: 'There was an error editing your profile:'
 		});
 
+		// console.log('yooooo');
+		// console.log(locals.user.description);
+		// console.log('ayyyyyy');
+		// locals.user.description = 'TESTTTTTTT';
+		// console.log(locals.user.description);
+		// console.log('supppppp');
+		// cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, "");
+
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
@@ -29,6 +37,9 @@ exports = module.exports = (req, res) => {
 				req.flash('success', 'Profile updated');
 				res.redirect('/profile');
 			}
+
+			// console.log(locals.user.description);
+			// console.log('oh no');
 		});
 	});
 
