@@ -42,10 +42,16 @@ exports = module.exports = app => {
 	app.all('/', routes.views.index);
 	app.all('/sign-up', routes.views.sign_up); 
 	app.all('/profile', middleware.requireUser, routes.views.profile);
+	app.all('/pledge', routes.views.pledge);
 	app.get('/playlists', routes.views.playlists);
 	app.get('/programs', middleware.loadPrograms, routes.views.programs);
 	app.get('/schedule', middleware.loadPrograms, routes.views.weekly_schedule);
-	app.get('/pledge', routes.views.pledge);
+	app.get('/djs', routes.views.djs);
+
+
+	// DJs
+	app.all('/dj/:slug*', middleware.loadDJ);
+	app.get('/dj/:slug', middleware.loadDJ, routes.views.dj);
 	
 	// Playlist
 	app.get('/playlist', routes.views.add_playlist);

@@ -19,6 +19,7 @@ User.add({
 		unique: true },
 	// Docs: Passwords are automatically encrypted
 	password: { type: Types.Password, initial: true, required: true },
+	description: { type: Types.Html, default: '' },
 	isConfirmed: { type: Boolean, default: false },
 	profileImage: { type: Types.LocalFile, dest: 'public/images/profile',
 		prefix: '/images/profile', 

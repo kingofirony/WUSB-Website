@@ -1,6 +1,8 @@
 .wysiwyg {
-  	height: 150px;  
-	width: 100%;
-	background-color: $wusb-white;
-	
+  	height: 150px;
+	  width: 100%;
+	  //background-color: $wusb-white;
+    background-color: pink;
+    z-index: 9999;
+  //change textbook to white~
 }

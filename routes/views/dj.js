@@ -5,14 +5,14 @@ exports = module.exports = (req, res) => {
 
 	const view = new keystone.View(req, res);
 	let locals = res.locals;
-	
-	if (locals.program) {
-		view.render('program');
+
+	if (locals.dj) {
+		view.render('dj');
 	}
 	else {
 		res.status(404).render('errors/404', {
-			errorTitle: 'Program not found',
-			errorMsg: "This program doesn't exist anymore"
+			errorTitle: 'DJ not found',
+			errorMsg: "This DJ doesn't exist anymore"
 		});
 	}
 };

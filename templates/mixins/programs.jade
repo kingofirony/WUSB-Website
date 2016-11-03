@@ -1,6 +1,12 @@
 include ../mixins/users
 include ../mixins/pagination
 
+script(src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js")
+//- script(src="../../public/js/masonry/imagesloaded.pkgd.min.js")
+script(src="../../public/js/site/masonry-fix.js")
+
+//- check this out : https://github.com/desandro/imagesloaded
+
 mixin programs()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}')
 		for program in programs.results
@@ -114,10 +120,52 @@ mixin live-program(prg)
 		i.material-icons radio
 	if prg
 		h5='Listen to ' + prg.title
-		h5='Genre: ' + prg.genre
-		- var names = 'Djs:'
-		for dj in prg.djs
-			- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
-		- names = names.substring(0, names.length - 4)
-		h5=names
+		//- h5='Genre: ' + prg.genre
+		//- - var names = 'Djs:'
+		//- for dj in prg.djs
+		//- 	- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
+		//- - names = names.substring(0, names.length - 4)
+		//- h5=names
 	
+mixin djs()
+	.grid(data-masonry='{"itemSelector": ".grid-item"}' id="dj-grid")
+		//- Need an array of DJs to filter out duplicates
+		- var arrayOfDJs = []
+		for program in programs.results
+			for dj in program.djs
+				//- If DJ exists, don't add DJ to page
+				if !_.contains(arrayOfDJs, dj)
+					- arrayOfDJs.push(dj)
+					.grid-item
+						a(href='/dj/' + dj.slug)
+							.card.card-content
+								.card-body
+									h4
+										!=dj.slug
+									div.dj-image
+										img(class="profile-picture" src=dj.profileImage.exists ? dj.profileImage.href : '/images/alien.svg')
+	+pagination(programs)
+
+mixin dj()
+	- var arrayOfPlaylists = []
+	h2=dj.slug
+	div.dj-image
+		+user-picture-with-name(dj)
+	hr
+	h3 Programs
+	ul
+		for program in programs
+			a(href='/program/' + program.slug)
+				h5=program.title
+			if (program.playlists.length > 0)
+				for playlist in program.playlists
+					- arrayOfPlaylists.push(playlist)
+	hr
+	h3 Playlists
+	ul
+		for playlist in arrayOfPlaylists
+			li
+				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
+	hr
+	h3 Description
+	p=dj.description
