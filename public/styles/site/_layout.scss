@@ -1,5 +1,6 @@
 body {
-  background-color: $body-bg;
+  //background-color: $body-bg;
+  background-color: #87BDB1;
 }
 
 a {
@@ -22,12 +23,13 @@ p {
 
     .stream {
       	position: absolute;
-      	background-color: $wusb-grey;
+      	//background-color: $wusb-grey;
+        background-color: #68B3AF;
 	  	text-align: right;
 	  	color: $wusb-white;
 	  	top: 1vh;
 	  	right: 1vw;
-		
+
       	h5 {
 			font-size: 1em;
 			font-weight: 500;
@@ -37,27 +39,29 @@ p {
 				vertical-align: top;
 			}
 		}
-		
+
 		.play:hover {
 			cursor: pointer;
 		}
     }
 
   	.tower {
-	  	background-color: $wusb-grey;
+	  	//background-color: $wusb-grey;
+      background-color: #68B3AF;
 		img {
 		  	margin: 15px auto 15px auto;
 		}
 	}
 
 	.navbar {
-		background-color: $wusb-blue;
+		//background-color: $wusb-blue;
+    background-color: #AACCB1;
 		border: none;
 		border-radius: 0;
 		text-align: center;
 
 		.navbar-collapse {
-			
+
 			.nav {
 				display:inline-block;
 				float: none;
@@ -101,7 +105,7 @@ p {
 #body {
 
 	color: $wusb-white;
-	
+
 	h2 {
 		display: inline-block;
 		margin-top: 0;
@@ -110,9 +114,10 @@ p {
 		max-width: 80vw;
 
 		a {
-			color: $wusb-grey;
+			//color: $wusb-grey;
+      color: #68B3AF;
 			text-decoration: none;
-			
+
 			.panel {
 				border-radius: 4px;
 			}
@@ -120,15 +125,17 @@ p {
 
 		a:hover {
 			text-decoration: none;
-			
+
 			.panel {
-				background-color: $wusb-grey;
+				//background-color: $wusb-grey;
+        background-color: #68B3AF;
 			}
 		}
-		
+
 		.panel {
 			border-radius: 4px;
-			background-color: $wusb-blue;
+			//background-color: $wusb-blue;
+      background-color: #AACCB1;
 			transition: all 0.5s ease;
 
 			.btn-delete {
@@ -139,12 +146,12 @@ p {
 				padding: 0;
 				margin: 12px 14px;
 			}
-			
+
 			h3 {
 				margin-top: 10px
 			}
 
-			
+
 		}
 	}
 
@@ -153,7 +160,7 @@ p {
 			margin: 0;
 		}
 	}
-	
+
 	/* clearfix */
 	.grid:after {
 		content: '';
@@ -174,11 +181,11 @@ p {
 	.grid-item--width3 {
 		width: 880px;
 	}
-	
+
 	.grid-item--width4 {
 		width: 1100px;
 	}
-	
+
 	.grid-item--expand {
 		width: 75vw;
 
@@ -187,29 +194,62 @@ p {
 			background: white;
 		}
 	}
-	
+
+  #popOut {
+    background-color: white;
+    color:black;
+    position: absolute;
+    display: block;
+    padding: 15px;
+    visibility: hidden;
+    border-radius: 15px;
+    width: 75vw;
+    z-index: 999;
+    margin-bottom: 20vw;
+
+    img {
+      width: 75vw;
+      border-radius: 15px;
+      display: block;
+      margin: -15px;
+      padding-bottom: 25px;
+    }
+  }
+
+  #popOutBG {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background:rgba(0,0,0,0.5);
+    z-index: 998;
+    visibility: hidden;
+  }
+
 	.btn-fab {
 		position: fixed;
 		right: 3vw;
 		bottom: 5vh;
 	}
-	
+
 	.btn-fab:hover {
 		color: $wusb-white;
 	}
-	
+
 	.jumbotron {
-		background-color: $wusb-blue;
-		
+		//background-color: $wusb-blue;
+    background-color: #AACCB1;
+
 		.row {
 			margin: 0;
 		}
 	}
 
-	
+
 	.user-picture-with-name {
 		display: inline-block;
-		
+
 		p {
 			text-align: center;
 			margin-top: 10px;
@@ -217,8 +257,8 @@ p {
 			font-weight: bold;
 		}
 	}
-	
-	
+
+
 	form {
 		text-align: left;
 
@@ -226,24 +266,25 @@ p {
 			label {
 				color: $wusb-white;
 			}
-			
+
 			input {
 				color: $wusb-white;
 			}
-			
+
 			input::-moz-placeholder{
 				color: #dfdee0;
 			}
 			input::-webkit-input-placeholder{
 				color: #dfdee0;
 			}
-			
+
 		}
 
 		.tt-menu {
 			padding: 5px;
 			background-color: $wusb-white;
-			color: $wusb-blue;
+			//color: $wusb-blue;
+      color: #AACCB1;
 		}
 
 		.wysihtml5-toolbar {
@@ -259,37 +300,41 @@ p {
 					-moz-box-shadow: none hoff voff blur color;
 					box-shadow: none hoff voff blur color;
 				}
-				
+
 				.wysihtml5-command-active {
-					background-color: $wusb-grey;
+					//background-color: $wusb-grey;
+          background-color: #68B3AF;
 				}
 			}
-			
+
 			.dropdown {
 				.dropdown-menu {
-					background-color: $wusb-blue;
+					//background-color: $wusb-blue;
+          background-color: #AACCB1;
 					li a {
 						color: $wusb-white;
 					}
 				}
 			}
-			
+
 			.open {
 				.dropdown-toggle {
-					background-color: $wusb-grey;
+					//background-color: $wusb-grey;
+          background-color: #68B3AF;
 				}
 			}
-			
+
 		}
 
 		iframe {
 			border: none !important;
 		}
-		
+
 		table {
-			
+
 			tr:hover {
-				background-color: $wusb-grey;
+				//background-color: $wusb-grey;
+        background-color: #68B3AF;
 			}
 			td {
 				input {
@@ -301,7 +346,7 @@ p {
 			}
 		}
 	}
-	
+
 	.pagination {
 		.material-icons {
 			font-size:inherit;
@@ -321,11 +366,11 @@ p {
 	margin-bottom: 20px;
 	border-top: 1px solid #eeeeee;
 	padding-top: 15px;
-	
+
 	.copyright {
-		margin-right: 10px;	
+		margin-right: 10px;
 	}
-	
+
 	.social-media {
 		margin: 0 10px 0 10px;
 		a:hover {
@@ -334,7 +379,7 @@ p {
 		object {
 			height: 1em;
 		}
-		
+
 	}
 }
 
@@ -349,7 +394,7 @@ input[type='text'], textarea {
 
 @media only screen and (max-width: 767px) {
 	/* phones */
-	
+
 	#header {
 		.stream {
 			position: relative;
@@ -383,7 +428,7 @@ input[type='text'], textarea {
 }
 
 
-/* iPhone 6 ----------- 
+/* iPhone 6 -----------
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
 	#body {
 		.grid {
@@ -404,7 +449,7 @@ input[type='text'], textarea {
 	}
 }
 
-/* iPhone 6+ ----------- 
+/* iPhone 6+ -----------
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
 	#body {
 		.grid {

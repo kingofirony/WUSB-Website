@@ -2,10 +2,13 @@ extends ../layouts/default
 include ../mixins/posts
 
 block content
+	div(id='popOutBG')
 	.col-md-12.col-xs-12.col-sm-12.index
 		h2 news from the booth
+		div(id='popOut')
 		+create-post()
 		+show-posts(posts)
+
 	if user && (user.isConfirmed || user.isAdmin)
 		div(id='new-post', data-toggle="modal", data-target="#myModal").btn.btn-fab
 			i.material-icons add_to_queue
