@@ -68,7 +68,6 @@ mixin show-post(post)
 					p!=post.textContent.replace(/\n/g, '<br>')
 				if user && user.id === post.author.id
 					a(href='?remove=post&post=' + post.slug, title='Delete this post', rel='tooltip', data-placement='left').post-delete.js-delete-confirm
-					//	button.btn.btn-default.btn-delete
 							i.material-icons clear
 
 
