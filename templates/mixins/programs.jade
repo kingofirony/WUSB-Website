@@ -127,6 +127,7 @@ mixin live-program(prg)
 		//- - names = names.substring(0, names.length - 4)
 		//- h5=names
 	
+//- This loads all the DJs in the masonry on the DJs page
 mixin djs()
 	.grid(data-masonry='{"itemSelector": ".grid-item"}' id="dj-grid")
 		//- Need an array of DJs to filter out duplicates
@@ -146,6 +147,7 @@ mixin djs()
 										img(class="profile-picture" src=dj.profileImage.exists ? dj.profileImage.href : '/images/alien.svg')
 	+pagination(programs)
 
+//- This loads each individual DJ from DJs page
 mixin dj()
 	- var arrayOfPlaylists = []
 	h2=dj.slug
@@ -168,4 +170,7 @@ mixin dj()
 				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
 	hr
 	h3 Description
-	p=dj.description
+	.card.card-content
+						.card-body
+							p
+								!=dj.description
