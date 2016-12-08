@@ -48,7 +48,7 @@ html
 				div.stream
 					+live-program(prg)
 					h5.play
-						span Click here to listen in! 
+						span Click here to listen in!
 						i.material-icons play_circle_outline
 			div(role="navigation").navbar.navbar-default
 				.container-fluid
@@ -91,12 +91,14 @@ html
 
 		//- FOOTER
 		.container: #footer
-			p 
+			p
 				span.copyright &copy; Copyright WUSB
 				a(href="https://www.facebook.com/WUSBfm/").social-media
-					object(type="image/svg+xml" data="/images/facebook.svg")
+					img(src="/images/facebook.svg")
+					//object(type="image/svg+xml" data="/images/facebook.svg")
 				a(href="https://twitter.com/wusbradio").social-media
-					object(type="image/svg+xml" data="/images/twitter.svg")
+					img(src="/images/twitter.svg")
+					//object(type="image/svg+xml" data="/images/twitter.svg")
 
 		//- JAVASCRIPT
 
@@ -124,7 +126,7 @@ html
 
 		script(src='/js/material-bootstrap/material.js')
 		link(href='/styles/material/bootstrap-material-design.min.css')
-		
+
 		script(src='/js/material-bootstrap/ripples.js')
 		link(href='/styles/material/ripples.min.css')
 

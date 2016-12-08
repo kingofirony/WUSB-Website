@@ -21,6 +21,7 @@
     // proper border colors.
     position: relative;
     z-index: 2;
+    color:white;
 
     // IE9 fubars the placeholder attribute in text inputs and the arrows on
     // select elements in input groups. To fix it, we float the input. Details:
@@ -164,4 +165,11 @@
       margin-left: -1px;
     }
   }
+}
+
+#title {
+  color: white;
+}
+::-webkit-input-placeholder {
+   color: white;
 }

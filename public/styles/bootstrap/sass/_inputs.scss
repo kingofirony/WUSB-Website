@@ -26,8 +26,9 @@
       font-size: $placeholder-font-size;
       line-height: $line-height;
       color: $mdb-input-placeholder-color;
+      //color: white;
       font-weight: 400;
-    
+
 }
     // margin-bottom must be specified to give help-block vertical space.
     //    $see also form-group padding-bottom (and size variants) re: collapsible margins.  These work together.
@@ -148,7 +149,7 @@
   @include material-placeholder {
     color: $mdb-input-placeholder-color;
     font-weight: 400;
-  
+
 }
 
 
@@ -191,6 +192,7 @@
       position: absolute;
       pointer-events: none;
       transition: 0.3s ease all;
+      color: white;
     }
   }
 
@@ -317,6 +319,7 @@ select.form-control {
   //.form-control {
   //  float: none;
   //}
+  color: white;
 
   // sm margin
   &.form-group-sm {
@@ -351,4 +354,9 @@ select.form-control {
   width: 100%;
   height: 100%;
   z-index: 100;
+  color: white;
+}
+
+::-webkit-input-placeholder {
+   color: white;
 }

@@ -24,6 +24,7 @@
     padding-right:  24px;
     padding-bottom: 16px;
     padding-left:   24px;
+    color:white;
   }
   // Footer (for actions)
   .modal-footer {
@@ -51,4 +52,7 @@
 }
 .modal-backdrop {
   background: rgba(0,0,0,0.3);
+}
+::-webkit-input-placeholder {
+   color: white;
 }

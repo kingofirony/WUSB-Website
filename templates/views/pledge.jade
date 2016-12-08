@@ -4,7 +4,9 @@ block content
 	form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form.create-form
 		input(type='hidden', name='action', value='pledge')
 
+
 		.col-sm-8.col-sm-offset-2.sign-up-form.col-xs-10.col-xs-offset-1
+		.pledgeBG
 			h2 WUSB Donor Registration Form
 			.form-group.row
 				label.col-sm-12.col-xs-12 First Name #[font(color="red") *]
@@ -36,7 +38,7 @@ block content
 					input(type="radio", name="gift", value="0")
 					| No thanks, keep up the great radio!
 				.col-sm-6.col-xs-12
-					input(type="radio", name="gift", value="1") 
+					input(type="radio", name="gift", value="1")
 					| Yes please! I'll write what I want in the box below.
 			.form-group.row
 				label.col-sm-12.col-xs-12 Enter your premium gift selection once you've chosen one from the list on the website
@@ -52,10 +54,10 @@ block content
 					input(type="radio", name="method", value="0")
 					| Mail me an invoice.
 				.col-sm-6.col-xs-12
-					input(type="radio", name="method", value="1") 
+					input(type="radio", name="method", value="1")
 					| Recurring monthly credit card pledge ($5 minimum). Someone will call you to confirm this pledge.
 				.col-sm-6.col-xs-12
-					input(type="radio", name="method", value="2") 
+					input(type="radio", name="method", value="2")
 					| Once-off credit card pledge (submit the form then go to the secure payment website from the front page)
 			.form-group
 				button(type='submit', style="background-color: white;" data-loading-text="Changing...").btn.btn-lg.btn-primary Submit

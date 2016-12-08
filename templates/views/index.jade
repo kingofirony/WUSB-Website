@@ -4,7 +4,8 @@ include ../mixins/posts
 block content
 	div(id='popOutBG')
 	.col-md-12.col-xs-12.col-sm-12.index
-		h2 news from the booth
+		div(id='headCont')
+			h2 news from the booth
 		div(id='popOut')
 		+create-post()
 		+show-posts(posts)

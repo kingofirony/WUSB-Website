@@ -27,8 +27,8 @@ exports.initLocals = function(req, res, next) {
 	const locals = res.locals;
 	locals.navLinks = [
 		{label: 'Home', key: 'home', href: '/'},
-		{label: 'Playlists', key: 'playlists', href: '/playlists'},
 		{label: 'Programs', key: 'programs', href: '/programs'},
+		{label: 'Playlists', key: 'playlists', href: '/playlists'},
 		{label: 'DJs', key: 'djs', href: '/djs'},
 		{label: 'Schedule', key: 'schedule', href: '/schedule'},
 		{label: 'Concert Billboard', key: 'billboard', href:'https://calendar.google.com/calendar/embed?src=usbcbb@gmail.com'},

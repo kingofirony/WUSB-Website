@@ -11,17 +11,25 @@ mixin create-post()
 						input(type='hidden', name='action', value='create-post')
 						//- Title
 						.form-group.label-floating
-							label(class="control-label", for="title") Post title
-							input(type='text', name='title', id='title').form-control
+							//label(class="control-label", for="title") Post title
+							input(type='text', name='title', id='title', placeholder="Title...").form-control
 
 						//- Content
 						.form-group
 							textarea(name='textContent', class='wysiwyg', rows="3").form-control
 
 						//- Image
+						//.form-group
+							//label(for="Image_preview") Add an image to this post
+							//input(type='file', id='postImage_upload' name='postImage_upload')
+							//br
+							//img#preview(src='#',height="200" alt='')
+
 						.form-group
-							label(for="postImage_upload") Add an image to this post
-							input(type='file', id='postImage_upload' name='postImage_upload').form-control
+							label(for="Image_preview") Add an image to this post
+							input(type='file', id='imgInp' name='postImage_upload')
+							br
+							img#preview(src='#',height="200" alt='')
 
 						//- Submit
 						.form-group
@@ -48,6 +56,12 @@ mixin create-post()
 					.form-group
 						label(for="postImage_upload") Add an image to this post
 						input(type='file', id='postImage_upload' name='postImage_upload').form-control.col-sm-12
+						img#preview(src='#', alt='your image')
+
+					.form-group
+						label(for="Image_preview") Preview Image
+						input#imgInp(type='file')
+						img#preview(src='#', alt='your image')
 
 					//- Submit
 					.form-group

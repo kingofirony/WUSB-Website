@@ -1,3 +1,7 @@
+::-webkit-input-placeholder {
+   color: white;
+}
+
 body {
   //background-color: $body-bg;
   background-color: #87BDB1;
@@ -50,6 +54,12 @@ p {
       background-color: #68B3AF;
 		img {
 		  	margin: 15px auto 15px auto;
+		}
+    img:hover {
+		  	//margin: 15px auto 15px auto;
+        //height: 110px;
+        -webkit-filter: drop-shadow(0px 0px 6px #AACCB1);
+        filter: drop-shadow(0px 0px 6px #AACCB1);
 		}
 	}
 
@@ -106,12 +116,19 @@ p {
 
 	color: $wusb-white;
 
+  #headCont {
+    width: 1000px;
+  }
 	h2 {
-		display: inline-block;
-		margin-top: 0;
+		display: inline;
+    //position: relative;
+    //max-width: 80vw;
+    //margin-left: 2%;
+    //float:left;
 	}
 	.grid {
 		max-width: 80vw;
+    margin: 0 auto;
 
 		a {
 			//color: $wusb-grey;
@@ -150,8 +167,6 @@ p {
 			h3 {
 				margin-top: 10px
 			}
-
-
 		}
 	}
 
@@ -199,20 +214,27 @@ p {
     background-color: white;
     color:black;
     position: absolute;
-    display: block;
+    display: inline-block;
     padding: 15px;
     visibility: hidden;
     border-radius: 15px;
-    width: 75vw;
     z-index: 999;
-    margin-bottom: 20vw;
+    //width: 50%;
+    margin-left: 11%;
+    width: fit-content;
 
     img {
-      width: 75vw;
       border-radius: 15px;
-      display: block;
+      display: table;
       margin: -15px;
       padding-bottom: 25px;
+      min-width: 600px;
+      max-width: 600px;
+      //float: right;
+      //margin-right: -10px;
+    }
+    p{
+      max-width: 570px;
     }
   }
 
@@ -347,9 +369,25 @@ p {
 	}
 
 	.pagination {
+    color: white;
+    list-style-type: none;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+  //  margin: 2000px;
 		.material-icons {
 			font-size:inherit;
+      color: white;
 		}
+    .previous {
+      //background-color:black;
+    }
+    li {
+      display: inline;
+    }
+    a {
+      color:white;
+    }
 	}
 }
 
@@ -380,8 +418,11 @@ p {
 		a:hover {
 			cursor: default;
 		}
-		object {
+		img {
 			height: 1em;
+		}
+    img:hover {
+			filter: invert(100%);
 		}
 
 	}
@@ -408,6 +449,14 @@ input[type='text'], textarea {
 			padding-bottom: 10px;
 		}
 	}
+}
+
+.pledgeBG {
+  background-color: #AACCB1;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  border-radius: 10px;
 }
 
 /*
