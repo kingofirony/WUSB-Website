@@ -305,5 +305,32 @@ describe('Keystone', function () {
 		});
 
 	  });
+
+		describe('#Pledge.js', function () {
+
+			it('should accept this pledge', function (done) {
+				const Pledge = keystone.list('Pledge');
+				const newPledge = new Pledge.model({
+					firstName: 'first',
+					lastName: 'last',
+					comments: 'comments here'
+				});
+				newPledge.save(function (err) {
+					if (err) throw err;
+					done();
+				});
+			});
+
+			after(function () {
+				const Pledge = keystone.list('Pledge');
+				Pledge.model.remove({ comments: 'comments here' }, 
+				  function (err) {
+					if (err) console.log(err);
+				});
+			})
+		});
+
+
+
 	});
 });
