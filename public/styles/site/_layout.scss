@@ -208,7 +208,9 @@ p {
     margin-bottom: 20vw;
 
     img {
-      width: 75vw;
+      position: relative;
+      width: 25vw;
+      left: 25vw;
       border-radius: 15px;
       display: block;
       margin: -15px;
