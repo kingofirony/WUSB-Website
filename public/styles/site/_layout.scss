@@ -23,8 +23,8 @@ p {
 
     .stream {
       	position: absolute;
-      	//background-color: $wusb-grey;
-        background-color: #68B3AF;
+      	background-color: $wusb-grey;
+        //background-color: #71B3AF;
 	  	text-align: right;
 	  	color: $wusb-white;
 	  	top: 1vh;
@@ -46,16 +46,14 @@ p {
     }
 
   	.tower {
-	  	//background-color: $wusb-grey;
-      background-color: #68B3AF;
+	  	background-color: $wusb-grey;
 		img {
 		  	margin: 15px auto 15px auto;
 		}
 	}
 
 	.navbar {
-		//background-color: $wusb-blue;
-    background-color: #AACCB1;
+		background-color: $wusb-blue;
 		border: none;
 		border-radius: 0;
 		text-align: center;
@@ -111,11 +109,10 @@ p {
 		margin-top: 0;
 	}
 	.grid {
-		max-width: 80vw;
+		max-width: 95vw;
 
 		a {
-			//color: $wusb-grey;
-      color: #68B3AF;
+			color: $wusb-grey;
 			text-decoration: none;
 
 			.panel {
@@ -127,15 +124,13 @@ p {
 			text-decoration: none;
 
 			.panel {
-				//background-color: $wusb-grey;
-        background-color: #68B3AF;
+				background-color: $wusb-grey;
 			}
 		}
 
 		.panel {
 			border-radius: 4px;
-			//background-color: $wusb-blue;
-      background-color: #AACCB1;
+			background-color: $wusb-blue;
 			transition: all 0.5s ease;
 
 			.btn-delete {
@@ -241,7 +236,7 @@ p {
 	}
 
 	.jumbotron {
-    background-color: #AACCB1;
+    background-color: $wusb-blue;
 		.row {
 			margin: 0;
 		}
@@ -284,8 +279,7 @@ p {
 		.tt-menu {
 			padding: 5px;
 			background-color: $wusb-white;
-			//color: $wusb-blue;
-      color: #AACCB1;
+			color: $wusb-blue;
 		}
 
 		.wysihtml5-toolbar {
@@ -303,15 +297,13 @@ p {
 				}
 
 				.wysihtml5-command-active {
-					//background-color: $wusb-grey;
-          background-color: #68B3AF;
+					background-color: $wusb-grey;
 				}
 			}
 
 			.dropdown {
 				.dropdown-menu {
-					//background-color: $wusb-blue;
-          background-color: #AACCB1;
+					background-color: $wusb-blue;
 					li a {
 						color: $wusb-white;
 					}
@@ -320,8 +312,7 @@ p {
 
 			.open {
 				.dropdown-toggle {
-					//background-color: $wusb-grey;
-          background-color: #68B3AF;
+					background-color: $wusb-grey;
 				}
 			}
 
@@ -334,8 +325,7 @@ p {
 		table {
 
 			tr:hover {
-				//background-color: $wusb-grey;
-        background-color: #68B3AF;
+				background-color: $wusb-grey;
 			}
 			td {
 				input {
